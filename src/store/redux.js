@@ -1,0 +1,28 @@
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import { configureStore } from "@reduxjs/toolkit";
+import categoriesSlice from "./categories/categoriesSlice";
+import productsSlice from "./products/productsSlice";
+import userSlice from "./user/userSlice";
+// console.log(categoriesSlice);
+// console.log(productsSlice);
+const commonConfig = {
+  key: "shop/user",
+  storage: storage,
+};
+
+const userConfig = {
+  ...commonConfig,
+  whitelist: ["isLoggedIn", "token"],
+};
+export const store = configureStore({
+  reducer: {
+    categories: categoriesSlice,
+    products: productsSlice,
+    user: persistReducer(userConfig, userSlice),
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+});
+
+export const persistor = persistStore(store);
