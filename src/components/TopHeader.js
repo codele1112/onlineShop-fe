@@ -7,14 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import icons from "../ultils/icons";
 
 const { FiLogOut } = icons;
+
 const TopHeader = () => {
+  let localStorageData = window.localStorage.getItem("persist:shop/user");
+  localStorageData = JSON.parse(localStorageData);
+  console.log(localStorageData);
   const dispatch = useDispatch();
   const { isLoggedIn, current } = useSelector((state) => state.user);
-  // console.log("isLoggedIn", isLoggedIn);
-  // console.log("accessToken", token);
+  console.log("isLoggedIn", isLoggedIn);
+  console.log("current", current);
 
   useEffect(() => {
-    if (isLoggedIn) dispatch(getCurrentUser());
+    // if (isLoggedIn) dispatch(getCurrentUser());
   }, [dispatch, isLoggedIn]);
 
   return (

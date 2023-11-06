@@ -33,28 +33,28 @@ const Login = () => {
     if (isRegister) {
       dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
       const response = await register(payload);
-      console.log("login", response);
+      // console.log("register", response);
+
       dispatch(showModal({ isShowModal: false, modalChildren: null }));
 
-      if (response.data.success) {
-        Swal.fire("Congratulations!", response.data.mes, "success").then(() => {
+      if (response.success) {
+        Swal.fire("Congratulations!", response.mes, "success").then(() => {
           setIsRegister(false);
           resetPayload();
         });
       } else {
-        Swal.fire("Oops!", response.data.mes, "error");
+        Swal.fire("Oops!", response.mes, "error");
       }
     } else {
       const rs = await login(data);
       console.log("rs", rs);
-      // console.log("rs.data", rs.data.data.accessToken);
-      // console.log("rs.data", rs.data.data.user);
+      console.log("rs.data", rs.data.accessToken);
       if (rs.success) {
         dispatch(
           userLogin({
             isLoggedIn: true,
             token: rs.data.accessToken,
-            user: rs.data.user,
+            user: rs.data.userData,
           })
         );
         navigate(`/${path.HOME}`);

@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Header, Navigation, TopHeader, Footer } from "../../components";
 
 const Public = () => {
+  console.log("public");
   return (
     <div className="w-full flex flex-col items-center">
       <TopHeader />

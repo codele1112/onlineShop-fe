@@ -12,11 +12,12 @@ instance.interceptors.request.use(
     if (localStorageData && typeof localStorageData === "string") {
       // console.log("localStorage", localStorageData);
       localStorageData = JSON.parse(localStorageData);
+      console.log(localStorageData);
       const accessToken = localStorageData["token"].replaceAll(`\"`, "");
-      // console.log("token", accessToken);
+      console.log("token", accessToken);
 
       config.headers = { authorization: `Bearer ${accessToken}` };
-      // console.log(config.headers);
+      console.log(config.headers);
       return config;
     } else return config;
   },

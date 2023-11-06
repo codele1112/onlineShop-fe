@@ -12,7 +12,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     userLogin: (state, action) => {
-      // console.log("action".action);
+      console.log("action", action);
       state.isLoggedIn = action.payload.isLoggedIn;
       state.token = action.payload.token;
     },
