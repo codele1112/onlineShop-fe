@@ -19,3 +19,16 @@ export const getCurrentUser = () =>
     url: "/users/me",
     method: "get",
   });
+
+export const updateCart = (data) =>
+  axios({
+    url: "/users/cart/",
+    method: "put",
+    data,
+  });
+
+export const removeProductInCart = (pid) =>
+  axios({
+    url: "/users/remove-cart/" + pid,
+    method: "delete",
+  });

@@ -1,5 +1,14 @@
 import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
 import categoriesSlice from "./categories/categoriesSlice";
 import productsSlice from "./products/productsSlice";
@@ -22,7 +31,11 @@ export const store = configureStore({
     user: persistReducer(userConfig, userSlice),
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

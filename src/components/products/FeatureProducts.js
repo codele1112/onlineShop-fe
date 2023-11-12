@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { getProducts } from "../apis";
+import { getProducts } from "../../apis";
 const FeatureProducts = () => {
   const [products, setProducts] = useState(null);
 
@@ -8,19 +8,19 @@ const FeatureProducts = () => {
     const response = await getProducts({
       limit: 6,
     });
-    // console.log(response.data.data.products);
-    if (response.data.success) setProducts(response.data.data.products);
+    // console.log("feature products", response);
+    if (response.success) setProducts(response.data.products);
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
   return (
-    <div className="w-full">
-      <h3 className=" font-semibold border-b-2  border-main text-[20px] py-[15px]">
+    <div className="w-main">
+      <h3 className=" font-semibold border-b-2 border-main text-[20px] py-[15px]">
         FEATURE PRODUCTS
       </h3>
-      <div className="flex flex-wrap mt-[15px]  mx-[-10px] ">
+      <div className="flex flex-wrap mt-10  mx-[-10px]  ">
         {products?.map((el) => (
           <ProductCard
             key={el._id}
@@ -31,7 +31,7 @@ const FeatureProducts = () => {
         ))}
       </div>
 
-      <div className="w-1/3 flex justify-between gap-2  ">
+      <div className="w-1/3 flex justify-between gap-2  mt-8  ">
         <img
           src="https://i.pinimg.com/564x/cd/75/32/cd7532cf046bdad46cee22e4b54851c5.jpg"
           alt="soaps"

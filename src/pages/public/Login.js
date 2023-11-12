@@ -20,6 +20,7 @@ const Login = () => {
 
   const [isRegister, setIsRegister] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
+
   const resetPayload = () => {
     setPayload({
       email: "",
@@ -48,7 +49,8 @@ const Login = () => {
     } else {
       const rs = await login(data);
       console.log("rs", rs);
-      console.log("rs.data", rs.data.accessToken);
+      // console.log("rs.data", rs.data.accessToken);
+      // console.log("rs.userdata", rs.data.userData);
       if (rs.success) {
         dispatch(
           userLogin({
@@ -62,7 +64,7 @@ const Login = () => {
         Swal.fire("Oops!", rs.mes, "error");
       }
     }
-  }, [payload, isRegister, navigate]);
+  }, [payload, isRegister, dispatch, navigate]);
 
   return (
     <div className="w-screen h-screen relative">

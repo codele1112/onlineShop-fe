@@ -4,23 +4,29 @@ import path from "../ultils/path";
 import { getCurrentUser } from "../store/user/asyncActions";
 import { userLogout } from "../store/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { persistor } from "../store/redux";
 import icons from "../ultils/icons";
 
 const { FiLogOut } = icons;
 
 const TopHeader = () => {
-  let localStorageData = window.localStorage.getItem("persist:shop/user");
-  localStorageData = JSON.parse(localStorageData);
-  console.log(localStorageData);
   const dispatch = useDispatch();
   const { isLoggedIn, current } = useSelector((state) => state.user);
-  console.log("isLoggedIn", isLoggedIn);
+  // console.log("isLoggedIn", isLoggedIn);
   console.log("current", current);
 
+  // useEffect(() => {
+  //   if (isLoggedIn) getCurrentUser();
+  // }, [dispatch, isLoggedIn]);
+
   useEffect(() => {
-    // if (isLoggedIn) dispatch(getCurrentUser());
+    if (isLoggedIn) getUserProfile();
   }, [dispatch, isLoggedIn]);
 
+  async function getUserProfile() {
+    dispatch(getCurrentUser());
+    await persistor.flush();
+  }
   return (
     <div className=" h-[38px] w-full bg-main flex items-center justify-center">
       <div className="w-main flex items-center justify-between text-xs text-white">

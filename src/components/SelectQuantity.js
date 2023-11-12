@@ -1,10 +1,15 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 
-const SelectQuantity = ({ quantity, handleQuantity, handleChangeQuantity }) => {
+const SelectQuantity = ({ originalQuantity, onQuantityChanged, tag }) => {
+  const [quantity, setQuantity] = useState(originalQuantity);
+
   return (
     <div className="flex items-center">
       <span
-        onClick={() => handleChangeQuantity("minus")}
+        onClick={() => {
+          setQuantity(originalQuantity - 1);
+          onQuantityChanged(originalQuantity - 1, tag);
+        }}
         className="text-[24px] cursor-pointer p-2 border-r border-black"
       >
         -
@@ -13,10 +18,16 @@ const SelectQuantity = ({ quantity, handleQuantity, handleChangeQuantity }) => {
         className="py-2 px-4  w-[50px] outline-none text-black text-center"
         type="text"
         value={quantity}
-        onChange={(e) => handleQuantity(e.target.value)}
+        onChange={(e) => {
+          setQuantity(e.target.value);
+          onQuantityChanged(e.target.value, tag);
+        }}
       />
       <span
-        onClick={() => handleChangeQuantity("plus")}
+        onClick={() => {
+          setQuantity(originalQuantity + 1);
+          onQuantityChanged(originalQuantity + 1, tag);
+        }}
         className="text-[24px] cursor-pointer p-2 border-r border-black"
       >
         +

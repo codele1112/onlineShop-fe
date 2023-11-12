@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,500;0,700;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200;0,8..60,300;0,8..60,500;1,8..60,500&display=swap");
 
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Source Serif 4', serif; */
 .custom-slider button.slick-next {
   right: 80px;
   z-index: 10;
@@ -72,4 +75,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+input {
+  -webkit-appearance: none;
+}
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 30px;
 }

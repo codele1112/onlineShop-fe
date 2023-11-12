@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts } from "./asyncActions";
+import * as actions from "./asyncActions";
+
 export const productsSlice = createSlice({
   name: "products",
   initialState: {
-    products: [],
+    newProducts: null,
     errorMessage: "",
+    isLoading: false,
   },
+
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state) => {
+    builder.addCase(actions.getNewProducts.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(getProducts.fulfilled, (state, action) => {
+    builder.addCase(actions.getNewProducts.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.products = action.payload;
+      state.newProducts = action.payload;
     });
 
-    builder.addCase(getProducts.rejected, (state, action) => {
+    builder.addCase(actions.getNewProducts.rejected, (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload.message);
       state.errorMessage = action.payload.message;
     });
   },

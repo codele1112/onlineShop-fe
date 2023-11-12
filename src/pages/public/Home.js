@@ -1,19 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 import {
   Banner,
   Sidebar,
   BestSeller,
   DealDaily,
   FeatureProducts,
+  CustomSlider,
 } from "../../components";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const Home = () => {
   const { newProducts } = useSelector((state) => state.products);
-  const { categories } = useSelector((state) => state.categories);
-  const { isLoggedIn, current } = useSelector((state) => state.user);
+  console.log("newProducts", newProducts);
 
-  // console.log({ isLoggedIn, current });
   return (
     <>
       <div className="w-main flex mt-6">
@@ -21,6 +21,7 @@ const Home = () => {
           <Sidebar />
           <DealDaily />
         </div>
+
         <div className="flex flex-col gap-5 pl-5 w-[75%] flex-auto ">
           <Banner />
           <BestSeller />
@@ -29,6 +30,15 @@ const Home = () => {
 
       <div className="my-8">
         <FeatureProducts />
+      </div>
+
+      <div className="my-8 w-main">
+        <h3 className="font-semibold border-b-2  border-main text-[20px] py-[15px]">
+          NEW ARRIVALS
+        </h3>
+        <div className="w-full  mt-8">
+          <CustomSlider products={newProducts} />
+        </div>
       </div>
       <div className="w-full h-[500px]"></div>
     </>

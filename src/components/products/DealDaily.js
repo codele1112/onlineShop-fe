@@ -1,8 +1,8 @@
 import React, { useEffect, useState, memo } from "react";
-import { formatMoney } from "../ultils/helpers";
-import icons from "../ultils/icons";
-import Countdown from "./Countdown";
-import { getProducts } from "../apis";
+import { formatMoney } from "../../ultils/helpers";
+import icons from "../../ultils/icons";
+import Countdown from "../Countdown";
+import { getProducts } from "../../apis";
 
 const { AiOutlineMenu } = icons;
 let idInterval;

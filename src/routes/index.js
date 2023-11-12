@@ -8,6 +8,7 @@ import {
   Services,
   DetailProduct,
   FAQ,
+  DetailCart,
 } from "../pages/public";
 import {
   AdminLayout,
@@ -20,23 +21,18 @@ import {
 import { MemberLayout, Personal } from "../pages/member";
 import NotFoundPage from "../pages/NotFoundPage";
 import path from "../ultils/path";
-import { getCategories } from "../store/categories/asyncActions";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+
 function Router() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCategories());
-  });
   return (
     <Routes>
       <Route path={path.PUBLIC} element={<Public />}>
-        <Route path={path.HOME} element={<Home />}></Route>
-        <Route path={path.PRODUCTS} element={<Products />}></Route>
+        <Route path={path.HOME} element={<Home />} />
         <Route
           path={path.DETAIL_PRODUCT_CATEGORY_PID_NAME}
           element={<DetailProduct />}
         />
+        <Route path={path.PRODUCTS} element={<Products />} />
+        <Route path={path.DETAIL_CART} element={<DetailCart />} />
         <Route path={path.BLOGS} element={<Blogs />} />
         <Route path={path.FAQ} element={<FAQ />} />
         <Route path={path.OUR_SERVICE} element={<Services />} />

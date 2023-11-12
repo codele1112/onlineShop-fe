@@ -26,3 +26,10 @@ export const navigation = [
     path: `/${path.FAQ}`,
   },
 ];
+
+export const productInfoTabs = [
+  { id: 1, name: "DESCRIPTION" },
+  { id: 2, name: "DELIVERY" },
+  { id: 3, name: "PAYMENT" },
+  { id: 4, name: "CUSTOMER'S REVIEWS" },
+];

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatMoney } from "../ultils/helpers";
+import { formatMoney } from "../../ultils/helpers";
 
 const ProductCard = ({ price, name, image }) => {
   return (
@@ -15,7 +15,7 @@ const ProductCard = ({ price, name, image }) => {
           <span className="line-clamp-1  text-sm capitalize text-center">
             {name?.toLowerCase()}
           </span>
-          <span>{formatMoney(price)}</span>
+          <span className="text-gray-600">{formatMoney(price)}</span>
         </div>
       </div>
     </div>

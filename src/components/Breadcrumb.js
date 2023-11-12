@@ -6,6 +6,7 @@ import icons from "../ultils/icons";
 const { MdArrowForwardIos } = icons;
 
 const Breadcrumb = ({ name, category }) => {
+  // console.log("category", category);
   const routes = [
     { path: "/:category", breadcrumb: category },
     { path: "/", breadcrumb: "Home" },
@@ -25,7 +26,7 @@ const Breadcrumb = ({ name, category }) => {
           >
             <span className=" capitalize">{breadcrumb}</span>
 
-            {index === self.length - 1 && <MdArrowForwardIos />}
+            {index !== self.length - 1 && <MdArrowForwardIos />}
           </Link>
         ))}
     </div>

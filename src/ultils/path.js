@@ -3,11 +3,14 @@ const path = {
   HOME: "",
   ALL: "*",
   LOGIN: "login",
-  PRODUCTS: "products",
+  PRODUCTS: ":category",
   BLOGS: "blogs",
   OUR_SERVICE: "services",
   FAQ: "faqs",
   DETAIL_PRODUCT_CATEGORY_PID_NAME: ":category/:pid/:name",
+  FINAL_REGISTER: "finalregister/:status",
+  RESET_PASSWORD: "reset-password/:token",
+  DETAIL_CART: "my-cart/",
 
   // admin:
   ADMIN: "admin",
