@@ -32,7 +32,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
         forceReRender={[style, currency, amount]}
         fundingSource={undefined}
         createOrder={(data, actions) => {
-          actions.order
+          return actions.order
             .create({
               purchase_units: [
                 { amount: { currency_code: currency, value: amount } },
