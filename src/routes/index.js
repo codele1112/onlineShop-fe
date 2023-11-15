@@ -18,13 +18,15 @@ import {
   ManageUser,
   CreateProducts,
 } from "../pages/admin";
-import { MemberLayout, Personal } from "../pages/member";
+import { Checkout, MemberLayout, Personal } from "../pages/member";
 import NotFoundPage from "../pages/NotFoundPage";
 import path from "../ultils/path";
 
 function Router() {
   return (
     <Routes>
+      <Route path={path.CHECK_OUT} element={<Checkout />} />
+
       <Route path={path.PUBLIC} element={<Public />}>
         <Route path={path.HOME} element={<Home />} />
         <Route

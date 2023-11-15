@@ -13,8 +13,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import categoriesSlice from "./categories/categoriesSlice";
 import productsSlice from "./products/productsSlice";
 import userSlice from "./user/userSlice";
-// console.log(categoriesSlice);
-// console.log(productsSlice);
 const commonConfig = {
   key: "shop/user",
   storage: storage,
@@ -22,7 +20,7 @@ const commonConfig = {
 
 const userConfig = {
   ...commonConfig,
-  whitelist: ["isLoggedIn", "token"],
+  whitelist: ["isLoggedIn", "token", "current", "currentCart"],
 };
 export const store = configureStore({
   reducer: {

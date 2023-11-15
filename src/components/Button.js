@@ -4,8 +4,7 @@ const Button = ({
   name,
   handleOnClick,
   style,
-  iconsBefore,
-  iconsAfter,
+
   fw,
 }) => {
   return (
@@ -22,9 +21,7 @@ const Button = ({
         handleOnClick && handleOnClick();
       }}
     >
-      {iconsBefore}
       <span>{name}</span>
-      {iconsAfter}
     </button>
   );
 };

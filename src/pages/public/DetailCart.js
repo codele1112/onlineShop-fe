@@ -1,26 +1,20 @@
-import React, { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumb, Button, SelectQuantity } from "../../components";
 import { formatMoney } from "../../ultils/helpers";
+import OrderItem from "../../components/products/OrderItem";
+import { updateCart } from "../../store/user/userSlice";
+import { Link } from "react-router-dom";
+import path from "../../ultils/path";
 
 const DetailCart = () => {
-  const current = useSelector((state) => state.user?.cart);
-  console.log("current", current);
-  const [currentCart, setCurrentCart] = useState(current);
+  const { currentCart } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const onQuantityChanged = (number, tag) => {
-    const cart = currentCart.map((item) => {
-      console.log(item);
-
-      if (item.product._id === tag) {
-        return { _id: item._id, quantity: number, product: item.product };
-      }
-      return item;
-    });
-    console.log("cart", cart);
-    setCurrentCart(cart);
+  const handleChangeQuantities = (pid, quantity) => {
+    dispatch(updateCart({ pid, quantity }));
   };
-  console.log("CurrentCart", currentCart);
+  // console.log("currentCart", currentCart);
 
   return (
     <div className="w-full">
@@ -39,37 +33,12 @@ const DetailCart = () => {
         </div>
 
         {currentCart?.map((el, index) => (
-          <div
+          <OrderItem
             key={index}
-            className="w-main border-b mx-auto py-3 grid grid-cols-10"
-          >
-            <span className="col-span-6 w-full text-center">
-              <div className="flex gap-2">
-                <img
-                  src={el.product?.images[0]}
-                  alt="images"
-                  className=" pl-2 w-28 h-28 object-cover"
-                />
-
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm">{el.product?.name}</span>
-                </div>
-              </div>
-            </span>
-
-            <span className="col-span-1 w-full text-center">
-              <div className="flex items-center h-full">
-                <SelectQuantity
-                  originalQuantity={el.quantity}
-                  tag={el.product._id.toString()}
-                  onQuantityChanged={onQuantityChanged}
-                />
-              </div>
-            </span>
-            <span className="col-span-3 w-full h-full flex items-center justify-center text-center">
-              <span className="text-lg">{formatMoney(el.product?.price)}</span>
-            </span>
-          </div>
+            el={el}
+            defaultQuantity={el.quantity}
+            handleChangeQuantities={handleChangeQuantities}
+          />
         ))}
       </div>
       <div className="w-main mx-auto flex flex-col justify-center items-end gap-3 ">
@@ -77,14 +46,22 @@ const DetailCart = () => {
           <span>Subtotal: </span>
           <span>
             {formatMoney(
-              currentCart?.reduce((sum, el) => sum + +el.product?.price, 0)
+              currentCart?.reduce(
+                (sum, el) => sum + +el.product?.price * el.quantity,
+                0
+              )
             )}
           </span>
         </span>
         <span className="text-xs italic text-center text-main">
           Shipping, taxes, and discounts calculated at checkout.
         </span>
-        <Button name="Check out" />
+        <Link
+          to={`/${path.CHECK_OUT}`}
+          className="px-4 py-4 flex justify-center items-center rounded-md bg-main text-white text-semibold my-2"
+        >
+          Check out
+        </Link>
       </div>
     </div>
   );

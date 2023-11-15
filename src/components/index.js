@@ -20,3 +20,4 @@ export { default as SelectQuantity } from "./SelectQuantity";
 export { default as Breadcrumb } from "./Breadcrumb";
 export { default as ProductInfor } from "./products/ProductInfor";
 export { default as Cart } from "./products/Cart";
+export { default as Paypal } from "./Paypal";

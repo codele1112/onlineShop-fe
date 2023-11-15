@@ -13,7 +13,7 @@ const TopHeader = () => {
   const dispatch = useDispatch();
   const { isLoggedIn, current } = useSelector((state) => state.user);
   // console.log("isLoggedIn", isLoggedIn);
-  console.log("current", current);
+  // console.log("current", current);
 
   // useEffect(() => {
   //   if (isLoggedIn) getCurrentUser();
