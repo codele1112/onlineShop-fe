@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 const Button = ({
-  name,
+  children,
   handleOnClick,
   style,
 
@@ -21,7 +21,7 @@ const Button = ({
         handleOnClick && handleOnClick();
       }}
     >
-      <span>{name}</span>
+      <span>{children}</span>
     </button>
   );
 };

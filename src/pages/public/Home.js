@@ -12,23 +12,23 @@ import {
 
 const Home = () => {
   const { newProducts } = useSelector((state) => state.products);
-  console.log("newProducts", newProducts);
+  // console.log("newProducts", newProducts);
 
   return (
-    <>
-      <div className="w-main flex mt-6">
-        <div className="flex flex-col gap-5 w-[25%] flex-auto ">
+    <div className="w-full">
+      <div className="w-main flex justify-between  mt-6">
+        <div className=" flex flex-col gap-5 md:hidden w-[25%] flex-auto ">
           <Sidebar />
           <DealDaily />
         </div>
 
-        <div className="flex flex-col gap-5 pl-5 w-[75%] flex-auto ">
+        <div className="flex flex-col gap-5 pl-5  md:w-full w-[75%] flex-auto ">
           <Banner />
           <BestSeller />
         </div>
       </div>
 
-      <div className="my-8">
+      <div className="w-full my-8">
         <FeatureProducts />
       </div>
 
@@ -40,8 +40,7 @@ const Home = () => {
           <CustomSlider products={newProducts} />
         </div>
       </div>
-      <div className="w-full h-[500px]"></div>
-    </>
+    </div>
   );
 };
 

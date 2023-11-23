@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
-import { Paypal } from "../../components";
+import { InputForm, Paypal } from "../../components";
+import { useForm } from "react-hook-form";
 
 const Checkout = () => {
-  const { currentCart } = useSelector((state) => state.user);
+  const { currentCart, current } = useSelector((state) => state.user);
+  const {
+    register,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm();
+  const address = watch("address");
+
+  useEffect(() => {
+    setValue("address", current?.address);
+  }, [current]);
+
   console.log("currentCart", currentCart);
+  console.log("current", current);
+  console.log("address", address);
+
   return (
     <div className=" w-full p-8 h-full max-h-screen flex flex-col overflow-y-auto  gap-6">
       <h2 className="text-2xl font-bold ">Checkout your order</h2>
@@ -46,9 +62,38 @@ const Checkout = () => {
           </span>
         </div>
       </div>
-      <div>input address</div>
+
+      <div className=" w-full">
+        <InputForm
+          label="Your Address"
+          register={register}
+          errors={errors}
+          id="address"
+          validate={{
+            required: "Need fill this field.",
+          }}
+          placeholder="Please fill the address first."
+          style="text-sm border"
+        />
+      </div>
+
       <div className="w-full mx-auto ">
-        <Paypal amount={120} />
+        {address && address?.length > 10 && (
+          <Paypal
+            payload={{
+              products: currentCart,
+              total: currentCart?.reduce(
+                (sum, el) => sum + +el.product?.price * el.quantity,
+                0
+              ),
+              address,
+            }}
+            amount={currentCart?.reduce(
+              (sum, el) => sum + +el.product?.price * el.quantity,
+              0
+            )}
+          />
+        )}
       </div>
     </div>
   );

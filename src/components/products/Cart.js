@@ -3,7 +3,7 @@ import icons from "../../ultils/icons";
 import { showCart } from "../../store/categories/categoriesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
-import Button from "../Button";
+import Button from "../buttons/Button";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../../store/user/asyncActions";
 import { removeProductInCart } from "../../apis";

@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import icons from "../ultils/icons";
+import icons from "../../ultils/icons";
 import { useNavigate, createSearchParams, useParams } from "react-router-dom";
 
 const { AiOutlineDown } = icons;

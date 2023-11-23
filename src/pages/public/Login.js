@@ -1,12 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { InputField, Button, Loading } from "../../components";
-import { login, register } from "../../apis";
+import { login, register, forgotPassword } from "../../apis";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../store/categories/categoriesSlice";
+import { validate } from "../../ultils/helpers";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,9 +19,10 @@ const Login = () => {
     name: "",
     phone: "",
   });
-
+  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
   const resetPayload = () => {
     setPayload({
@@ -29,39 +32,59 @@ const Login = () => {
       phone: "",
     });
   };
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleForgotPassword = async () => {
+    const response = await forgotPassword({ email });
+    if (response.success) {
+      toast.success(response.mes, { theme: "colored" });
+    } else {
+      toast.info(response.mes, { theme: "colored" });
+    }
+  };
+
+  useEffect(() => {
+    resetPayload();
+  }, [isRegister]);
+
   const handleSubmit = useCallback(async () => {
     const { name, phone, ...data } = payload;
-    if (isRegister) {
-      dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
-      const response = await register(payload);
-      // console.log("register", response);
+    const invalids = isRegister
+      ? validate(payload, setInvalidFields)
+      : validate(data, setInvalidFields);
 
-      dispatch(showModal({ isShowModal: false, modalChildren: null }));
+    if (invalids === 0) {
+      if (isRegister) {
+        dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
+        const response = await register(payload);
+        dispatch(showModal({ isShowModal: false, modalChildren: null }));
+        // console.log("register", response);
 
-      if (response.success) {
-        Swal.fire("Congratulations!", response.mes, "success").then(() => {
-          setIsRegister(false);
-          resetPayload();
-        });
+        if (response.success) {
+          Swal.fire("Congratulation!", response.mes, "success").then(() => {
+            setIsRegister(false);
+            resetPayload();
+          });
+        } else {
+          Swal.fire("Oops!", response.mes, "error");
+        }
       } else {
-        Swal.fire("Oops!", response.mes, "error");
-      }
-    } else {
-      const rs = await login(data);
-      console.log("rs", rs);
-      // console.log("rs.data", rs.data.accessToken);
-      // console.log("rs.userdata", rs.data.userData);
-      if (rs.success) {
-        dispatch(
-          userLogin({
-            isLoggedIn: true,
-            token: rs.data.accessToken,
-            user: rs.data.userData,
-          })
-        );
-        navigate(`/${path.HOME}`);
-      } else {
-        Swal.fire("Oops!", rs.mes, "error");
+        const rs = await login(data);
+        // console.log("rs", rs);
+        // console.log("rs.data", rs.data.accessToken);
+        if (rs.success) {
+          dispatch(
+            userLogin({
+              isLoggedIn: true,
+              token: rs.data.accessToken,
+              user: rs.data.userData,
+            })
+          );
+          navigate(`/${path.HOME}`);
+        } else {
+          Swal.fire("Oops!", rs.mes, "error");
+        }
       }
     }
   }, [payload, isRegister, dispatch, navigate]);

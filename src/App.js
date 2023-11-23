@@ -3,8 +3,10 @@ import Router from "./routes";
 import { Cart } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "./store/categories/asyncActions";
-import { Modal } from "@mui/base";
 import { showCart } from "./store/categories/categoriesSlice";
+import { Modal } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="h-screen font-main relative">
+    <div className=" font-main relative">
       {isShowCart && (
         <div
           onClick={() => dispatch(showCart())}
@@ -29,6 +31,17 @@ function App() {
       {isShowModal && <Modal>{modalChidren}</Modal>}
 
       <Router />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

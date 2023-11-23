@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import SelectQuantity from "../SelectQuantity";
+import SelectQuantity from "../common/SelectQuantity";
 import { formatMoney } from "../../ultils/helpers";
 
 const OrderItem = ({ el, handleChangeQuantities, defaultQuantity = 1 }) => {

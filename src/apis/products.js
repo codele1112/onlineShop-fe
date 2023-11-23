@@ -12,3 +12,10 @@ export const getProductById = (pid) =>
     url: "/products/" + pid,
     method: "get",
   });
+
+export const createOrder = (data) =>
+  axios({
+    url: "/order/",
+    method: "post",
+    data,
+  });

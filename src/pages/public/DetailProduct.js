@@ -41,9 +41,9 @@ function DetailProduct() {
   };
 
   const fetchProducts = async () => {
-    const response = await getProducts({ name });
+    const response = await getProducts();
     // console.log("products data", response);
-    // if (response.success) setRelatedProducts(response.data);
+    if (response.success) setRelatedProducts(response.data.products);
   };
   useEffect(() => {
     if (pid) {
@@ -89,8 +89,9 @@ function DetailProduct() {
         // });
       });
     const response = await updateCart({ pid, quantity, price: product.price });
+    // console.log("response", response);
     if (response.success) {
-      toast.success(response.mes);
+      toast.success("The product has been added to cart!");
       dispatch(getCurrentUser());
     } else toast.error(response.mes);
   };
@@ -102,6 +103,7 @@ function DetailProduct() {
           <Breadcrumb name={name} category={category} />
         </div>
       </div>
+
       <div className="w-main m-auto mt-4 flex ">
         <div className=" w-1/2 flex-col flex ">
           <img
@@ -109,7 +111,8 @@ function DetailProduct() {
             alt="product"
             className="h-[458px] w-[458px] border object-cover"
           />
-          <div className="w-[458px]">
+
+          <div className="w-[458px] mt-4">
             <Slider className="image-slider" {...settings}>
               {product?.images?.map((el, index) => (
                 <div key={index} className="px-2">
@@ -147,12 +150,16 @@ function DetailProduct() {
 
           <div className="flex flex-col gap-8">
             <SelectQuantity
-              quantity={quantity}
+              originalQuantity={quantity}
               handleQuantity={handleQuantity}
               handleChangeQuantity={handleChangeQuantity}
             />
 
-            <Button name={"Add to cart"} handleOnClick={handleAddtoCart} />
+            <Button
+              fw
+              children={"Add to cart"}
+              handleOnClick={handleAddtoCart}
+            />
           </div>
         </div>
       </div>

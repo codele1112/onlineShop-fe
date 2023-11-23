@@ -14,10 +14,23 @@ export const login = (data) =>
     data,
   });
 
+export const forgotPassword = (data) =>
+  axios({
+    url: "/auth/forgotpassword",
+    method: "get",
+    data,
+  });
 export const getCurrentUser = () =>
   axios({
     url: "/users/me",
     method: "get",
+  });
+
+export const getUsers = (params) =>
+  axios({
+    url: "/users",
+    method: "get",
+    params,
   });
 
 export const updateCart = (data) =>

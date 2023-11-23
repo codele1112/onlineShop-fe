@@ -2,6 +2,22 @@
 module.exports = {
   content: ["./src/**/*.{html,js}", "./public/index.html"],
   theme: {
+    screens: {
+      "2xl": { max: "1535px" },
+      // => @media (max-width: 1535px) { ... }
+
+      xl: { max: "1279px" },
+      // => @media (max-width: 1279px) { ... }
+
+      lg: { max: "1023px" },
+      // => @media (max-width: 1023px) { ... }
+
+      md: { max: "767px" },
+      // => @media (max-width: 767px) { ... }
+
+      sm: { max: "639px" },
+      // => @media (max-width: 639px) { ... }
+    },
     fontFamily: {
       main: ["Montserrat", "sans-serif"],
     },
@@ -22,9 +38,12 @@ module.exports = {
       backgroundColor: {
         main: "#1d1716",
         second: "#dfd3c3",
+        third: "#c7b198",
+        fourth: "#f0ece2",
       },
       colors: {
         main: "#596e79",
+        second: "#dc2f2f",
       },
       flex: {
         2: "2 2 0%",

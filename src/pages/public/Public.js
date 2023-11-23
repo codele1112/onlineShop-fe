@@ -5,11 +5,11 @@ import { Header, Navigation, TopHeader, Footer } from "../../components";
 const Public = () => {
   // console.log("public");
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <TopHeader />
       <Header />
       <Navigation />
-      <div className="w-full flex justify-center flex-col items-center">
+      <div className="flex flex-col items-center ">
         <Outlet />
       </div>
       <Footer />

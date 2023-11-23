@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { formatMoney } from "../../ultils/helpers";
 import { Link } from "react-router-dom";
-import SelectOption from "../SelectOption";
+import SelectOption from "../common/SelectOption";
 import { showModal } from "../../store/categories/categoriesSlice";
 import DetailProduct from "../../pages/public/DetailProduct";
 import icons from "../../ultils/icons";

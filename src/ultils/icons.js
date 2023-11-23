@@ -1,6 +1,12 @@
-import { RiPhoneFill, RiBubbleChartLine } from "react-icons/ri";
-import { MdEmail, MdArrowForwardIos } from "react-icons/md";
-import { LiaUserCogSolid } from "react-icons/lia";
+import { RiPhoneFill, RiBubbleChartLine, RiBillLine } from "react-icons/ri";
+import {
+  MdEmail,
+  MdArrowForwardIos,
+  MdGroups,
+  MdOutlineChevronRight,
+  MdKeyboardArrowDown,
+} from "react-icons/md";
+import { LiaUserCogSolid, LiaProductHunt } from "react-icons/lia";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
@@ -12,6 +18,7 @@ import {
   AiFillHeart,
   AiOutlineDown,
   AiOutlineCloseSquare,
+  AiOutlineDashboard,
 } from "react-icons/ai";
 
 const icons = {
@@ -31,6 +38,12 @@ const icons = {
   BsFillCartCheckFill,
   AiOutlineCloseSquare,
   IoIosRemoveCircleOutline,
+  AiOutlineDashboard,
+  MdGroups,
+  LiaProductHunt,
+  RiBillLine,
+  MdOutlineChevronRight,
+  MdKeyboardArrowDown,
 };
 
 export default icons;

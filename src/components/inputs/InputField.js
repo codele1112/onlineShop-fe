@@ -27,6 +27,7 @@ const InputField = ({
         onChange={(e) =>
           setValue((prev) => ({ ...prev, [nameKey]: e.target.value }))
         }
+        onFocus={() => setInvalidFields([])}
       />
 
       {invalidFields?.some((el) => el.name === nameKey) && (

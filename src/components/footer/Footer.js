@@ -1,5 +1,5 @@
 import React from "react";
-import icons from "../ultils/icons";
+import icons from "../../ultils/icons";
 
 const Footer = () => {
   const { MdEmail } = icons;
@@ -7,19 +7,21 @@ const Footer = () => {
     <div className="w-full">
       <div className="h-[103px] w-full bg-main flex items-center justify-center">
         <div className="w-main flex items-center justify-between">
-          <div className=" flex flex-col text-white flex-1">
-            <span className="text-[20px]">SIGN UP TO NEWSLETTER</span>
-            <small className="text-[13px]">
+          <div className=" flex flex-col  text-white flex-1 ">
+            <span className=" md:text-[10px] text-[20px]">
+              SIGN UP TO NEWSLETTER
+            </span>
+            <small className=" md:text-[8px] text-[13px]">
               Subcribe now and recieve weekly newsletter
             </small>
           </div>
-          <div className=" flex-1 flex items-center ">
+          <div className=" md:flex-2 flex-1  flex items-center ">
             <input
               type="text"
-              className="p-4 pr-0 rounded-l-full w-full bg-[#f8b400] outline-none text-gray-100 placeholder:text-gray-100 placeholder:text-sm  placeholder:italic placeholder:opacity-50"
+              className="p-4 md:p-2 pr-0  rounded-l-full w-full bg-[#f8b400] outline-none text-gray-100 placeholder:text-gray-100 placeholder:text-sm  placeholder:italic placeholder:opacity-50"
               placeholder="Email address"
             />
-            <div className="h-[56px] w-[56px] bg-[#f8b400] rounded-r-full  flex items-center justify-center">
+            <div className="h-[56px] w-[56px] bg-[#f8b400] md:h-[40px] rounded-r-full  flex items-center justify-center">
               <MdEmail size={18} color="#fff" />
             </div>
           </div>
@@ -27,12 +29,12 @@ const Footer = () => {
       </div>
 
       <div className="h-[407px] w-full bg-gray-600 flex items-center justify-center text-white text-[13px]">
-        <div className="w-main flex ">
+        <div className="w-main md:w-[390px] flex ">
           <div className="flex-1 flex flex-col gap-2">
-            <h3 className="mb-[20px] text-[15px] font-medium border-l-2 border-main pl-[15px]">
+            <h3 className="mb-[20px]  text-[15px] font-medium border-l-2 border-main pl-[15px]">
               ABOUT US
             </h3>
-            <span>
+            <span className="md:invisible">
               <span>Address: </span>
               <span className="opacity-70">
                 <p>F12 KQH Hoang Dieu, Ward 5,</p>
@@ -40,17 +42,17 @@ const Footer = () => {
               </span>
             </span>
 
-            <span>
+            <span className="md:invisible">
               <span>Phone: </span>
               <span className="opacity-70">(+1800) 567899xx</span>
             </span>
 
-            <span>
+            <span className="md:invisible">
               <span>Mail: </span>
               <span className="opacity-70">soapsandscents@gmail.com</span>
             </span>
           </div>
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="flex-1 flex flex-col gap-2 md:hidden">
             <h3 className="mb-[20px] text-[15px] font-medium border-l-2  border-main pl-[15px]">
               INFORMATION
             </h3>
@@ -64,13 +66,13 @@ const Footer = () => {
             <h3 className="mb-[20px] text-[15px] font-medium border-l-2  border-main pl-[15px]">
               WHO WE ARE
             </h3>
-            <span className="opacity-70">Help</span>
-            <span className="opacity-70">Shipping & Return</span>
-            <span className="opacity-70">FAQs</span>
-            <span className="opacity-70">Testimonials</span>
+            <span className="opacity-70 md:invisible">Help</span>
+            <span className="opacity-70 md:invisible">Shipping & Return</span>
+            <span className="opacity-70 md:invisible">FAQs</span>
+            <span className="opacity-70 md:invisible">Testimonials</span>
           </div>
 
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="flex-1 flex flex-col md:hidden gap-2">
             <h3 className="mb-[20px] text-[15px] font-medium border-l-2  border-main pl-[15px]">
               #SOAPS&SCENTS
             </h3>

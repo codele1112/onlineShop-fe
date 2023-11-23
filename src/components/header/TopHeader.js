@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from "react";
 import { Link } from "react-router-dom";
-import path from "../ultils/path";
-import { getCurrentUser } from "../store/user/asyncActions";
-import { userLogout } from "../store/user/userSlice";
+import path from "../../ultils/path";
+import { getCurrentUser } from "../../store/user/asyncActions";
+import { userLogout } from "../../store/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { persistor } from "../store/redux";
-import icons from "../ultils/icons";
+import { persistor } from "../../store/redux";
+import icons from "../../ultils/icons";
 
 const { FiLogOut } = icons;
 
@@ -28,13 +28,15 @@ const TopHeader = () => {
     await persistor.flush();
   }
   return (
-    <div className=" h-[38px] w-full bg-main flex items-center justify-center">
+    <div className=" w-full  h-[40px] bg-main flex items-center justify-center">
       <div className="w-main flex items-center justify-between text-xs text-white">
-        <span>ORDER ONLINE OR CALL US (+1800) 000 9098</span>
+        <span className="md:invisible md:max-w-[200px]">
+          ORDER ONLINE OR CALL US (+1800) 000 9098
+        </span>
 
         {isLoggedIn ? (
-          <div className="flex gap-2">
-            <span className="text-base">
+          <div className="flex gap-2 ">
+            <span className="text-base sm:text-[10px]">
               {`Welcome, ${current?.name ? current.name : ""}  `}!
             </span>
             <span
