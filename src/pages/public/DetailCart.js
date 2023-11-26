@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Breadcrumb, Button, SelectQuantity } from "../../components";
+import { Breadcrumb } from "../../components";
 import { formatMoney } from "../../ultils/helpers";
 import OrderItem from "../../components/products/OrderItem";
 import { updateCart } from "../../store/user/userSlice";

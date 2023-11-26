@@ -59,9 +59,9 @@ const Product = ({ productData, navigate, dispatch }) => {
     }
   };
   return (
-    <div className="w-full text-base pr-5 px-[10px]">
+    <div className="w-full md:max-w-[390px] text-base pr-5 px-[10px]">
       <Link
-        className="w-full border p-[15px] flex flex-col items-center "
+        className="w-full border p-[15px] md:text-[8px] flex flex-col items-center "
         to={`/${productData?.category.name}/${productData?._id}/${productData?.name}`}
         onMouseEnter={(e) => {
           e.stopPropagation();
@@ -108,7 +108,7 @@ const Product = ({ productData, navigate, dispatch }) => {
           <img
             src={productData?.images[0] || ""}
             alt=""
-            className="w-full object-cover h-[300px]"
+            className="w-full object-cover h-[300px] md:max-w-[100px] md:max-h-[100px]"
           />
         </div>
         <div className="flex flex-col gap-1  mt-[15px] items-start w-full ">

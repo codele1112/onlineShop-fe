@@ -9,7 +9,7 @@ const Sidebar = () => {
   // console.log("categories", categories);
   return (
     <div className="flex flex-col border">
-      <span className=" flex gap-2 items-center justify-center w-full bg-main text-white font-medium py-2">
+      <span className=" md:text-[8px] flex gap-2 items-center justify-center w-full bg-main text-white font-medium py-2">
         ALL CATEGORIES
       </span>
       {categories?.map((el) => (
@@ -18,8 +18,8 @@ const Sidebar = () => {
           to={createSlug(el.name)}
           className={({ isActive }) =>
             isActive
-              ? "text-[20px]  bg-main text-white px-5 pt-[15px] pb-[14px] hover:text-main"
-              : "text-[20px]  px-5 pt-[15px] pb-[14px] text-sm hover:text-main"
+              ? "text-[20px] md:text-[10px] bg-main text-white px-5 pt-[15px] pb-[14px] hover:text-main"
+              : "text-[20px] md:text-[10px] px-5 pt-[15px] pb-[14px] text-sm hover:text-main"
           }
         >
           {el.name}

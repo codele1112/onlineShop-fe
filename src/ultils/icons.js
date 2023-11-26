@@ -9,7 +9,11 @@ import {
 import { LiaUserCogSolid, LiaProductHunt } from "react-icons/lia";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
+import {
+  BsFillCartPlusFill,
+  BsFillCartCheckFill,
+  BsThreeDots,
+} from "react-icons/bs";
 import {
   AiFillHome,
   AiOutlineShoppingCart,
@@ -44,6 +48,7 @@ const icons = {
   RiBillLine,
   MdOutlineChevronRight,
   MdKeyboardArrowDown,
+  BsThreeDots,
 };
 
 export default icons;

@@ -10,6 +10,8 @@ export { default as FeatureProducts } from "./products/FeatureProducts";
 export { default as ProductCard } from "./products/ProductCard";
 export { default as SelectOption } from "./common/SelectOption";
 export { default as InputField } from "./inputs/InputField";
+export { default as Pagination } from "./pagination/Pagination";
+export { default as PaginationItem } from "./pagination/PaginationItem";
 export { default as Button } from "./buttons/Button";
 export { default as TopHeader } from "./header/TopHeader";
 export { default as Footer } from "./footer/Footer";

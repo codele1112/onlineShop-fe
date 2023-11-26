@@ -40,7 +40,7 @@ function BestSeller() {
 
   return (
     <div>
-      <div className="flex text-[20px]  ml-[-32px]">
+      <div className="flex text-[20px] md:text-[10px] ml-[-32px]">
         {tabs.map((el, index) => (
           <span
             key={index}

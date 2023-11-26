@@ -16,8 +16,8 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      <div className="w-main flex justify-between  mt-6">
-        <div className=" flex flex-col gap-5 md:hidden w-[25%] flex-auto ">
+      <div className="w-main md:max-w-[390px] flex md:flex md:flex-col justify-between mt-6">
+        <div className=" flex flex-col gap-5 md:w-full w-[25%] flex-auto ">
           <Sidebar />
           <DealDaily />
         </div>
@@ -28,12 +28,12 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="w-full my-8">
+      <div className="w-full  my-8">
         <FeatureProducts />
       </div>
 
-      <div className="my-8 w-main">
-        <h3 className="font-semibold border-b-2  border-main text-[20px] py-[15px]">
+      <div className="my-8 w-main md:max-w-[390px]">
+        <h3 className="font-semibold border-b-2 md:text-[10px] border-main text-[20px] py-[15px]">
           NEW ARRIVALS
         </h3>
         <div className="w-full  mt-8">

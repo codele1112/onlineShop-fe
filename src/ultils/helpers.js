@@ -11,6 +11,13 @@ export const formatMoney = (number) =>
     number
   );
 
+export const generateRange = (start, end) => {
+  const length = end + 1 - start;
+  return Array.from({ length }, (_, index) => start + index);
+};
+
+// [3,4,5,6]
+
 export const validate = (payload, setInvalidFields) => {
   let invalids = 0;
   const formatPayload = Object.entries(payload);

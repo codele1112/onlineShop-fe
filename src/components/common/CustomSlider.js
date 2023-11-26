@@ -10,9 +10,9 @@ const settings = {
 };
 const CustomSlider = ({ products, activedTab }) => {
   return (
-    <>
+    <div className="md:max-w-[390px]">
       {products && (
-        <Slider className="custom-slider" {...settings}>
+        <Slider className="custom-slider " {...settings}>
           {products?.map((el, index) => (
             <Product
               key={index}
@@ -23,7 +23,7 @@ const CustomSlider = ({ products, activedTab }) => {
           ))}
         </Slider>
       )}
-    </>
+    </div>
   );
 };
 

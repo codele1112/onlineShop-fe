@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "./store/categories/asyncActions";
 import { showCart } from "./store/categories/categoriesSlice";
 import { Modal } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import path from "../../ultils/path";
 import { useDispatch, useSelector } from "react-redux";
 import { showCart } from "../../store/categories/categoriesSlice";
+import { userLogout } from "../../store/user/userSlice";
 
 const {
   RiPhoneFill,
@@ -15,7 +16,7 @@ const {
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);
-  console.log("current", current);
+  // console.log("current", current);
   const [isShowOption, setIsShowOption] = useState(false);
   const dispatch = useDispatch();
 
@@ -65,18 +66,40 @@ const Header = () => {
                 <span>{`${current?.cart?.length || 0} item(s)`}</span>
               </div>
 
-              <Link
-                to={
-                  current?.role === "admin"
-                    ? `/${path.ADMIN}/${path.DASHBOARD}`
-                    : `/${path.MEMBER}/${path.PERSONAL}`
-                }
-                className="flex items-center justify-center px-6 gap-2 cursor-pointer"
+              <div
+                className="flex items-center justify-center cursor-pointer px-6 gap-2 relative"
+                onClick={() => setIsShowOption((prev) => !prev)}
               >
                 <LiaUserCogSolid size={24} />
-
                 <span>Profile</span>
-              </Link>
+                {console.log("isShowOption", isShowOption)}
+                {isShowOption && (
+                  <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[200px] py-2">
+                    {
+                      <Link
+                        className="p-2 w-full hover:bg-sky-100"
+                        to={`/${path.MEMBER}/${path.PERSONAL}`}
+                      >
+                        Personal
+                      </Link>
+                    }
+                    {current?.role === "admin" && (
+                      <Link
+                        className="p-2 w-full hover:bg-sky-100"
+                        to={`/${path.ADMIN}/${path.DASHBOARD}`}
+                      >
+                        Admin workspace
+                      </Link>
+                    )}
+                    <span
+                      onClick={() => dispatch(userLogout())}
+                      className="p-2 w-full hover:bg-sky-100"
+                    >
+                      Logout
+                    </span>
+                  </div>
+                )}
+              </div>
             </Fragment>
           )}
         </div>
