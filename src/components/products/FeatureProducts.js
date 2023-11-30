@@ -17,11 +17,11 @@ const FeatureProducts = () => {
     fetchProducts();
   }, []);
   return (
-    <div className="w-main md:max-w-[390px]">
+    <div className="w-main md:max-w-[390px] lg:max-w-[768px]">
       <h3 className=" font-semibold border-b-2 border-main text-[20px] md:text-[10px] py-[15px]">
         FEATURE PRODUCTS
       </h3>
-      <div className=" md:max-w-[390px] md:flex md:flex-col flex flex-wrap mt-10  mx-[-10px] md:mx-[10px] ">
+      <div className=" md:max-w-[390px] md:flex md:flex-col flex flex-wrap mt-10  mx-[-10px] md:mx-[10px] lg:mx-[10px]">
         {products?.map((el) => (
           <ProductCard
             key={el._id}
@@ -32,7 +32,7 @@ const FeatureProducts = () => {
         ))}
       </div>
 
-      <div className="w-1/3 md:hidden flex justify-between gap-2   mt-8  ">
+      <div className="w-1/3 md:hidden  flex justify-between gap-2  mt-8  ">
         <img
           src="https://i.pinimg.com/564x/cd/75/32/cd7532cf046bdad46cee22e4b54851c5.jpg"
           alt="soaps"

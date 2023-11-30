@@ -73,7 +73,6 @@ const Checkout = () => {
             required: "Need fill this field.",
           }}
           placeholder="Please fill the address first."
-          style="text-sm border"
         />
       </div>
 

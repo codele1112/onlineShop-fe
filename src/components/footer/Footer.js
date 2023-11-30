@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="h-[407px] w-full bg-gray-600 flex items-center justify-center text-white text-[13px]">
+      <div className="h-[407px] w-full bg-gray-600 flex items-center justify-center text-white text-[13px] lg:px-3">
         <div className="w-main md:w-[390px] flex ">
           <div className="flex-1 flex flex-col gap-2">
             <h3 className="mb-[20px]  text-[15px] font-medium border-l-2 border-main pl-[15px]">
@@ -72,7 +72,7 @@ const Footer = () => {
             <span className="opacity-70 md:invisible">Testimonials</span>
           </div>
 
-          <div className="flex-1 flex flex-col md:hidden gap-2">
+          <div className="flex-1 flex flex-col md:hidden lg:hidden gap-2">
             <h3 className="mb-[20px] text-[15px] font-medium border-l-2  border-main pl-[15px]">
               #SOAPS&SCENTS
             </h3>

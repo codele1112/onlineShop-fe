@@ -19,14 +19,14 @@ const DetailCart = () => {
   return (
     <div className="w-full">
       <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-        <div className="w-main">
+        <div className="w-main md:max-w-[390px] lg:max-w-[768px]  lg:px-3">
           <h3 className="font-semibold uppercase">My Cart</h3>
           <Breadcrumb name="your cart" />
         </div>
       </div>
 
-      <div className="flex flex-col border mt-8 w-main mx-auto my-8">
-        <div className="w-main mx-auto bg-second py-3 grid font-semibold grid-cols-10">
+      <div className="flex flex-col border mt-8 w-main md:max-w-[390px] lg:max-w-[768px] mx-auto my-8">
+        <div className="w-main md:max-w-[390px] lg:max-w-[768px] mx-auto bg-second py-3 lg:px-2  grid font-semibold grid-cols-10">
           <span className="col-span-6 w-full text-center">Products</span>
           <span className="col-span-1 w-full text-center">Quantity</span>
           <span className="col-span-3 w-full text-center">Price</span>
@@ -41,7 +41,7 @@ const DetailCart = () => {
           />
         ))}
       </div>
-      <div className="w-main mx-auto flex flex-col justify-center items-end gap-3 ">
+      <div className="w-main md:max-w-[390px] lg:max-w-[768px] mx-auto flex flex-col justify-center items-end gap-3 lg:px-3  md:px-3 ">
         <span className="flex items-center gap-8">
           <span>Subtotal: </span>
           <span>

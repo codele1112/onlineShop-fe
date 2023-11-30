@@ -29,6 +29,15 @@ export const navigation = [
   },
 ];
 
+export const roles = [
+  { code: "admin", value: "admin" },
+  { code: "user", value: "user" },
+];
+export const status = [
+  { code: true, value: "Blocked" },
+  { code: false, value: "Active" },
+];
+
 export const productInfoTabs = [
   { id: 1, name: "DESCRIPTION" },
   { id: 2, name: "DELIVERY" },

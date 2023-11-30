@@ -24,4 +24,6 @@ export { default as Breadcrumb } from "./common/Breadcrumb";
 export { default as ProductInfor } from "./products/ProductInfor";
 export { default as Cart } from "./products/Cart";
 export { default as InputForm } from "./inputs/InputForm";
+export { default as Select } from "./inputs/Select";
+export { default as MarkDownEditor } from "./inputs/MarkDownEditor";
 export { default as Paypal } from "./products/Paypal";

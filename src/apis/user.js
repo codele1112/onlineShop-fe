@@ -33,6 +33,19 @@ export const getUsers = (params) =>
     params,
   });
 
+export const updateUser = (data, uid) =>
+  axios({
+    url: "/users/" + uid,
+    method: "put",
+    data,
+  });
+
+export const deleteUser = (uid) =>
+  axios({
+    url: "/users/" + uid,
+    method: "delete",
+  });
+
 export const updateCart = (data) =>
   axios({
     url: "/users/cart/",

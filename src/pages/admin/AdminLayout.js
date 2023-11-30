@@ -6,7 +6,7 @@ import { AdminSidebar } from "../../components";
 
 const AdminLayout = () => {
   const { isLoggedIn, current } = useSelector((state) => state.user);
-  console.log(isLoggedIn, current);
+  // console.log(isLoggedIn, current);
   if (!isLoggedIn || !current || current?.role !== "admin")
     return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (

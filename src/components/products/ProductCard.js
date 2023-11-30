@@ -3,7 +3,7 @@ import { formatMoney } from "../../ultils/helpers";
 
 const ProductCard = ({ price, name, image }) => {
   return (
-    <div className="w-1/3 md:w-full flex-auto px-[10px] mb-[20px]">
+    <div className="w-1/3 lg:w-[300px] md:w-full flex-auto px-[10px] mb-[20px]">
       <div className="w-full  border ">
         <img
           src={image}

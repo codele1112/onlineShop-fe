@@ -10,7 +10,7 @@ const settings = {
 };
 const CustomSlider = ({ products, activedTab }) => {
   return (
-    <div className="md:max-w-[390px]">
+    <div className="md:max-w-[390px] lg:max-w-[768px]">
       {products && (
         <Slider className="custom-slider " {...settings}>
           {products?.map((el, index) => (

@@ -90,15 +90,9 @@ const Login = () => {
   }, [payload, isRegister, dispatch, navigate]);
 
   return (
-    <div className="w-screen h-screen relative">
-      <img
-        src="https://i.pinimg.com/564x/3e/4f/21/3e4f213acec75143c349ab281fe4f12c.jpg"
-        alt=""
-        className="w-full h-full object-cover"
-      />
-
-      <div className="absolute top-0 bottom-0 left-0 right-1/2 items-center justify-center flex ">
-        <div className="p-8 bg-white rounded-md min-w-[500px] flex flex-col items-center ">
+    <div className="w-screen h-screen">
+      <div className="   border items-center justify-center flex ">
+        <div className="p-8 my-20 bg-second rounded-md min-w-[500px] md:min-w-[350px] flex flex-col items-center ">
           <h1 className="text-[28px] font-semibold  text-main mb-8">
             {isRegister ? "Register" : "Login"}
           </h1>

@@ -16,7 +16,7 @@ const {
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);
-  // console.log("current", current);
+  console.log("current", current);
   const [isShowOption, setIsShowOption] = useState(false);
   const dispatch = useDispatch();
 
@@ -32,16 +32,16 @@ const Header = () => {
   }, []);
   return (
     <div className="w-full flex items-center justify-center h-[110px] py-[35px]">
-      <div className="w-main flex justify-between items-center ">
-        <div className="  flex text-center ">
+      <div className="w-main md:max-w-[390px] lg:max-w-[768px] flex justify-between items-center ">
+        <div className="  flex text-center gap-0 ">
           <Link to={`/${path.HOME}`} />
           <RiBubbleChartLine size={35} />
           <span className="text-[35px] md:text-[15px]">SOAP & CANDLE</span>
         </div>
 
-        <div className="flex text-[13px] ">
-          <div className=" md:hidden flex flex-col items-center px-4 border-r">
-            <span className="flex gap-4 items-center">
+        <div className="flex text-[10px] ">
+          <div className=" md:hidden lg:hidden flex flex-col items-center px-4 border-r">
+            <span className="flex  gap-4 items-center">
               <RiPhoneFill />
               <span className="font-semibold">(+1800) 0000 8098</span>
             </span>
@@ -73,16 +73,17 @@ const Header = () => {
                 <LiaUserCogSolid size={24} />
                 <span>Profile</span>
                 {console.log("isShowOption", isShowOption)}
-                {isShowOption && (
-                  <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[200px] py-2">
-                    {
+                {console.log("role", current.role)}
+                {
+                  <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[100px] py-2">
+                    {current?.role === "user" && (
                       <Link
                         className="p-2 w-full hover:bg-sky-100"
                         to={`/${path.MEMBER}/${path.PERSONAL}`}
                       >
                         Personal
                       </Link>
-                    }
+                    )}
                     {current?.role === "admin" && (
                       <Link
                         className="p-2 w-full hover:bg-sky-100"
@@ -98,7 +99,7 @@ const Header = () => {
                       Logout
                     </span>
                   </div>
-                )}
+                }
               </div>
             </Fragment>
           )}

@@ -92,7 +92,7 @@ const Cart = () => {
             dispatch(showCart());
             navigate(`/${path.DETAIL_CART}`);
           }}
-          name={"Shopping Cart"}
+          children={"Shopping Cart"}
         />
       </div>
     </div>

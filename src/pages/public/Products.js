@@ -36,7 +36,7 @@ const Products = () => {
   );
 
   return (
-    <div className="w-full md:max-w-[390px]">
+    <div className="w-full md:max-w-[390px]  lg:max-w-[768px]">
       <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
         <div className="w-main md:max-w-[390px]">
           <h3 className="uppercase">{category}</h3>
@@ -44,7 +44,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="w-main md:max-w-[390px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
+      <div className="w-main md:max-w-[390px] lg:max-w-[768px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
         <div className="w-4/5 flex-auto flex flex-col ">
           <span className="font-semibold text-sm">Filter By </span>
           <SearchItem
@@ -57,7 +57,7 @@ const Products = () => {
         <div className="w-1/5 flex">Sort by</div>
       </div>
 
-      <div className="mt-8 w-main md:max-w-[390px] m-auto  ">
+      <div className="mt-8 w-main md:max-w-[390px] lg:max-w-[768px] m-auto  ">
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid flex mx-[-10px] "
