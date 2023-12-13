@@ -57,14 +57,14 @@ export const adminSidebar = [
   {
     id: 2,
     type: "single",
-    text: "Manage Users",
+    text: "Users",
     path: `/${path.ADMIN}/${path.MANAGE_USER}`,
     icon: <MdGroups size={20} />,
   },
   {
     id: 3,
     type: "parent",
-    text: "Manage Products",
+    text: "Products",
     icon: <LiaProductHunt size={20} />,
     submenu: [
       {
@@ -80,7 +80,7 @@ export const adminSidebar = [
   {
     id: 4,
     type: "single",
-    text: "Manage Oders",
+    text: "Orders",
     path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
     icon: <RiBillLine size={20} />,
   },

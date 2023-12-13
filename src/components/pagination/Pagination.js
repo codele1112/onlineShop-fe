@@ -1,32 +1,38 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSearchParams } from "react-router-dom";
 import usePagination from "../hooks/usePagination";
 import PaginationItem from "./PaginationItem";
 
 const Pagination = ({ totalCount }) => {
-  console.log(usePagination(66, 2));
+  // console.log("totalCount", totalCount);
   const [params] = useSearchParams();
-  const pagination = usePagination(totalCount, 2);
+  const pagination = usePagination(totalCount, +params.get("page") || 1);
+
+  console.log({ pagination });
 
   const range = () => {
     const currentPage = +params.get("page");
     const pageSize = +process.env.REACT_APP_PRODUCT_LIMIT || 10;
-    const start = (currentPage - 1) * pageSize + 1;
+    const start = Math.min((currentPage - 1) * pageSize + 1, totalCount);
     const end = Math.min(currentPage * pageSize, totalCount);
 
     return `${start} - ${end}`;
   };
   return (
     <div className="flex w-main justify-between items-center">
-      {!+params.get("page") && (
+      {!+params.get("page") ? (
         <span className="text-sm italic">
-          {`Show products: 1-${
-            +process.env.REACT_APP_PRODUCT_LIMIT || 10
-          } of ${totalCount}`}{" "}
+          {`Show products 1-${
+            Math.min(+process.env.REACT_APP_PRODUCT_LIMIT, totalCount) || 10
+          } of ${totalCount}`}
         </span>
+      ) : (
+        ""
       )}
-      {!+params.get("page") && (
+      {+params.get("page") ? (
         <span className="text-sm italic">{`Show products ${range()} of ${totalCount}`}</span>
+      ) : (
+        ""
       )}
 
       <div className="flex items-center">
@@ -38,4 +44,4 @@ const Pagination = ({ totalCount }) => {
   );
 };
 
-export default Pagination;
+export default memo(Pagination);

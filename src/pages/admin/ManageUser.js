@@ -87,7 +87,7 @@ const ManageUser = () => {
   return (
     <div className="w-full">
       <h1 className="h-[75px] flex justify-between items-center px-4 border-b text-3xl">
-        <span>Manage Users</span>
+        <span>Users</span>
       </h1>
       <div className="w-full p-4">
         <div className="flex justify-end py-4">

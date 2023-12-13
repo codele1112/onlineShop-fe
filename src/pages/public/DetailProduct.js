@@ -15,6 +15,7 @@ import { updateCart } from "../../apis";
 import { toast } from "react-toastify";
 import path from "../../ultils/path";
 import { getCurrentUser } from "../../store/user/asyncActions";
+import DOMPurify from "dompurify";
 
 const settings = {
   dots: false,
@@ -131,7 +132,20 @@ function DetailProduct() {
           <h1 className="text-[30px] md:text-[15px] font-semibold">{name}</h1>
 
           <div className=" md:max-w-[390px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
-            <span>{product?.description}</span>
+            <span>
+              {/* {product?.description.length > 1 && product?.description.map((el, index) => (
+                <li className="leading-6" key={index}>
+                  {el}
+                </li>
+              ))} */}
+              {product?.description && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(product.description),
+                  }}
+                ></div>
+              )}
+            </span>
           </div>
 
           <div className="  mt-[50px] mb-[50px] flex items-center gap-1">

@@ -16,15 +16,14 @@ const {
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);
-  console.log("current", current);
+  // console.log("current", current);
   const [isShowOption, setIsShowOption] = useState(false);
   const dispatch = useDispatch();
-
+  const handleClickoutOptions = (e) => {
+    const profile = document.getElementById("profile");
+    if (!profile?.contains(e.target.value)) setIsShowOption(!isShowOption);
+  };
   useEffect(() => {
-    const handleClickoutOptions = (e) => {
-      const profile = document.getElementById("profile");
-      if (!profile?.contains(e.target)) setIsShowOption(false);
-    };
     document.addEventListener("click", handleClickoutOptions);
     return () => {
       document.removeEventListener("click", handleClickoutOptions);
@@ -67,19 +66,23 @@ const Header = () => {
               </div>
 
               <div
+                id="profile"
                 className="flex items-center justify-center cursor-pointer px-6 gap-2 relative"
-                onClick={() => setIsShowOption((prev) => !prev)}
+                onClick={(e) => {
+                  handleClickoutOptions(e);
+                }}
               >
                 <LiaUserCogSolid size={24} />
                 <span>Profile</span>
                 {console.log("isShowOption", isShowOption)}
-                {console.log("role", current.role)}
-                {
+                {/* {console.log("role", current.role)} */}
+                {isShowOption && (
                   <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[100px] py-2">
                     {current?.role === "user" && (
                       <Link
                         className="p-2 w-full hover:bg-sky-100"
                         to={`/${path.MEMBER}/${path.PERSONAL}`}
+                        onClick={() => setIsShowOption(false)}
                       >
                         Personal
                       </Link>
@@ -88,6 +91,7 @@ const Header = () => {
                       <Link
                         className="p-2 w-full hover:bg-sky-100"
                         to={`/${path.ADMIN}/${path.DASHBOARD}`}
+                        onClick={() => setIsShowOption(false)}
                       >
                         Admin workspace
                       </Link>
@@ -99,7 +103,7 @@ const Header = () => {
                       Logout
                     </span>
                   </div>
-                }
+                )}
               </div>
             </Fragment>
           )}

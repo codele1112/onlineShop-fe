@@ -62,12 +62,12 @@ const Login = () => {
         // console.log("register", response);
 
         if (response.success) {
-          Swal.fire("Congratulation!", response.mes, "success").then(() => {
+          Swal.fire("Congratulation!", response.message, "success").then(() => {
             setIsRegister(false);
             resetPayload();
           });
         } else {
-          Swal.fire("Oops!", response.mes, "error");
+          Swal.fire("Oops!", response.message, "error");
         }
       } else {
         const rs = await login(data);
@@ -83,7 +83,7 @@ const Login = () => {
           );
           navigate(`/${path.HOME}`);
         } else {
-          Swal.fire("Oops!", rs.mes, "error");
+          Swal.fire("Oops!", rs.message, "error");
         }
       }
     }

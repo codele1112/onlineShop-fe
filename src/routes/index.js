@@ -9,6 +9,7 @@ import {
   DetailProduct,
   FAQ,
   DetailCart,
+  FinalRegister,
 } from "../pages/public";
 import {
   AdminLayout,
@@ -37,7 +38,8 @@ function Router() {
         <Route path={path.DETAIL_CART} element={<DetailCart />} />
         <Route path={path.BLOGS} element={<Blogs />} />
         <Route path={path.FAQ} element={<FAQ />} />
-        <Route path={path.OUR_SERVICE} element={<Services />} />
+        <Route path={path.FINAL_REGISTER} element={<Services />} />
+        <Route path={path.OUR_SERVICE} element={<FinalRegister />} />
         {/* <Route path={path.RESET_PASSWORD} element={<ResetPassword />} /> */}
       </Route>
 

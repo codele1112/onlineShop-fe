@@ -1,32 +1,71 @@
-import React, { useCallback, useState } from "react";
-import { Button, InputForm, Select, MarkDownEditor } from "../../components";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  Button,
+  InputForm,
+  Select,
+  MarkDownEditor,
+  Loading,
+} from "../../components";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { validate } from "../../ultils/helpers";
+import { useSelector, useDispatch } from "react-redux";
+import { getBase64, validate } from "../../ultils/helpers";
+import { toast } from "react-toastify";
+import { createProducts } from "../../apis";
+import { showModal } from "../../store/categories/categoriesSlice";
 
 const CreateProducts = () => {
+  const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
   const [payload, setPayload] = useState({
     description: "",
   });
+
   const [invalidFields, setInValidFields] = useState([]);
   const [preview, setPreview] = useState({
     thumb: null,
     images: [],
   });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
 
+  const [hoverEl, setHoverEl] = useState(null);
   const changeValue = useCallback(
     (e) => {
       setPayload(e);
     },
     [payload]
   );
+
+  const handlePreviewThumb = async (file) => {
+    const base64Thumb = await getBase64(file);
+    setPreview((prev) => ({ ...prev, thumb: base64Thumb }));
+  };
+
+  const handlePreviewImages = async (files) => {
+    let imagesPreview = [];
+    for (let file of files) {
+      if (file.type !== "image/png" && file.type !== "image/jpeg") {
+        toast.warning("File not supported!");
+        return;
+      }
+      const base64 = await getBase64(file);
+      imagesPreview.push({ name: file.name, path: base64 });
+    }
+    setPreview((prev) => ({ ...prev, images: imagesPreview }));
+  };
+
+  useEffect(() => {
+    handlePreviewThumb(watch("thumb")[0]);
+  }, [watch("thumb")]);
+  useEffect(() => {
+    handlePreviewImages(watch("images"));
+  }, [watch("images")]);
 
   const handleCreateProduct = async (data) => {
     const invalids = validate(payload, setInValidFields);
@@ -36,10 +75,32 @@ const CreateProducts = () => {
           (el) => el._id === data.category
         )?.name;
       const finalPayload = { ...data, ...payload };
+      // console.log("finalPayload", finalPayload);
       const formData = new FormData();
       for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
+      if (finalPayload.thumb) formData.append("thumb", finalPayload.thumb[0]);
+      if (finalPayload.images) {
+        for (let image of finalPayload.images) formData.append("images", image);
+      }
+      dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
+      const response = await createProducts(formData);
+      // console.log("response", response);
+      dispatch(showModal({ isShowModal: false, modalChildren: null }));
+
+      if (response.success) {
+        toast.success(response.message);
+        reset();
+        setPayload({
+          thumb: "",
+          images: [],
+        });
+      } else {
+        toast.error(response.message);
+      }
     }
   };
+
+  // console.log("preview", preview);
 
   return (
     <div className="w-full">
@@ -146,6 +207,24 @@ const CreateProducts = () => {
               </small>
             )}
           </div>
+          {preview?.images?.length > 0 && (
+            <div className="my-4 flex flex-wrap w-full gap-2">
+              {preview?.images?.map((el, index) => (
+                <div
+                  onMouseEnter={() => setHoverEl(el.name)}
+                  key={index}
+                  className="w-fit relative"
+                  onMouseLeave={() => setHoverEl(null)}
+                >
+                  <img
+                    src={el.path}
+                    alt="product"
+                    className="w-[200px] object-contain h-[200px]"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="my-6">
             <Button children={"Create new product"} type="submit" />

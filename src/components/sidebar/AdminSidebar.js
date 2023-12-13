@@ -19,17 +19,17 @@ const AdminSidebar = () => {
   };
   return (
     <div className=" bg-second h-full py-4">
-      <div className="flex flex-col p-4 gap-2 ">
+      <Link to={`/${path.HOME}`} className="flex flex-col p-4 gap-2 ">
         <div className="flex text-center">
-          <Link to={`/${path.HOME}`}>
+          <div>
             <RiBubbleChartLine size={30} />
-          </Link>
+          </div>
           <span className="text-[20px] md:text-[15px] ">SOAP & CANDLE</span>
         </div>
         <span className="text-center text-red-900 py-4 px-4">
           ADMIN WORKSPACE
         </span>
-      </div>
+      </Link>
 
       <div>
         {adminSidebar.map((el) => (

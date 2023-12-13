@@ -1,3 +1,4 @@
+import { FaRegTrashAlt } from "react-icons/fa";
 import { RiPhoneFill, RiBubbleChartLine, RiBillLine } from "react-icons/ri";
 import {
   MdEmail,
@@ -49,6 +50,7 @@ const icons = {
   MdOutlineChevronRight,
   MdKeyboardArrowDown,
   BsThreeDots,
+  FaRegTrashAlt,
 };
 
 export default icons;

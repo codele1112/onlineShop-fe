@@ -62,7 +62,7 @@ const Product = ({ productData, navigate, dispatch }) => {
     <div className="w-full md:max-w-[390px] lg:max-w-[768px] text-base pr-5 px-[10px]">
       <Link
         className="w-full border p-[15px] md:text-[8px] flex flex-col items-center "
-        to={`/${productData?.category.name}/${productData?._id}/${productData?.name}`}
+        to={`/${productData?.category?.name}/${productData?._id}/${productData?.name}`}
         onMouseEnter={(e) => {
           e.stopPropagation();
           setIsShowOption(true);
