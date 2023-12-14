@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { formatMoney } from "../../ultils/helpers";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SelectOption from "../common/SelectOption";
 import { showModal } from "../../store/categories/categoriesSlice";
 import DetailProduct from "../../pages/public/DetailProduct";
@@ -8,16 +8,18 @@ import icons from "../../ultils/icons";
 import { updateCart } from "../../apis";
 import { getCurrentUser } from "../../store/user/asyncActions";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import path from "../../ultils/path";
 
 const { AiFillEye, AiFillHeart, BsFillCartPlusFill, BsFillCartCheckFill } =
   icons;
 
-const Product = ({ productData, navigate, dispatch }) => {
+const Product = ({ productData }) => {
   const [isShowOption, setIsShowOption] = useState(false);
   const { current } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // console.log("current", current);
   // console.log("productData", productData);
 

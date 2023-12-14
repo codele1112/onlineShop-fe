@@ -23,20 +23,20 @@ const ManageProducts = () => {
   } = useForm();
 
   const [params] = useSearchParams();
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [count, setCount] = useState(0);
 
-  const fetchProducts = async (params) => {
-    const response = await getProducts({
-      ...params,
-      limit: process.env.REACT_APP_PRODUCT_LIMIT,
-    });
+  // const fetchProducts = async (params) => {
+  //   const response = await getProducts({
+  //     ...params,
+  //     limit: process.env.REACT_APP_PRODUCT_LIMIT,
+  //   });
 
-    if (response.success) {
-      setCount(response.data.count);
-      setProducts(response.data.products);
-    }
-  };
+  //   if (response.success) {
+  //     setCount(response.data.count);
+  //     setProducts(response.data.products);
+  //   }
+  // };
 
   const queryDebounce = useDebounce(watch("q"), 800);
 
@@ -55,6 +55,17 @@ const ManageProducts = () => {
 
   useEffect(() => {
     const searchParams = Object.fromEntries([...params]);
+    const fetchProducts = async (params) => {
+      const response = await getProducts({
+        ...params,
+        limit: process.env.REACT_APP_PRODUCT_LIMIT,
+      });
+
+      if (response.success) {
+        setCount(response.data.count);
+        setProducts(response.data.products);
+      }
+    };
     fetchProducts(searchParams);
   }, [params]);
 
@@ -73,7 +84,7 @@ const ManageProducts = () => {
           // onSubmit={handleSubmit(handleSearchProducts())}
         >
           <InputForm
-            id={"q"}
+            id="q"
             register={register}
             errors={errors}
             fullWidth
@@ -97,29 +108,30 @@ const ManageProducts = () => {
           </tr>
         </thead>
 
-        {/* <tbody>
-          {products?.map((el, index) => (
-            <tr className="border-b" key={index}>
-              <td className="px-4 py-2">{index + 1}</td>
-              <td className="px-4 py-2">
-                <img
-                  src={el.thumb}
-                  alt="thumb"
-                  className="w-12 h-12 object-cover"
-                />
-              </td>
-              <td className=" px-4 py-2">{el.name}</td>
-              <td className=" px-4 py-2">{el.category}</td>
-              <td className="text-center px-4 py-2">{el.price}</td>
-              <td className="text-center px-4 py-2">{el.quantity}</td>
-              <td className="text-center px-4 py-2">{el.sold}</td>
-              <td className="text-center px-4 py-2">{el.totalRatings}</td>
-              <td className="text-center px-4 py-2">
-                {moment(el.updatedAt).format("DD/MM/YYYY")}
-              </td>
-            </tr>
-          ))}
-        </tbody> */}
+        <tbody>
+          {products?.length &&
+            products?.map((el, index) => (
+              <tr className="border-b" key={index}>
+                <td className="px-4 py-2">{index + 1}</td>
+                <td className="px-4 py-2">
+                  <img
+                    src={el.thumb}
+                    alt="thumb"
+                    className="w-12 h-12 object-cover"
+                  />
+                </td>
+                <td className=" px-4 py-2">{el.name}</td>
+                <td className=" px-4 py-2">{el.category.name}</td>
+                <td className="text-center px-4 py-2">{el.price}</td>
+                <td className="text-center px-4 py-2">{el.quantity}</td>
+                <td className="text-center px-4 py-2">{el.sold}</td>
+                <td className="text-center px-4 py-2">{el.totalRatings}</td>
+                <td className="text-center px-4 py-2">
+                  {moment(el.updatedAt).format("DD/MM/YYYY")}
+                </td>
+              </tr>
+            ))}
+        </tbody>
       </table>
 
       <div className="w-full flex justify-end my-8">

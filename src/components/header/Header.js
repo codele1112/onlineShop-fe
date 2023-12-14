@@ -16,19 +16,24 @@ const {
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);
-  // console.log("current", current);
+  console.log("current", current);
   const [isShowOption, setIsShowOption] = useState(false);
   const dispatch = useDispatch();
-  const handleClickoutOptions = (e) => {
-    const profile = document.getElementById("profile");
-    if (!profile?.contains(e.target.value)) setIsShowOption(!isShowOption);
-  };
+
   useEffect(() => {
+    const handleClickoutOptions = (e) => {
+      const profile = document.getElementById("profile");
+
+      if (!profile?.contains(e.target)) setIsShowOption(false);
+    };
+
     document.addEventListener("click", handleClickoutOptions);
+
     return () => {
       document.removeEventListener("click", handleClickoutOptions);
     };
   }, []);
+
   return (
     <div className="w-full flex items-center justify-center h-[110px] py-[35px]">
       <div className="w-main md:max-w-[390px] lg:max-w-[768px] flex justify-between items-center ">
@@ -69,13 +74,12 @@ const Header = () => {
                 id="profile"
                 className="flex items-center justify-center cursor-pointer px-6 gap-2 relative"
                 onClick={(e) => {
-                  handleClickoutOptions(e);
+                  setIsShowOption((prev) => !prev);
                 }}
               >
                 <LiaUserCogSolid size={24} />
                 <span>Profile</span>
-                {console.log("isShowOption", isShowOption)}
-                {/* {console.log("role", current.role)} */}
+                {/* {console.log("isShowOption", isShowOption)} */}
                 {isShowOption && (
                   <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[100px] py-2">
                     {current?.role === "user" && (
