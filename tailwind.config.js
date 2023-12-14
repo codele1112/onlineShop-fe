@@ -40,6 +40,7 @@ module.exports = {
         second: "#dfd3c3",
         third: "#c7b198",
         fourth: "#f0ece2",
+        overlay: "rgba(0,0,0,0.3)",
       },
       colors: {
         main: "#596e79",

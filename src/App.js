@@ -28,7 +28,7 @@ function App() {
         </div>
       )}
 
-      {isShowModal && <Modal>{modalChidren}</Modal>}
+      {/* {isShowModal && <Modal>{modalChidren}</Modal>} */}
 
       <Router />
       <ToastContainer
@@ -38,6 +38,7 @@ function App() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
+        theme="colored"
         pauseOnFocusLoss
         draggable
         pauseOnHover

@@ -5,6 +5,7 @@ export const register = (data) =>
     url: "/users/register",
     method: "post",
     data,
+    withCredentials: true,
   });
 
 export const login = (data) =>
@@ -16,8 +17,15 @@ export const login = (data) =>
 
 export const forgotPassword = (data) =>
   axios({
-    url: "/auth/forgotpassword",
-    method: "get",
+    url: "/auth/forgot-password",
+    method: "post",
+    data,
+  });
+
+export const resetPassword = (data) =>
+  axios({
+    url: "/auth/reset-password",
+    method: "put",
     data,
   });
 export const getCurrentUser = () =>

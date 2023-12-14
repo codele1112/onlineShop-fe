@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { InputField, Button, Loading } from "../../components";
 import { login, register, forgotPassword } from "../../apis";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  // console.log("location", location);
   const [payload, setPayload] = useState({
     email: "",
     password: "",
@@ -37,10 +39,11 @@ const Login = () => {
 
   const handleForgotPassword = async () => {
     const response = await forgotPassword({ email });
+    // console.log("response fw", response);
     if (response.success) {
-      toast.success(response.mes, { theme: "colored" });
+      toast.success("Please check your mail!", { theme: "colored" });
     } else {
-      toast.info(response.mes, { theme: "colored" });
+      toast.info(response.message, { theme: "colored" });
     }
   };
 
@@ -90,7 +93,36 @@ const Login = () => {
   }, [payload, isRegister, dispatch, navigate]);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen relative">
+      {isForgotPassword && (
+        <div className="absolute top-0 left-0 bottom-0 bg-white right-0 py-8 flex flex-col items-center  z-50">
+          <div className="flex flex-col gap-4">
+            <label htmlFor="email">Please enter your email:</label>
+            <input
+              type="text"
+              id="email"
+              className="w-[800px] lg:max-w-[700px] md:max-w-[350px] pb-2 border-b outline-none placeholder:text-sm"
+              placeholder="Your email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className="flex items-center justify-end w-full gap-2">
+              <Button
+                children={"Submit"}
+                style={"py-2 px-4 rounded-md bg-main text-white my-2 "}
+                handleOnClick={handleForgotPassword}
+              />
+              <Button
+                children={"Back"}
+                style={
+                  "py-2 px-4 rounded-md text-white bg-gray-500 text-semibold my-2 "
+                }
+                handleOnClick={() => setIsForgotPassword(false)}
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="   border items-center justify-center flex ">
         <div className="p-8 my-20 bg-second rounded-md min-w-[500px] md:min-w-[350px] flex flex-col items-center ">
           <h1 className="text-[28px] font-semibold  text-main mb-8">
@@ -103,6 +135,7 @@ const Login = () => {
               nameKey="name"
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
+              fullWidth
             />
           ) : (
             ""
@@ -114,6 +147,7 @@ const Login = () => {
               nameKey="phone"
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
+              fullWidth
             />
           ) : (
             ""
@@ -143,7 +177,10 @@ const Login = () => {
           />
           <div className="flex items-center justify-between my-2 w-full text-sm">
             {!isRegister && (
-              <span className="text-main hover:underline cursor-pointer">
+              <span
+                onClick={() => setIsForgotPassword(true)}
+                className="text-main hover:underline cursor-pointer"
+              >
                 Forgot your account?
               </span>
             )}

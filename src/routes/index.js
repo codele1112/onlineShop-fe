@@ -10,6 +10,7 @@ import {
   FAQ,
   DetailCart,
   FinalRegister,
+  ResetPassword,
 } from "../pages/public";
 import {
   AdminLayout,
@@ -38,9 +39,8 @@ function Router() {
         <Route path={path.DETAIL_CART} element={<DetailCart />} />
         <Route path={path.BLOGS} element={<Blogs />} />
         <Route path={path.FAQ} element={<FAQ />} />
-        <Route path={path.FINAL_REGISTER} element={<Services />} />
-        <Route path={path.OUR_SERVICE} element={<FinalRegister />} />
-        {/* <Route path={path.RESET_PASSWORD} element={<ResetPassword />} /> */}
+        <Route path={path.OUR_SERVICE} element={<Services />} />
+        <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
       </Route>
 
       <Route path={path.ADMIN} element={<AdminLayout />}>
@@ -56,7 +56,7 @@ function Router() {
       </Route>
       <Route path={path.ALL} element={<NotFoundPage />} />
       <Route path={path.LOGIN} element={<Login />} />
-      {/* <Route path={path.FINAL_REGISTER} element={<FinalRegister />}/> */}
+      <Route path={path.FINAL_REGISTER} element={<FinalRegister />} />
     </Routes>
   );
 }

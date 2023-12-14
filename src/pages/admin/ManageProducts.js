@@ -97,7 +97,7 @@ const ManageProducts = () => {
           </tr>
         </thead>
 
-        <tbody>
+        {/* <tbody>
           {products?.map((el, index) => (
             <tr className="border-b" key={index}>
               <td className="px-4 py-2">{index + 1}</td>
@@ -119,7 +119,7 @@ const ManageProducts = () => {
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody> */}
       </table>
 
       <div className="w-full flex justify-end my-8">
