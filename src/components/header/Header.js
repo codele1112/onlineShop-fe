@@ -16,7 +16,7 @@ const {
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);
-  console.log("current", current);
+  // console.log("current", current);
   const [isShowOption, setIsShowOption] = useState(false);
   const dispatch = useDispatch();
 

@@ -38,33 +38,41 @@ const Product = ({ productData }) => {
         }).then((rs) => {
           if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
         });
+
       const response = await updateCart({ pid: productData._id });
       if (response.success) {
         toast.success(response.mes);
         dispatch(getCurrentUser());
       } else toast.error(response.mes);
     }
+
     if (flag === "WISHLIST") {
     }
+
     if (flag === "QUICK_VIEW") {
-      // dispatch(
-      //   showModal({
-      //     isShowModal: true,
-      //     modalChildren: (
-      //       <DetailProduct
-      //         data={productData?._id}
-      //         category={productData?.category.name}
-      //       />
-      //     ),
-      //   })
-      // );
+      dispatch(
+        showModal({
+          isShowModal: true,
+          modalChildren: (
+            <DetailProduct
+              isQuickview
+              data={productData?._id}
+              category={productData?.category.name}
+            />
+          ),
+        })
+      );
     }
   };
   return (
     <div className="w-full md:max-w-[390px] lg:max-w-[768px] text-base pr-5 px-[10px]">
-      <Link
+      <div
         className="w-full border p-[15px] md:text-[8px] flex flex-col items-center "
-        to={`/${productData?.category?.name}/${productData?._id}/${productData?.name}`}
+        onClick={(e) =>
+          navigate(
+            `/${productData?.category?.name}/${productData?._id}/${productData?.name}`
+          )
+        }
         onMouseEnter={(e) => {
           e.stopPropagation();
           setIsShowOption(true);
@@ -117,7 +125,7 @@ const Product = ({ productData }) => {
           <span className="line-clamp-1">{productData?.name}</span>
           <span>{formatMoney(productData?.price)}</span>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

@@ -25,21 +25,27 @@ const settings = {
   slidesToScroll: 1,
 };
 
-function DetailProduct() {
-  const { pid, name, category } = useParams();
+function DetailProduct({ isQuickview, data }) {
+  const params = useParams();
   const [product, setProduct] = useState(null);
+  const [pid, setPid] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
   const { current } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (data && data.pid) {
+      setPid(data.pid);
+    } else if (params && params.pid) setPid(params.pid);
+  }, [data, params]);
+
   const fetchProductData = async () => {
     const response = await getProductById(pid);
-    // console.log("product data", response);
     if (response.success) setProduct(response.data);
   };
+  console.log("product", product);
 
   const fetchProducts = async () => {
     const response = await getProducts();
@@ -96,14 +102,17 @@ function DetailProduct() {
       dispatch(getCurrentUser());
     } else toast.error(response.mes);
   };
+
   return (
-    <div className="w-full md:max-w-[390px] px-2">
-      <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-        <div className="w-main md:max-w-[390px]">
-          <h3 className="font-semibold md:text-[10px]">{name}</h3>
-          <Breadcrumb name={name} category={category} />
+    <div className="w-full md:max-w-[390px] px-2 bg-white">
+      {!isQuickview && (
+        <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
+          <div className="w-main md:max-w-[390px]">
+            <h3 className="font-semibold md:text-[10px]">{product?.name}</h3>
+            {/* <Breadcrumb name={product?.name} category={product.category.name} /> */}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="w-main md:max-w-[390px] md:flex md:flex-col m-auto mt-4 flex ">
         <div className="md:w-full w-1/2 flex-col flex ">
@@ -129,7 +138,9 @@ function DetailProduct() {
         </div>
 
         <div className="md:w-full w-1/2 md:max-w-[390px] ">
-          <h1 className="text-[30px] md:text-[15px] font-semibold">{name}</h1>
+          <h1 className="text-[30px] md:text-[15px] font-semibold">
+            {product?.name}
+          </h1>
 
           <div className=" md:max-w-[390px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
             <span>
@@ -177,13 +188,14 @@ function DetailProduct() {
           </div>
         </div>
       </div>
-      <div className=" w-main md:max-w-[390px] m-auto mt-8">
-        <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
-          YOU MAY ALSO LIKE
-        </h3>
-        <CustomSlider products={relatedProducts} />
-      </div>
-      {/* <div className="h-[500px] w-full"></div> */}
+      {!isQuickview && (
+        <div className=" w-main md:max-w-[390px] m-auto mt-8">
+          <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
+            YOU MAY ALSO LIKE
+          </h3>
+          <CustomSlider products={relatedProducts} />
+        </div>
+      )}
     </div>
   );
 }

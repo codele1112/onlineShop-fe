@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as actions from "./asyncActions";
+
 export const categoriesSlice = createSlice({
   name: "categories",
   initialState: {

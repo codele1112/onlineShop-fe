@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import Router from "./routes";
-import { Cart } from "./components";
+import { Cart, Modal } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "./store/categories/asyncActions";
 import { showCart } from "./store/categories/categoriesSlice";
-import { Modal } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,7 +17,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className=" font-main relative">
+    <div className=" font-main h-screen relative">
       {isShowCart && (
         <div
           onClick={() => dispatch(showCart())}
@@ -28,7 +27,7 @@ function App() {
         </div>
       )}
 
-      {/* {isShowModal && <Modal>{modalChidren}</Modal>} */}
+      {isShowModal && <Modal>{modalChidren}</Modal>}
 
       <Router />
       <ToastContainer

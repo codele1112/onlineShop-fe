@@ -24,7 +24,7 @@ const Personal = () => {
       email: current?.email,
       phone: current?.phone,
       address: current?.address,
-      avatar: current?.avatar || avatar,
+      avatar: current?.avatar,
     });
   }, [current]);
 
