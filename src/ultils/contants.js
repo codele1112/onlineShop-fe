@@ -45,7 +45,16 @@ export const productInfoTabs = [
   { id: 4, name: "CUSTOMER'S REVIEWS" },
 ];
 
-const { AiOutlineDashboard, MdGroups, LiaProductHunt, RiBillLine } = icons;
+const {
+  AiOutlineDashboard,
+  MdGroups,
+  LiaProductHunt,
+  RiBillLine,
+  AiOutlineShoppingCart,
+  AiFillHeart,
+  LiaUserCogSolid,
+} = icons;
+
 export const adminSidebar = [
   {
     id: 1,
@@ -82,6 +91,33 @@ export const adminSidebar = [
     type: "single",
     text: "Orders",
     path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
+    icon: <RiBillLine size={20} />,
+  },
+];
+
+export const memberSidebar = [
+  {
+    id: 1,
+    text: "Personal",
+    path: `/${path.MEMBER}/${path.PERSONAL}`,
+    icon: <LiaUserCogSolid size={20} />,
+  },
+  {
+    id: 2,
+    text: "My cart",
+    path: `/${path.MEMBER}/${path.MYCART}`,
+    icon: <AiOutlineShoppingCart size={20} />,
+  },
+  {
+    id: 3,
+    text: "Wishlist",
+    path: `/${path.MEMBER}/${path.WISHLIST}`,
+    icon: <AiFillHeart size={20} />,
+  },
+  {
+    id: 4,
+    text: "History",
+    path: `/${path.MEMBER}/${path.HISTORY}`,
     icon: <RiBillLine size={20} />,
   },
 ];

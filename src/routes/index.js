@@ -20,7 +20,14 @@ import {
   ManageUser,
   CreateProducts,
 } from "../pages/admin";
-import { Checkout, MemberLayout, Personal } from "../pages/member";
+import {
+  Checkout,
+  History,
+  MemberLayout,
+  MyCart,
+  Personal,
+  Wishlist,
+} from "../pages/member";
 import NotFoundPage from "../pages/NotFoundPage";
 import path from "../ultils/path";
 
@@ -53,6 +60,9 @@ function Router() {
 
       <Route path={path.MEMBER} element={<MemberLayout />}>
         <Route path={path.PERSONAL} element={<Personal />} />
+        <Route path={path.MYCART} element={<MyCart />} />
+        <Route path={path.WISHLIST} element={<Wishlist />} />
+        <Route path={path.HISTORY} element={<History />} />
       </Route>
       <Route path={path.ALL} element={<NotFoundPage />} />
       <Route path={path.LOGIN} element={<Login />} />

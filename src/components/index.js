@@ -17,6 +17,7 @@ export { default as TopHeader } from "./header/TopHeader";
 export { default as Footer } from "./footer/Footer";
 export { default as Loading } from "./common/Loading";
 export { default as AdminSidebar } from "./sidebar/AdminSidebar";
+export { default as MemberSidebar } from "./sidebar/MemberSidebar";
 export { default as CustomSlider } from "./common/CustomSlider";
 export { default as SearchItem } from "./search/SearchItem";
 export { default as SelectQuantity } from "./common/SelectQuantity";

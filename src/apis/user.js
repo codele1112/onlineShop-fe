@@ -48,6 +48,13 @@ export const updateUser = (data, uid) =>
     data,
   });
 
+export const updateCurrentUser = (data) =>
+  axios({
+    url: "/users/me",
+    method: "put",
+    data,
+  });
+
 export const deleteUser = (uid) =>
   axios({
     url: "/users/" + uid,
