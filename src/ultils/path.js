@@ -4,14 +4,13 @@ const path = {
   ALL: "*",
   LOGIN: "login",
   PRODUCTS: "products",
-  BLOGS: "blogs",
   OUR_SERVICE: "services",
   FAQ: "faqs",
   DETAIL_PRODUCT_CATEGORY_PID_NAME: ":category/:pid/:name",
   FINAL_REGISTER: "final-registration/:status",
   RESET_PASSWORD: "reset-password/:token",
-  DETAIL_CART: "my-cart/",
   CHECK_OUT: "check-out/",
+  DETAIL_CART: "my-cart/",
 
   // admin:
   ADMIN: "admin",
@@ -25,8 +24,8 @@ const path = {
 
   MEMBER: "member",
   PERSONAL: "personal",
+  MY_CART: "my-cart/",
   HISTORY: "order-history",
-  MYCART: "my-cart",
   WISHLIST: "wishlist",
 };
 

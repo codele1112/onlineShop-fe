@@ -17,7 +17,7 @@ const SelectQuantity = ({
         -
       </span>
       <input
-        className="py-2 px-4  w-[50px] outline-none text-black text-center"
+        className="py-2 px-4  w-[50px] outline-none text-black text-center mx-4"
         type="text"
         value={originalQuantity}
         onChange={(e) => {
@@ -28,7 +28,7 @@ const SelectQuantity = ({
         onClick={() => {
           handleChangeQuantity("plus");
         }}
-        className="text-[24px] cursor-pointer p-2 border-r border-black"
+        className="text-[24px] cursor-pointer p-2 border-l border-black"
       >
         +
       </span>

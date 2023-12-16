@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { createSearchParams, useNavigate, useParams } from "react-router-dom";
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { getProductById, getProducts } from "../../apis/products";
 
 import {
@@ -32,12 +37,14 @@ function DetailProduct({ isQuickview, data }) {
   const params = useParams();
   const [product, setProduct] = useState(null);
   const [pid, setPid] = useState(null);
+  const { categories } = useSelector((state) => state.categories);
   const [currentImage, setCurrentImage] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { current } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (data && data.pid) {
@@ -92,20 +99,20 @@ function DetailProduct({ isQuickview, data }) {
   const handleAddtoCart = async () => {
     if (!current)
       Swal.fire({
-        title: "ALmost...",
+        title: "Almost...",
         text: "Please login first!",
         icon: "info",
         cancelButtonText: "Not now!",
         showCancelButton: true,
         confirmButtonText: "Go to login page",
       }).then((rs) => {
-        // if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
-        // navigate({
-        //   pathname: `/${path.LOGIN}`,
-        //   search: createSearchParams({
-        //     redirect: pathname,
-        //   }).toString(),
-        // });
+        if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
+        navigate({
+          pathname: `/${path.LOGIN}`,
+          search: createSearchParams({
+            redirect: location.pathname,
+          }).toString(),
+        });
       });
     const response = await updateCart({ pid, quantity, price: product.price });
     // console.log("response", response);
@@ -157,11 +164,6 @@ function DetailProduct({ isQuickview, data }) {
 
           <div className=" md:max-w-[390px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
             <span>
-              {/* {product?.description.length > 1 && product?.description.map((el, index) => (
-                <li className="leading-6" key={index}>
-                  {el}
-                </li>
-              ))} */}
               {product?.description && (
                 <div
                   dangerouslySetInnerHTML={{

@@ -61,7 +61,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, payload }) => {
         onApprove={(data, actions) =>
           actions.order.capture().then(async (response) => {
             console.log(response);
-            console.log(payload);
+            console.log("payload", payload);
             if (response.status === "COMPLETED") {
               handleSaveOrder();
             }

@@ -20,6 +20,12 @@ export const createOrder = (data) =>
     data,
   });
 
+export const getUserOrders = () =>
+  axios({
+    url: "order/",
+    method: "get",
+  });
+
 export const getOrders = () =>
   axios({
     url: "order/admin",

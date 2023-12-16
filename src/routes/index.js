@@ -4,7 +4,6 @@ import {
   Home,
   Login,
   Products,
-  Blogs,
   Services,
   DetailProduct,
   FAQ,
@@ -24,7 +23,6 @@ import {
   Checkout,
   History,
   MemberLayout,
-  MyCart,
   Personal,
   Wishlist,
 } from "../pages/member";
@@ -44,7 +42,6 @@ function Router() {
         />
         <Route path={path.PRODUCTS} element={<Products />} />
         <Route path={path.DETAIL_CART} element={<DetailCart />} />
-        <Route path={path.BLOGS} element={<Blogs />} />
         <Route path={path.FAQ} element={<FAQ />} />
         <Route path={path.OUR_SERVICE} element={<Services />} />
         <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
@@ -60,11 +57,12 @@ function Router() {
 
       <Route path={path.MEMBER} element={<MemberLayout />}>
         <Route path={path.PERSONAL} element={<Personal />} />
-        <Route path={path.MYCART} element={<MyCart />} />
+        <Route path={path.MY_CART} element={<DetailCart />} />
         <Route path={path.WISHLIST} element={<Wishlist />} />
         <Route path={path.HISTORY} element={<History />} />
       </Route>
       <Route path={path.ALL} element={<NotFoundPage />} />
+      <Route path={path.CHECK_OUT} element={<Checkout />} />
       <Route path={path.LOGIN} element={<Login />} />
       <Route path={path.FINAL_REGISTER} element={<FinalRegister />} />
     </Routes>

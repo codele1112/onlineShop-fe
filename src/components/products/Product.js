@@ -21,7 +21,7 @@ const Product = ({ productData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // console.log("current", current);
-  // console.log("productData", productData.category.name);
+  // console.log("productData", productData);
 
   const handleClickOptions = async (e, flag) => {
     e.stopPropagation();
@@ -41,9 +41,9 @@ const Product = ({ productData }) => {
 
       const response = await updateCart({ pid: productData._id });
       if (response.success) {
-        toast.success(response.mes);
+        toast.success("Added!");
         dispatch(getCurrentUser());
-      } else toast.error(response.mes);
+      } else toast.error(response.message);
     }
 
     if (flag === "WISHLIST") {

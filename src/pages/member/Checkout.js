@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
-import { InputForm, Paypal } from "../../components";
+import { Button, InputForm, Paypal } from "../../components";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import path from "../../ultils/path";
 
 const Checkout = () => {
   const { currentCart, current } = useSelector((state) => state.user);
@@ -13,21 +15,30 @@ const Checkout = () => {
     setValue,
   } = useForm();
   const address = watch("address");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValue("address", current?.address);
   }, [current]);
+
+  const handleOnClick = () => {
+    navigate(`/${path.HOME}`);
+  };
 
   console.log("currentCart", currentCart);
   console.log("current", current);
   console.log("address", address);
 
   return (
-    <div className=" w-full p-8 h-full max-h-screen flex flex-col overflow-y-auto  gap-6">
-      <h2 className="text-2xl font-bold ">Checkout your order</h2>
+    <div className=" w-main md:max-w-[350px] lg:max-w-[700px] mx-auto my-auto ">
+      <h2 className="h-[75px] flex justify-between items-center px-4 border-b text-3xl ">
+        <span className=" text-blue-900  font-semibold md:text-[18px]">
+          Checkout your order
+        </span>
+      </h2>
 
-      <div>
-        <table className="table-auto w-full">
+      <div className="mx-auto">
+        <table className="table-auto w-full md:text-[15px] lg:text-[20px]">
           <thead>
             <tr className="border bg-gray-200">
               <th className="text-left p-2">Product</th>
@@ -62,7 +73,6 @@ const Checkout = () => {
           </span>
         </div>
       </div>
-
       <div className=" w-full">
         <InputForm
           label="Your Address"
@@ -76,7 +86,7 @@ const Checkout = () => {
         />
       </div>
 
-      <div className="w-full mx-auto ">
+      <div className="w-full mx-auto  mt-8">
         {address && address?.length > 10 && (
           <Paypal
             payload={{

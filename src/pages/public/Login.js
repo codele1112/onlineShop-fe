@@ -2,7 +2,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { InputField, Button, Loading } from "../../components";
 import { login, register, forgotPassword } from "../../apis";
 import Swal from "sweetalert2";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
@@ -25,7 +30,8 @@ const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get("redirect"));
   const resetPayload = () => {
     setPayload({
       email: "",
@@ -84,7 +90,9 @@ const Login = () => {
               user: rs.data.userData,
             })
           );
-          navigate(`/${path.HOME}`);
+          searchParams.get("redirect")
+            ? navigate(searchParams.get("redirect"))
+            : navigate(`/${path.HOME}`);
         } else {
           Swal.fire("Oops!", rs.message, "error");
         }

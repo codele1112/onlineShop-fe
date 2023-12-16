@@ -12,18 +12,14 @@ export const navigation = [
     value: "PRODUCTS",
     path: `/${path.PRODUCTS}`,
   },
+
   {
     id: 3,
-    value: "BLOGS",
-    path: `/${path.BLOGS}`,
-  },
-  {
-    id: 4,
     value: "OUR SERVICES",
     path: `/${path.OUR_SERVICE}`,
   },
   {
-    id: 5,
+    id: 4,
     value: "FAQs",
     path: `/${path.FAQ}`,
   },
@@ -102,17 +98,18 @@ export const memberSidebar = [
     path: `/${path.MEMBER}/${path.PERSONAL}`,
     icon: <LiaUserCogSolid size={20} />,
   },
+
   {
     id: 2,
-    text: "My cart",
-    path: `/${path.MEMBER}/${path.MYCART}`,
-    icon: <AiOutlineShoppingCart size={20} />,
-  },
-  {
-    id: 3,
     text: "Wishlist",
     path: `/${path.MEMBER}/${path.WISHLIST}`,
     icon: <AiFillHeart size={20} />,
+  },
+  {
+    id: 3,
+    text: "My cart",
+    path: `/${path.MEMBER}/${path.MY_CART}`,
+    icon: <AiOutlineShoppingCart size={20} />,
   },
   {
     id: 4,
