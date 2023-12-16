@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useParams } from "react-router-dom";
 import { getProductById, getProducts } from "../../apis/products";
+
 import {
   Breadcrumb,
   SelectQuantity,
   CustomSlider,
   Button,
+  Rating,
+  Votebar,
 } from "../../components";
 import Slider from "react-slick";
 import { formatMoney } from "../../ultils/helpers";
@@ -29,6 +32,7 @@ function DetailProduct({ isQuickview, data }) {
   const params = useParams();
   const [product, setProduct] = useState(null);
   const [pid, setPid] = useState(null);
+  const [currentImage, setCurrentImage] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { current } = useSelector((state) => state.user);
@@ -43,9 +47,11 @@ function DetailProduct({ isQuickview, data }) {
 
   const fetchProductData = async () => {
     const response = await getProductById(pid);
+    // console.log("response", response.data.thumb);
     if (response.success) setProduct(response.data);
+    setCurrentImage(response.data?.thumb || response.data?.images[0]);
   };
-  console.log("product", product);
+  // console.log("product", product);
 
   const fetchProducts = async () => {
     const response = await getProducts();
@@ -57,6 +63,7 @@ function DetailProduct({ isQuickview, data }) {
       fetchProductData();
       fetchProducts();
     }
+    window.scrollTo(0, 0);
   }, [pid]);
 
   const handleQuantity = useCallback((number) => {
@@ -77,6 +84,11 @@ function DetailProduct({ isQuickview, data }) {
     [quantity]
   );
 
+  const handleClickImage = (e, el) => {
+    e.stopPropagation();
+    setCurrentImage(el);
+  };
+
   const handleAddtoCart = async () => {
     if (!current)
       Swal.fire({
@@ -87,7 +99,7 @@ function DetailProduct({ isQuickview, data }) {
         showCancelButton: true,
         confirmButtonText: "Go to login page",
       }).then((rs) => {
-        if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
+        // if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
         // navigate({
         //   pathname: `/${path.LOGIN}`,
         //   search: createSearchParams({
@@ -109,7 +121,7 @@ function DetailProduct({ isQuickview, data }) {
         <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
           <div className="w-main md:max-w-[390px]">
             <h3 className="font-semibold md:text-[10px]">{product?.name}</h3>
-            {/* <Breadcrumb name={product?.name} category={product.category.name} /> */}
+            {/* <Breadcrumb name={product?.name} category={product?.category.name} /> */}
           </div>
         </div>
       )}
@@ -117,7 +129,7 @@ function DetailProduct({ isQuickview, data }) {
       <div className="w-main md:max-w-[390px] md:flex md:flex-col m-auto mt-4 flex ">
         <div className="md:w-full w-1/2 flex-col flex ">
           <img
-            src={product?.images[0]}
+            src={currentImage}
             alt="product"
             className="h-[458px] w-[458px] md:w-[360px] md:h-[360px] border  object-cover"
           />
@@ -127,9 +139,10 @@ function DetailProduct({ isQuickview, data }) {
               {product?.images?.map((el, index) => (
                 <div key={index} className="px-2">
                   <img
+                    onClick={(e) => handleClickImage(e, el)}
                     src={el}
                     alt="sub-product"
-                    className="h-[143px] w-[143px] border object-cover"
+                    className="h-[143px] w-[143px] border object-cover cursor-pointer"
                   />
                 </div>
               ))}
@@ -160,10 +173,15 @@ function DetailProduct({ isQuickview, data }) {
           </div>
 
           <div className="  mt-[50px] mb-[50px] flex items-center gap-1">
-            <h2 className="text-base  ">Stock: </h2>
+            <h2 className="text-base  ">In Stock: </h2>
             <span className=" text-base text-gray-700 ">
               {product?.quantity}
             </span>
+          </div>
+
+          <div className="  mt-[50px] mb-[50px] flex items-center gap-1">
+            <h2 className="text-base  ">Sold: </h2>
+            <span className=" text-base text-gray-700 ">{product?.sold}</span>
           </div>
 
           <div className="flex gap-2 mb-[30px]">
@@ -188,6 +206,7 @@ function DetailProduct({ isQuickview, data }) {
           </div>
         </div>
       </div>
+
       {!isQuickview && (
         <div className=" w-main md:max-w-[390px] m-auto mt-8">
           <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
@@ -196,6 +215,24 @@ function DetailProduct({ isQuickview, data }) {
           <CustomSlider products={relatedProducts} />
         </div>
       )}
+
+      <div className="  flex w-main md:max-w-[390px] m-auto mt-8 gap-2 p-4">
+        <div className="flex-4 flex items-center justify-center border">
+          <Rating totalRatings={3} totalCount={18} />
+        </div>
+        <div className="flex-6 flex flex-col gap-4 border">
+          {Array.from(Array(5).keys())
+            .reverse()
+            .map((el) => (
+              <Votebar
+                key={el}
+                number={el + 1}
+                ratingCount={5}
+                ratingTotal={35}
+              />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const Product = ({ productData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // console.log("current", current);
-  // console.log("productData", productData);
+  // console.log("productData", productData.category.name);
 
   const handleClickOptions = async (e, flag) => {
     e.stopPropagation();
@@ -57,7 +57,7 @@ const Product = ({ productData }) => {
             <DetailProduct
               isQuickview
               data={productData?._id}
-              category={productData?.category.name}
+              category={productData?.category?.name}
             />
           ),
         })

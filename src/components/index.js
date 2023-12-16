@@ -1,6 +1,7 @@
 export { default as Header } from "./header/Header";
 export { default as Navigation } from "./navigation/Navigation";
 export { default as Sidebar } from "./sidebar/Sidebar";
+export { default as Votebar } from "./sidebar/Votebar";
 export { default as Banner } from "./common/Banner";
 export { default as BestSeller } from "./products/BestSeller";
 export { default as Product } from "./products/Product";
@@ -24,6 +25,7 @@ export { default as CustomSlider } from "./common/CustomSlider";
 export { default as SearchItem } from "./search/SearchItem";
 export { default as SelectQuantity } from "./common/SelectQuantity";
 export { default as Breadcrumb } from "./common/Breadcrumb";
+export { default as Rating } from "./common/Rating";
 export { default as ProductInfor } from "./products/ProductInfor";
 export { default as Cart } from "./products/Cart";
 export { default as InputForm } from "./inputs/InputForm";

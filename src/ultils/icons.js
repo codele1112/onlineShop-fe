@@ -24,6 +24,8 @@ import {
   AiOutlineDown,
   AiOutlineCloseSquare,
   AiOutlineDashboard,
+  AiFillStar,
+  AiOutlineStar,
 } from "react-icons/ai";
 
 const icons = {
@@ -51,6 +53,8 @@ const icons = {
   MdKeyboardArrowDown,
   BsThreeDots,
   FaRegTrashAlt,
+  AiFillStar,
+  AiOutlineStar,
 };
 
 export default icons;

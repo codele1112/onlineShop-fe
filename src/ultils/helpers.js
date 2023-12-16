@@ -1,3 +1,6 @@
+import icons from "./icons";
+
+const { AiOutlineStar, AiFillStar } = icons;
 export const createSlug = (string) =>
   string
     .toLowerCase()
@@ -10,6 +13,16 @@ export const formatMoney = (number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     number
   );
+
+export const renderStarFromNumber = (number, size) => {
+  if (!Number(number)) return;
+  const stars = [];
+  for (let i = 0; i < +number; i++)
+    stars.push(<AiFillStar color="orange" size={size || 16} />);
+  for (let i = 5; i < +number; i--)
+    stars.push(<AiOutlineStar color="orange" size={size || 16} />);
+  return stars;
+};
 
 export const generateRange = (start, end) => {
   const length = end + 1 - start;

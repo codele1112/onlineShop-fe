@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Breadcrumb, Pagination, Product, SearchItem } from "../../components";
 import { getProducts } from "../../apis";
 import Masonry from "react-masonry-css";
+import { useSelector } from "react-redux";
 
 const breakpointColumnsObj = {
   default: 3,
@@ -12,20 +13,27 @@ const breakpointColumnsObj = {
 };
 
 const Products = () => {
-  const { category } = useParams();
+  // const { category } = useParams();
+  const { categories } = useSelector((state) => state.categories);
+  const [params] = useSearchParams();
   const [products, setProducts] = useState(null);
   const [activeClick, setActiveClick] = useState(null);
   // console.log("category", category);
 
   const fetchProductByCategory = async (queries) => {
     const response = await getProducts(queries);
-    if (response.success) setProducts(response.data);
     console.log("response", response);
+    if (response.success) setProducts(response.data);
   };
 
   useEffect(() => {
-    fetchProductByCategory();
-  }, []);
+    let param = [];
+    for (let i of params.entries()) param.push(i);
+    const queries = {};
+    for (let i of params) queries[i[0]] = i[1];
+
+    fetchProductByCategory(queries);
+  }, [params]);
 
   const changeActiveFilter = useCallback(
     (name) => {
@@ -39,22 +47,33 @@ const Products = () => {
     <div className="w-full md:max-w-[390px]  lg:max-w-[768px]">
       <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
         <div className="w-main md:max-w-[390px]">
-          <h3 className="uppercase">{category}</h3>
-          <Breadcrumb category={category} />
+          ALL PRODUCTS
+          {/* <h3 className="uppercase">{categories.name}</h3> */}
+          {/* <Breadcrumb category={category} /> */}
         </div>
       </div>
 
       <div className="w-main md:max-w-[390px] lg:max-w-[768px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
         <div className="w-4/5 flex-auto flex flex-col ">
           <span className="font-semibold text-sm">Filter By </span>
-          <SearchItem
-            name="price"
-            activeClick={activeClick}
-            changeActiveFilter={changeActiveFilter}
-          />
+          <div className="flex gap-4">
+            <SearchItem
+              name="price"
+              type="input"
+              activeClick={activeClick}
+              changeActiveFilter={changeActiveFilter}
+            />
+            <SearchItem
+              name="category"
+              activeClick={activeClick}
+              changeActiveFilter={changeActiveFilter}
+            />
+          </div>
         </div>
 
-        <div className="w-1/5 flex">Sort by</div>
+        <div className="w-1/5 flex">
+          <span>Sort by</span>
+        </div>
       </div>
 
       <div className="mt-8 w-main md:max-w-[390px] lg:max-w-[768px] m-auto  ">
