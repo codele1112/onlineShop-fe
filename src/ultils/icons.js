@@ -10,6 +10,7 @@ import {
 import { LiaUserCogSolid, LiaProductHunt } from "react-icons/lia";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { IoReturnUpForward } from "react-icons/io5";
 import {
   BsFillCartPlusFill,
   BsFillCartCheckFill,
@@ -55,6 +56,7 @@ const icons = {
   FaRegTrashAlt,
   AiFillStar,
   AiOutlineStar,
+  IoReturnUpForward,
 };
 
 export default icons;

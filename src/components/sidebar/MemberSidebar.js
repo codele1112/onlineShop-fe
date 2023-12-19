@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import avatar from "../../assets/avatarDefault01.jpeg";
 
-const { MdKeyboardArrowDown, MdOutlineChevronRight } = icons;
+const { IoReturnUpForward } = icons;
 const activedStyle = "px-4 px-2 flex items-center gap-2 bg-third ";
 const notActivedStyle = "px-4 py-2 flex items-center gap-2 hover:bg-fourth";
 const MemberSidebar = () => {
@@ -38,6 +38,10 @@ const MemberSidebar = () => {
             </NavLink>
           </Fragment>
         ))}
+        <NavLink to={`/${path.HOME}`} className={clsx(notActivedStyle)}>
+          <IoReturnUpForward size={20} />
+          Go Home
+        </NavLink>
       </div>
     </div>
   );

@@ -7,13 +7,14 @@ export const categoriesSlice = createSlice({
     categories: null,
     isLoading: false,
     isShowModal: false,
-    modalChildren: null,
+    detailProduct: null,
     isShowCart: false,
   },
   reducers: {
     showModal: (state, action) => {
+      console.log(action.payload);
       state.isShowModal = action.payload.isShowModal;
-      state.modalChildren = action.payload.modalChildren;
+      state.detailProduct = action.payload.detailProduct;
     },
     showCart: (state) => {
       state.isShowCart = state.isShowCart === false ? true : false;

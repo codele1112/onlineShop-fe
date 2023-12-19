@@ -40,7 +40,7 @@ function Router() {
           path={path.DETAIL_PRODUCT_CATEGORY_PID_NAME}
           element={<DetailProduct />}
         />
-        <Route path={path.PRODUCTS} element={<Products />} />
+        <Route path={path.PRODUCTS_CATEGORY} element={<Products />} />
         <Route path={path.DETAIL_CART} element={<DetailCart />} />
         <Route path={path.FAQ} element={<FAQ />} />
         <Route path={path.OUR_SERVICE} element={<Services />} />

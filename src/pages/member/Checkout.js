@@ -74,16 +74,8 @@ const Checkout = () => {
         </div>
       </div>
       <div className=" w-full">
-        <InputForm
-          label="Your Address"
-          register={register}
-          errors={errors}
-          id="address"
-          validate={{
-            required: "Need fill this field.",
-          }}
-          placeholder="Please fill the address first."
-        />
+        <span>Address:</span>
+        <span className="font-bold text-red-800 ">{current?.address}</span>
       </div>
 
       <div className="w-full mx-auto  mt-8">

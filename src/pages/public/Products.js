@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Breadcrumb, Pagination, Product, SearchItem } from "../../components";
+import { useParams, useSearchParams } from "react-router-dom";
+import { Pagination, Product, SearchItem } from "../../components";
 import { getProducts } from "../../apis";
 import Masonry from "react-masonry-css";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const breakpointColumnsObj = {
 };
 
 const Products = () => {
-  // const { category } = useParams();
+  const { category } = useParams();
   const { categories } = useSelector((state) => state.categories);
   const [params] = useSearchParams();
   const [products, setProducts] = useState(null);
@@ -21,6 +21,7 @@ const Products = () => {
   // console.log("category", category);
 
   const fetchProductByCategory = async (queries) => {
+    if (category && category !== "products") queries.category = category;
     const response = await getProducts(queries);
     console.log("response", response);
     if (response.success) setProducts(response.data);
@@ -44,16 +45,14 @@ const Products = () => {
   );
 
   return (
-    <div className="w-full md:max-w-[390px]  lg:max-w-[768px]">
+    <div className=" w-full md:max-w-[390px]  lg:max-w-[768px]">
       <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-        <div className="w-main md:max-w-[390px]">
-          ALL PRODUCTS
-          {/* <h3 className="uppercase">{categories.name}</h3> */}
-          {/* <Breadcrumb category={category} /> */}
+        <div className="text-bold pl-2 md:pl-2 lg:pl-2 w-main md:max-w-[390px]">
+          PRODUCTS
         </div>
       </div>
 
-      <div className="w-main md:max-w-[390px] lg:max-w-[768px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
+      <div className="  w-main md:max-w-[390px] lg:max-w-[768px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
         <div className="w-4/5 flex-auto flex flex-col ">
           <span className="font-semibold text-sm">Filter By </span>
           <div className="flex gap-4">

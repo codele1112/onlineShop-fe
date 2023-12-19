@@ -2,30 +2,92 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { getUserOrders } from "../../apis";
 import { formatMoney } from "../../ultils/helpers";
+import { CustomSelect, InputForm, Pagination } from "../../components";
+import { useForm } from "react-hook-form";
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { statusOrders } from "../../ultils/contants";
 
 const History = () => {
   const [orderList, setOrdersList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [params] = useSearchParams();
+  console.log("params", params.get("page"));
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm();
+  const q = watch("q");
+  const status = watch("status");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const fetchOrdersList = async () => {
-    const response = await getUserOrders();
+  const fetchOrdersList = async (params) => {
+    const response = await getUserOrders({
+      ...params,
+      limit: process.env.REACT_APP_LIMIT,
+    });
     console.log("orders response", response);
 
     if (response.success) {
-      setOrdersList(response.data);
+      setOrdersList(response.data.orders);
+      setCount(response.data.count);
     }
   };
   useEffect(() => {
-    fetchOrdersList();
-  }, []);
+    const param = Object.fromEntries([...params]);
+    fetchOrdersList(param);
+  }, [params]);
+
+  const handleSearchStatus = ({ value }) => {
+    navigate({
+      pathname: location.pathname,
+      search: createSearchParams({ status: value }).toString(),
+    });
+  };
 
   console.log("orderList", orderList);
   return (
-    <div className="w-full  ">
-      <h1 className=" h-[75px] flex justify-between items-center px-4 border-b text-3xl ">
-        Orders
-      </h1>
+    <div className="w-full flex flex-col gap-4 relative ">
+      <div className="h-[70px] w-full"></div>
+      <div className="p-4 border-b bg-white w-full flex justify-between items-center fixed top-0">
+        <h1 className=" text-3xl tracking-tighter ">History</h1>
+      </div>
 
-      <table className="table-auto text-left mb-6 w-full ">
+      <div className="flex justify-end items-center px-4">
+        <form
+          className="w-[45%] grid grid-cols-2 gap-4"
+          // onSubmit={handleSubmit(handleSearchProducts())}
+        >
+          <div className="col-span-1 ">
+            <InputForm
+              id="q"
+              register={register}
+              errors={errors}
+              fullWidth
+              placeholder="Search orders by status..."
+            />
+          </div>
+          <div className="col-span-1 flex items-center">
+            <CustomSelect
+              option={statusOrders}
+              value={status}
+              onChange={(value) => handleSearchStatus(value)}
+              wrapClassName="w-full"
+            />
+          </div>
+        </form>
+      </div>
+
+      <table className="table-auto text-left mb-6 w-full  ">
         <thead className="text-red-900 text-[13px] border-b bg-second">
           <tr className="border ">
             <th className="px-4 py-2">#</th>
@@ -40,7 +102,12 @@ const History = () => {
           {orderList?.length &&
             orderList?.map((el, index) => (
               <tr className="border-b" key={index}>
-                <td className="px-4 py-2 text-xs">{index + 1}</td>
+                <td className="px-4 py-2 text-xs">
+                  {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
+                    process.env.REACT_APP_LIMIT +
+                    index +
+                    1}
+                </td>
                 <td className="px-4 py-2">
                   {el?.products?.map((i, index) => (
                     <ul key={index}>
@@ -60,6 +127,10 @@ const History = () => {
             ))}
         </tbody>
       </table>
+
+      <div className="w-full flex justify-end my-8">
+        <Pagination totalCount={count} />
+      </div>
     </div>
   );
 };

@@ -5,17 +5,18 @@ import SelectOption from "../common/SelectOption";
 import { showModal } from "../../store/categories/categoriesSlice";
 import DetailProduct from "../../pages/public/DetailProduct";
 import icons from "../../ultils/icons";
-import { updateCart } from "../../apis";
+import { updateCart, updateWishlist } from "../../apis";
 import { getCurrentUser } from "../../store/user/asyncActions";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import path from "../../ultils/path";
+import clsx from "clsx";
 
 const { AiFillEye, AiFillHeart, BsFillCartPlusFill, BsFillCartCheckFill } =
   icons;
 
-const Product = ({ productData }) => {
+const Product = ({ productData, pid, className }) => {
   const [isShowOption, setIsShowOption] = useState(false);
   const { current } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -47,25 +48,36 @@ const Product = ({ productData }) => {
     }
 
     if (flag === "WISHLIST") {
+      console.log("pid", productData._id);
+      const response = await updateWishlist(productData._id);
+      if (response.success) {
+        dispatch(getCurrentUser());
+        toast.success("Added to wishlist!");
+      } else toast.error(response.message);
     }
 
     if (flag === "QUICK_VIEW") {
       dispatch(
         showModal({
           isShowModal: true,
-          modalChildren: (
-            <DetailProduct
-              isQuickview
-              data={productData?._id}
-              category={productData?.category?.name}
-            />
-          ),
+          detailProduct: {
+            isQuickView: true,
+            data: {
+              pid: productData._id,
+              category: productData?.category.name,
+            },
+          },
         })
       );
     }
   };
   return (
-    <div className="w-full md:max-w-[390px] lg:max-w-[768px] text-base pr-5 px-[10px]">
+    <div
+      className={clsx(
+        "w-full md:max-w-[390px] lg:max-w-[768px] text-base pr-5 px-[10px]",
+        className
+      )}
+    >
       <div
         className="w-full border p-[15px] md:text-[8px] flex flex-col items-center "
         onClick={(e) =>
@@ -89,7 +101,17 @@ const Product = ({ productData }) => {
                 title="Add to wishlist"
                 onClick={(e) => handleClickOptions(e, "WISHLIST")}
               >
-                <SelectOption icon={<AiFillHeart />} />
+                <SelectOption
+                  icon={
+                    <AiFillHeart
+                      color={
+                        current?.wishlist?.some((i) => i === pid)
+                          ? "red"
+                          : "black"
+                      }
+                    />
+                  }
+                />
               </span>
               {current?.cart?.some(
                 (el) => el.product === productData._id.toString()

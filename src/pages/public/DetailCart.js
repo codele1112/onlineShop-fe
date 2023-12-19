@@ -1,20 +1,52 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Breadcrumb } from "../../components";
+import { Breadcrumb, Button } from "../../components";
 import { formatMoney } from "../../ultils/helpers";
 import OrderItem from "../../components/products/OrderItem";
 import { updateCart } from "../../store/user/userSlice";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  createSearchParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import path from "../../ultils/path";
+import Swal from "sweetalert2";
 
 const DetailCart = () => {
-  const { currentCart } = useSelector((state) => state.user);
+  const { currentCart, current } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChangeQuantities = (pid, quantity) => {
     dispatch(updateCart({ pid, quantity }));
   };
-  // console.log("currentCart", currentCart);
+
+  const handleSubmit = () => {
+    if (!current?.address) {
+      return Swal.fire({
+        icon: "info",
+        title: "Almost!",
+        text: "Please update your address before checkout.",
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: "Not now...",
+        confirmButtonText: "Go to update",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate({
+            pathname: `/${path.MEMBER}/${path.PERSONAL}`,
+            search: createSearchParams({
+              redirect: location.pathname,
+            }).toString(),
+          });
+        }
+      });
+    } else {
+      window.open(`/${path.CHECK_OUT}`, "_blank");
+    }
+  };
 
   return (
     <div className="w-full">
@@ -56,12 +88,14 @@ const DetailCart = () => {
         <span className="text-xs italic text-center text-main">
           Shipping, taxes, and discounts calculated at checkout.
         </span>
-        <Link
+
+        <Button handleOnClick={handleSubmit}>Checkout</Button>
+        {/* <Link
           to={`/${path.CHECK_OUT}`}
           className="px-4 py-4 flex justify-center items-center rounded-md bg-main text-white text-semibold my-2"
         >
           Check out
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

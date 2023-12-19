@@ -118,3 +118,8 @@ export const memberSidebar = [
     icon: <RiBillLine size={20} />,
   },
 ];
+
+export const statusOrders = [
+  { label: "Cancelled", value: "Cancelled" },
+  { label: "Succeed", value: "Succeed" },
+];

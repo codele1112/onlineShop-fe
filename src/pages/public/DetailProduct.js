@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import path from "../../ultils/path";
 import { getCurrentUser } from "../../store/user/asyncActions";
 import DOMPurify from "dompurify";
+import clsx from "clsx";
 
 const settings = {
   dots: false,
@@ -36,8 +37,8 @@ const settings = {
 function DetailProduct({ isQuickview, data }) {
   const params = useParams();
   const [product, setProduct] = useState(null);
+  const [category, setCategory] = useState(null);
   const [pid, setPid] = useState(null);
-  const { categories } = useSelector((state) => state.categories);
   const [currentImage, setCurrentImage] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -46,10 +47,15 @@ function DetailProduct({ isQuickview, data }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // console.log("data", data);
   useEffect(() => {
     if (data && data.pid) {
       setPid(data.pid);
-    } else if (params && params.pid) setPid(params.pid);
+      setCategory(data.category);
+    } else if (params && params.pid) {
+      setPid(params.pid);
+      setCategory(params.category);
+    }
   }, [data, params]);
 
   const fetchProductData = async () => {
@@ -58,7 +64,7 @@ function DetailProduct({ isQuickview, data }) {
     if (response.success) setProduct(response.data);
     setCurrentImage(response.data?.thumb || response.data?.images[0]);
   };
-  // console.log("product", product);
+  console.log("product", product);
 
   const fetchProducts = async () => {
     const response = await getProducts();
@@ -123,25 +129,32 @@ function DetailProduct({ isQuickview, data }) {
   };
 
   return (
-    <div className="w-full md:max-w-[390px] px-2 bg-white">
+    <div className="w-full md:max-w-[390px]  lg:max-w-[768px] px-2">
       {!isQuickview && (
         <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-          <div className="w-main md:max-w-[390px]">
+          <div className="w-main md:max-w-[390px] lg:max-w-[768px] pl-2 lg:pl-2">
             <h3 className="font-semibold md:text-[10px]">{product?.name}</h3>
-            {/* <Breadcrumb name={product?.name} category={product?.category.name} /> */}
+            <Breadcrumb name={product?.name} category={category} />
           </div>
         </div>
       )}
 
-      <div className="w-main md:max-w-[390px] md:flex md:flex-col m-auto mt-4 flex ">
-        <div className="md:w-full w-1/2 flex-col flex ">
+      <div
+        className={clsx(
+          "  bg-white md:max-w-[390px] md:flex md:flex-col lg:flex-col lg:max-w-[700px] m-auto mt-4 flex",
+          isQuickview
+            ? "w-main md:max-w-[390px] px-2 py-2 "
+            : "w-main md:max-w-[390px]"
+        )}
+      >
+        <div className="md:w-full lg:w-full w-1/2  lg:flex lg:flex-col flex-col flex ">
           <img
             src={currentImage}
             alt="product"
-            className="h-[458px] w-[458px] md:w-[360px] md:h-[360px] border  object-cover"
+            className="h-[458px] w-[458px] md:w-[150px] md:h-[150px] lg:w-[300px] lg:h-[300px] lg:mx-auto border object-cover"
           />
 
-          <div className="w-[458px] md:w-[360px] mt-4">
+          <div className="w-[458px] md:max-w-[360px] lg:max-w-[700px] mt-4 lg:mx-auto">
             <Slider className="image-slider" {...settings}>
               {product?.images?.map((el, index) => (
                 <div key={index} className="px-2">
@@ -149,7 +162,7 @@ function DetailProduct({ isQuickview, data }) {
                     onClick={(e) => handleClickImage(e, el)}
                     src={el}
                     alt="sub-product"
-                    className="h-[143px] w-[143px] border object-cover cursor-pointer"
+                    className="h-[143px] w-[143px] lg:w-[150px] lg:h-[150px]  border object-cover cursor-pointer"
                   />
                 </div>
               ))}
@@ -157,12 +170,12 @@ function DetailProduct({ isQuickview, data }) {
           </div>
         </div>
 
-        <div className="md:w-full w-1/2 md:max-w-[390px] ">
+        <div className=" w-1/2 md:w-full lg:w-full  md:max-w-[390px] lg:max-w-[768px] ">
           <h1 className="text-[30px] md:text-[15px] font-semibold">
             {product?.name}
           </h1>
 
-          <div className=" md:max-w-[390px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
+          <div className=" md:max-w-[390px] lg:max-w-[768px] lg:text-[15px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
             <span>
               {product?.description && (
                 <div
@@ -174,8 +187,8 @@ function DetailProduct({ isQuickview, data }) {
             </span>
           </div>
 
-          <div className="  mt-[50px] mb-[50px] flex items-center gap-1">
-            <h2 className="text-base  ">In Stock: </h2>
+          <div className="mt-[50px] mb-[50px] flex items-center gap-1">
+            <h2 className="text-base">In Stock: </h2>
             <span className=" text-base text-gray-700 ">
               {product?.quantity}
             </span>
@@ -193,7 +206,7 @@ function DetailProduct({ isQuickview, data }) {
             </span>
           </div>
 
-          <div className="flex flex-col gap-8 md:max-w-[380px] md:flex md:justify-center md:items-center ">
+          <div className="flex flex-col gap-8 md:max-w-[380px] lg:max-w-[768px] md:flex md:justify-center md:items-center ">
             <SelectQuantity
               originalQuantity={quantity}
               handleQuantity={handleQuantity}
@@ -210,7 +223,7 @@ function DetailProduct({ isQuickview, data }) {
       </div>
 
       {!isQuickview && (
-        <div className=" w-main md:max-w-[390px] m-auto mt-8">
+        <div className=" w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-8">
           <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
             YOU MAY ALSO LIKE
           </h3>
@@ -218,23 +231,25 @@ function DetailProduct({ isQuickview, data }) {
         </div>
       )}
 
-      <div className="  flex w-main md:max-w-[390px] m-auto mt-8 gap-2 p-4">
-        <div className="flex-4 flex items-center justify-center border">
-          <Rating totalRatings={3} totalCount={18} />
+      {!isQuickview && (
+        <div className="  flex w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-8 gap-2 p-4">
+          <div className="flex-4 flex items-center justify-center border">
+            <Rating totalRatings={3} totalCount={18} />
+          </div>
+          <div className="flex-6 flex flex-col gap-4 border">
+            {Array.from(Array(5).keys())
+              .reverse()
+              .map((el) => (
+                <Votebar
+                  key={el}
+                  number={el + 1}
+                  ratingCount={5}
+                  ratingTotal={35}
+                />
+              ))}
+          </div>
         </div>
-        <div className="flex-6 flex flex-col gap-4 border">
-          {Array.from(Array(5).keys())
-            .reverse()
-            .map((el) => (
-              <Votebar
-                key={el}
-                number={el + 1}
-                ratingCount={5}
-                ratingTotal={35}
-              />
-            ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 }

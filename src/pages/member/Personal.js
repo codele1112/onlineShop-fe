@@ -7,17 +7,19 @@ import avatar from "../../assets/avatarDefault01.jpeg";
 import { updateCurrentUser } from "../../apis";
 import { getCurrentUser } from "../../store/user/asyncActions";
 import { toast } from "react-toastify";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Personal = () => {
   const { current } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const {
     reset,
     handleSubmit,
     register,
     formState: { errors, isDirty },
   } = useForm();
-
   useEffect(() => {
     reset({
       name: current?.name,
@@ -41,8 +43,11 @@ const Personal = () => {
     if (response.success) {
       dispatch(getCurrentUser());
       toast.success("Updated profile successfully!");
+
+      if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
     } else toast.error(response.error);
   };
+
   return (
     <div className="w-full relative">
       <h1 className=" h-[75px] flex justify-between items-center px-4 border-b text-3xl ">

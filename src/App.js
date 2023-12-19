@@ -6,16 +6,18 @@ import { getCategories } from "./store/categories/asyncActions";
 import { showCart } from "./store/categories/categoriesSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DetailProduct } from "./pages/public";
 
-function App() {
+function App({}) {
   const dispatch = useDispatch();
-  const { isShowModal, modalChidren, isShowCart } = useSelector(
+  const { isShowModal, detailProduct, isShowCart } = useSelector(
     (state) => state.categories
   );
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
+  // console.log("detailProduct", detailProduct);
   return (
     <div className=" font-main h-screen relative">
       {isShowCart && (
@@ -26,8 +28,6 @@ function App() {
           <Cart />
         </div>
       )}
-
-      {isShowModal && <Modal>{modalChidren}</Modal>}
 
       <Router />
       <ToastContainer
@@ -42,6 +42,15 @@ function App() {
         draggable
         pauseOnHover
       />
+
+      {isShowModal && (
+        <Modal>
+          <DetailProduct
+            isQuickview={!detailProduct.isQuickview}
+            data={detailProduct?.data}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

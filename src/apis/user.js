@@ -73,3 +73,9 @@ export const removeProductInCart = (pid) =>
     url: "/users/remove-cart/" + pid,
     method: "delete",
   });
+
+export const updateWishlist = (pid) =>
+  axios({
+    url: "/users/wishlist/" + pid,
+    method: "put",
+  });
