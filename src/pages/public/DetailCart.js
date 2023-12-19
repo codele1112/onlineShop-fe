@@ -4,12 +4,7 @@ import { Breadcrumb, Button } from "../../components";
 import { formatMoney } from "../../ultils/helpers";
 import OrderItem from "../../components/products/OrderItem";
 import { updateCart } from "../../store/user/userSlice";
-import {
-  Link,
-  createSearchParams,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import path from "../../ultils/path";
 import Swal from "sweetalert2";
 

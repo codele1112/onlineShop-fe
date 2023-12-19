@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { InputForm, Pagination } from "../../components";
+// import { Pagination } from "../../components";
 import moment from "moment";
-import { useForm } from "react-hook-form";
 import { getOrders } from "../../apis";
 import { formatMoney } from "../../ultils/helpers";
 
 const ManageOrder = () => {
   const [orderList, setOrdersList] = useState([]);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   const fetchOrdersList = async () => {
     const response = await getOrders();
-    console.log("orders response", response);
+    // console.log("orders response", response);
 
     if (response.success) {
       setOrdersList(response.data);
@@ -22,7 +21,7 @@ const ManageOrder = () => {
     fetchOrdersList();
   }, []);
 
-  console.log("orderList", orderList);
+  // console.log("orderList", orderList);
   return (
     <div className="w-full  ">
       <h1 className=" h-[75px] flex justify-between items-center px-4 border-b text-3xl ">
@@ -69,9 +68,9 @@ const ManageOrder = () => {
         </tbody>
       </table>
 
-      <div className="w-full flex justify-end my-8">
+      {/* <div className="w-full flex justify-end my-8">
         <Pagination totalCount={count} />
-      </div>
+      </div> */}
     </div>
   );
 };

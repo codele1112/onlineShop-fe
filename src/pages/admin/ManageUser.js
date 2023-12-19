@@ -1,33 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { getUsers, updateUser, deleteUser } from "../../apis/user";
+import React, { useEffect, useState } from "react";
+import { getUsers } from "../../apis/user";
 import moment from "moment";
 import {
   InputField,
   Pagination,
-  InputForm,
-  Select,
-  Button,
+  // InputForm,
+  // Select,
+  // Button,
 } from "../../components";
 import useDebounce from "../../components/hooks/useDebounce";
 import { useSearchParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import { roles, status } from "../../ultils/contants";
 
 const ManageUser = () => {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    email: "",
-    name: "",
-    role: "",
-    phone: "",
-    isBlocked: "",
-  });
-
   const [users, setUsers] = useState(null);
   const [count, setCount] = useState(null);
   const [queries, setQueries] = useState({ q: "" });

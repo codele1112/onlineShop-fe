@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DetailProduct } from "./pages/public";
 
-function App({}) {
+function App() {
   const dispatch = useDispatch();
   const { isShowModal, detailProduct, isShowCart } = useSelector(
     (state) => state.categories

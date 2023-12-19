@@ -20,6 +20,7 @@ const Personal = () => {
     register,
     formState: { errors, isDirty },
   } = useForm();
+
   useEffect(() => {
     reset({
       name: current?.name,

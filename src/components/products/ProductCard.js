@@ -1,10 +1,17 @@
-import React from "react";
-import { formatMoney } from "../../ultils/helpers";
+import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
+import { formatMoney, renderStarFromNumber } from "../../ultils/helpers";
+import path from "../../ultils/path";
 
-const ProductCard = ({ price, name, image }) => {
+const ProductCard = ({ price, name, image, totalRatings, pid, category }) => {
+  const navigate = useNavigate();
+  //
   return (
     <div className="w-1/3 lg:w-[300px] md:w-full flex-auto px-[10px] mb-[20px]">
-      <div className="w-full  border ">
+      <div
+        className="w-full  border"
+        onClick={(e) => navigate(`/${category.name}/${pid}/${name}`)}
+      >
         <img
           src={image}
           alt="products"
@@ -15,6 +22,14 @@ const ProductCard = ({ price, name, image }) => {
           <span className="line-clamp-1 md:text-[15px] text-sm capitalize text-center">
             {name?.toLowerCase()}
           </span>
+          <span className="flex line-clamp-1 md:text-[15px] text-sm capitalize text-center">
+            {totalRatings
+              ? renderStarFromNumber(totalRatings, 14)?.map((el, index) => (
+                  <span key={index}>{el}</span>
+                ))
+              : ""}
+          </span>
+
           <span className="text-gray-600 md:text-[15px]">
             {formatMoney(price)}
           </span>
@@ -24,4 +39,4 @@ const ProductCard = ({ price, name, image }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

@@ -3,7 +3,6 @@ import { Outlet, Navigate } from "react-router-dom";
 import path from "../../ultils/path";
 import { useSelector } from "react-redux";
 import { MemberSidebar } from "../../components";
-import avatarDefault01 from "../../assets/avatarDefault01.jpeg";
 
 const MemberLayout = () => {
   const { isLoggedIn, current } = useSelector((state) => state.user);

@@ -19,10 +19,10 @@ const History = () => {
   console.log("params", params.get("page"));
   const {
     register,
-    handleSubmit,
-    reset,
+    // handleSubmit,
+    // reset,
     watch,
-    setValue,
+    // setValue,
     formState: { errors },
   } = useForm();
   const q = watch("q");

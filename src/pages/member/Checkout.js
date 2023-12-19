@@ -1,29 +1,24 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
-import { Button, InputForm, Paypal } from "../../components";
+import { Paypal } from "../../components";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import path from "../../ultils/path";
+// import { useNavigate } from "react-router-dom";
+// import path from "../../ultils/path";
 
 const Checkout = () => {
   const { currentCart, current } = useSelector((state) => state.user);
-  const {
-    register,
-    formState: { errors },
-    watch,
-    setValue,
-  } = useForm();
+  const { watch, setValue } = useForm();
   const address = watch("address");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     setValue("address", current?.address);
   }, [current]);
 
-  const handleOnClick = () => {
-    navigate(`/${path.HOME}`);
-  };
+  // const handleOnClick = () => {
+  //   navigate(`/${path.HOME}`);
+  // };
 
   console.log("currentCart", currentCart);
   console.log("current", current);

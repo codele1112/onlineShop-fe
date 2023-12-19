@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { Pagination, Product, SearchItem } from "../../components";
+import { Product, SearchItem } from "../../components";
 import { getProducts } from "../../apis";
 import Masonry from "react-masonry-css";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const breakpointColumnsObj = {
   default: 3,
@@ -14,7 +14,7 @@ const breakpointColumnsObj = {
 
 const Products = () => {
   const { category } = useParams();
-  const { categories } = useSelector((state) => state.categories);
+  // const { categories } = useSelector((state) => state.categories);
   const [params] = useSearchParams();
   const [products, setProducts] = useState(null);
   const [activeClick, setActiveClick] = useState(null);
