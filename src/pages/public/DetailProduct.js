@@ -77,6 +77,7 @@ function DetailProduct({ isQuickview, data }) {
       fetchProducts();
     }
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [pid]);
 
   const handleQuantity = useCallback((number) => {

@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatMoney, renderStarFromNumber } from "../../ultils/helpers";
-import path from "../../ultils/path";
 
 const ProductCard = ({ price, name, image, totalRatings, pid, category }) => {
   const navigate = useNavigate();

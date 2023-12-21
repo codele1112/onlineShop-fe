@@ -14,6 +14,7 @@ const Checkout = () => {
 
   useEffect(() => {
     setValue("address", current?.address);
+    // eslint-disable-next-line
   }, [current]);
 
   // const handleOnClick = () => {

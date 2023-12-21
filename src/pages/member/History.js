@@ -25,7 +25,7 @@ const History = () => {
     // setValue,
     formState: { errors },
   } = useForm();
-  const q = watch("q");
+  watch("q");
   const status = watch("status");
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,7 +54,7 @@ const History = () => {
     });
   };
 
-  console.log("orderList", orderList);
+  // console.log("orderList", orderList);
   return (
     <div className="w-full flex flex-col gap-4 relative ">
       <div className="h-[70px] w-full"></div>

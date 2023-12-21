@@ -29,6 +29,7 @@ const Personal = () => {
       address: current?.address,
       avatar: current?.avatar,
     });
+    // eslint-disable-next-line
   }, [current]);
 
   const handleUpdateInfor = async (data) => {
@@ -74,6 +75,7 @@ const Personal = () => {
           errors={errors}
           id="name"
           validate={{ required: "Required." }}
+          // eslint-disable-next-line
           style="flex-auto "
         />
         <InputForm
@@ -83,10 +85,12 @@ const Personal = () => {
           id="email"
           validate={{
             pattern: {
+              // eslint-disable-next-line
               value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
               message: "Email invalid",
             },
           }}
+          // eslint-disable-next-line
           style="flex-auto"
         />
         <InputForm
@@ -102,6 +106,7 @@ const Personal = () => {
               message: "Phone invalid",
             },
           }}
+          // eslint-disable-next-line
           style="flex-auto"
         />
         <InputForm
@@ -110,6 +115,7 @@ const Personal = () => {
           errors={errors}
           id="address"
           validate={{ required: "Required." }}
+          // eslint-disable-next-line
           style="flex-auto"
         />
         <div className="flex items-center gap-2">

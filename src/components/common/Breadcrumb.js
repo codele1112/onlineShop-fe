@@ -7,11 +7,11 @@ const { MdArrowForwardIos } = icons;
 
 const Breadcrumb = ({ name, category }) => {
   // console.log("category", category);
-  const routes = [
-    { path: "/:category", breadcrumb: category },
-    { path: "/", breadcrumb: "Home" },
-    { path: "/:category/:pid/:name", breadcrumb: name },
-  ];
+  // const routes = [
+  //   { path: "/:category", breadcrumb: category },
+  //   { path: "/", breadcrumb: "Home" },
+  //   { path: "/:category/:pid/:name", breadcrumb: name },
+  // ];
   const breadcrumb = useBreadcrumbs();
   // console.log("breadcrumb", breadcrumb);
   return (

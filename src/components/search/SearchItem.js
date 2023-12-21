@@ -1,6 +1,6 @@
 import { memo, useState, useEffect } from "react";
 import icons from "../../ultils/icons";
-import { useNavigate, createSearchParams, useParams } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import path from "../../ultils/path";
 import { getProducts } from "../../apis";
@@ -43,6 +43,7 @@ const SearchItem = ({
         category: selected,
       }).toString(),
     });
+    // eslint-disable-next-line
   }, [selected]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ const SearchItem = ({
       pathname: `/${path.PRODUCTS}`,
       search: createSearchParams(data).toString(),
     });
+    // eslint-disable-next-line
   }, [debouncePriceFrom, debouncePriceTo]);
 
   return (

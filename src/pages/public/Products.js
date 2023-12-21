@@ -54,6 +54,7 @@ const Products = () => {
     const q = { ...priceQuery, queries };
     console.log(q);
     fetchProductByCategory(q);
+    // eslint-disable-next-line
   }, [params]);
 
   const changeActiveFilter = useCallback(

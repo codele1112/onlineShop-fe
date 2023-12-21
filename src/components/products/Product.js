@@ -3,7 +3,6 @@ import { formatMoney } from "../../ultils/helpers";
 import { useNavigate } from "react-router-dom";
 import SelectOption from "../common/SelectOption";
 import { showModal } from "../../store/categories/categoriesSlice";
-// import DetailProduct from "../../pages/public/DetailProduct";
 import icons from "../../ultils/icons";
 import { updateCart, updateWishlist } from "../../apis";
 import { getCurrentUser } from "../../store/user/asyncActions";
