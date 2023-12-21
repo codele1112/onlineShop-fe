@@ -17,7 +17,6 @@ const SearchItem = ({
 }) => {
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
-  // console.log("category", categories[0].name);
   const [selected, setSelected] = useState([]);
   const [price, setPrice] = useState({ from: "", to: "" });
   const [bestPrice, setBestPrice] = useState(null);
@@ -65,6 +64,9 @@ const SearchItem = ({
     // eslint-disable-next-line
   }, [debouncePriceFrom, debouncePriceTo]);
 
+  useEffect(() => {
+    if (price.from > price.to) alert("From price connot greater than To price");
+  }, [price]);
   return (
     <div
       onClick={() => changeActiveFilter(name)}

@@ -16,8 +16,6 @@ const ManageProducts = () => {
   const location = useLocation();
   const {
     register,
-    handleSubmit,
-    reset,
     watch,
     formState: { errors },
   } = useForm();
@@ -26,22 +24,23 @@ const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(0);
 
-  // const fetchProducts = async (params) => {
-  //   const response = await getProducts({
-  //     ...params,
-  //     limit: process.env.REACT_APP_PRODUCT_LIMIT,
-  //   });
+  const fetchProducts = async (params) => {
+    const response = await getProducts({
+      ...params,
+      limit: process.env.REACT_APP_PRODUCT_LIMIT,
+    });
 
-  //   if (response.success) {
-  //     setCount(response.data.count);
-  //     setProducts(response.data.products);
-  //   }
-  // };
+    if (response.success) {
+      setCount(response.data.count);
+      setProducts(response.data.products);
+    }
+  };
 
   const queryDebounce = useDebounce(watch("q"), 800);
 
   useEffect(() => {
     if (queryDebounce) {
+      // console.log("location.pathname", location.pathname);
       navigate({
         pathname: location.pathname,
         search: createSearchParams({ q: queryDebounce }).toString(),
@@ -51,26 +50,14 @@ const ManageProducts = () => {
         pathname: location.pathname,
       });
     }
+    // eslint-disable-next-line
   }, [queryDebounce]);
 
   useEffect(() => {
     const searchParams = Object.fromEntries([...params]);
-    const fetchProducts = async (params) => {
-      const response = await getProducts({
-        ...params,
-        limit: process.env.REACT_APP_PRODUCT_LIMIT,
-      });
-
-      if (response.success) {
-        setCount(response.data.count);
-        setProducts(response.data.products);
-      }
-    };
     fetchProducts(searchParams);
   }, [params]);
 
-  console.log("Products", products);
-  // console.log("page", params.get("page"));
   return (
     <div className="w-full flex flex-col gap-4 relative">
       <div className="h-[70px] w-full"></div>
@@ -79,10 +66,7 @@ const ManageProducts = () => {
       </div>
 
       <div className="flex justify-end items-center px-4">
-        <form
-          className="w-[45%]"
-          // onSubmit={handleSubmit(handleSearchProducts())}
-        >
+        <form className="w-[45%]">
           <InputForm
             id="q"
             register={register}

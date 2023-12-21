@@ -26,7 +26,7 @@ const AdminSidebar = () => {
           </div>
           <span className="text-[20px] md:text-[15px] ">SOAP & CANDLE</span>
         </div>
-        <span className="text-center text-red-900 py-4 px-4">
+        <span className="text-center py-4 px-4 border-t border-b">
           ADMIN WORKSPACE
         </span>
       </Link>

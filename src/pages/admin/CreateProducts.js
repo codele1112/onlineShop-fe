@@ -39,6 +39,7 @@ const CreateProducts = () => {
     (e) => {
       setPayload(e);
     },
+    // eslint-disable-next-line
     [payload]
   );
 
@@ -62,9 +63,11 @@ const CreateProducts = () => {
 
   useEffect(() => {
     handlePreviewThumb(watch("thumb")[0]);
+    // eslint-disable-next-line
   }, [watch("thumb")]);
   useEffect(() => {
     handlePreviewImages(watch("images"));
+    // eslint-disable-next-line
   }, [watch("images")]);
 
   const handleCreateProduct = async (data) => {
@@ -75,7 +78,6 @@ const CreateProducts = () => {
           (el) => el._id === data.category
         )?.name;
       const finalPayload = { ...data, ...payload };
-      // console.log("finalPayload", finalPayload);
       const formData = new FormData();
       for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
       if (finalPayload.thumb) formData.append("thumb", finalPayload.thumb[0]);
@@ -84,7 +86,6 @@ const CreateProducts = () => {
       }
       dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
       const response = await createProducts(formData);
-      // console.log("response", response);
       dispatch(showModal({ isShowModal: false, modalChildren: null }));
 
       if (response.success) {
@@ -99,8 +100,6 @@ const CreateProducts = () => {
       }
     }
   };
-
-  // console.log("preview", preview);
 
   return (
     <div className="w-full">
@@ -128,6 +127,7 @@ const CreateProducts = () => {
               validate={{ required: "Required." }}
               placeholder="Price of product..."
               type="number"
+              // eslint-disable-next-line
               style="flex-auto"
             />
 
@@ -139,6 +139,7 @@ const CreateProducts = () => {
               validate={{ required: "Required." }}
               placeholder="Quantity of product..."
               type="number"
+              // eslint-disable-next-line
               style="flex-auto"
             />
           </div>
@@ -153,6 +154,7 @@ const CreateProducts = () => {
                 value: el.name,
               }))}
               id="category"
+              // eslint-disable-next-line
               style="flex-auto"
               validate={{ required: "Required." }}
             />

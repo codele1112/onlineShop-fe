@@ -14,7 +14,7 @@ const MemberSidebar = () => {
   const { current } = useSelector((state) => state.user);
 
   return (
-    <div className=" bg-second h-full py-4">
+    <div className=" bg-gray-300 h-full py-4">
       <div className="w-full flex flex-col items-center justify-center py-4">
         <img
           src={current?.avatar || avatar}

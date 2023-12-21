@@ -58,6 +58,7 @@ export const validate = (payload, setInvalidFields) => {
   for (let arr of formatPayload) {
     switch (arr[0]) {
       case "email":
+        // eslint-disable-next-line
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!arr[1].match(regex)) invalids++;
         setInvalidFields((prev) => [

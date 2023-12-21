@@ -8,7 +8,7 @@ const Pagination = ({ totalCount }) => {
   const [params] = useSearchParams();
   const pagination = usePagination(totalCount, +params.get("page") || 1);
 
-  console.log({ pagination });
+  // console.log({ pagination });
 
   const range = () => {
     const currentPage = +params.get("page");

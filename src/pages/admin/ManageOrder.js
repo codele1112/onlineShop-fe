@@ -6,22 +6,17 @@ import { formatMoney } from "../../ultils/helpers";
 
 const ManageOrder = () => {
   const [orderList, setOrdersList] = useState([]);
-  // const [count, setCount] = useState(0);
-
   const fetchOrdersList = async () => {
     const response = await getOrders();
-    // console.log("orders response", response);
 
     if (response.success) {
       setOrdersList(response.data);
-      // setCount(response.data.count);
     }
   };
   useEffect(() => {
     fetchOrdersList();
   }, []);
 
-  // console.log("orderList", orderList);
   return (
     <div className="w-full  ">
       <h1 className=" h-[75px] flex justify-between items-center px-4 border-b text-3xl ">

@@ -1,32 +1,25 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { InputField, Button, Loading } from "../../components";
 import { login, register, forgotPassword } from "../../apis";
-import Swal from "sweetalert2";
-import {
-  Link,
-  useNavigate,
-  useLocation,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../store/categories/categoriesSlice";
 import { validate } from "../../ultils/helpers";
+import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  // console.log("location", location);
   const [payload, setPayload] = useState({
     email: "",
     password: "",
     name: "",
     phone: "",
   });
-  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
+  // const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -40,12 +33,10 @@ const Login = () => {
       phone: "",
     });
   };
-  const [token, setToken] = useState("");
   const [email, setEmail] = useState("");
 
   const handleForgotPassword = async () => {
     const response = await forgotPassword({ email });
-    // console.log("response fw", response);
     if (response.success) {
       toast.success("Please check your mail!", { theme: "colored" });
     } else {
@@ -98,6 +89,7 @@ const Login = () => {
         }
       }
     }
+    // eslint-disable-next-line
   }, [payload, isRegister, dispatch, navigate]);
 
   return (
@@ -117,11 +109,13 @@ const Login = () => {
             <div className="flex items-center justify-end w-full gap-2">
               <Button
                 children={"Submit"}
+                // eslint-disable-next-line
                 style={"py-2 px-4 rounded-md bg-main text-white my-2 "}
                 handleOnClick={handleForgotPassword}
               />
               <Button
                 children={"Back"}
+                // eslint-disable-next-line
                 style={
                   "py-2 px-4 rounded-md text-white bg-gray-500 text-semibold my-2 "
                 }
