@@ -25,6 +25,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, payload }) => {
         currency: currency,
       },
     });
+    // eslint-disable-next-line
   }, [currency, showSpinner]);
 
   const handleSaveOrder = async () => {

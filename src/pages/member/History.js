@@ -35,7 +35,7 @@ const History = () => {
       ...params,
       limit: process.env.REACT_APP_LIMIT,
     });
-    console.log("orders response", response);
+    // console.log("orders response", response);
 
     if (response.success) {
       setOrdersList(response.data.orders);

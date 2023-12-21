@@ -51,7 +51,8 @@ const Products = () => {
 
     delete queries.to;
     delete queries.from;
-    const q = { ...priceQuery, queries };
+    const price = queries.price;
+    const q = { ...priceQuery, price };
     console.log(q);
     fetchProductByCategory(q);
     // eslint-disable-next-line

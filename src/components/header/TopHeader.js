@@ -12,15 +12,14 @@ const { FiLogOut } = icons;
 const TopHeader = () => {
   const dispatch = useDispatch();
   const { isLoggedIn, current } = useSelector((state) => state.user);
-  // console.log("isLoggedIn", isLoggedIn);
-  // console.log("current", current);
 
-  // useEffect(() => {
-  //   if (isLoggedIn) getCurrentUser();
-  // }, [dispatch, isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) getCurrentUser();
+  }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) getUserProfile();
+    // eslint-disable-next-line
   }, [dispatch, isLoggedIn]);
 
   async function getUserProfile() {

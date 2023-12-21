@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Slider from "react-slick";
-// import { Product } from "../products/Product";
 import { CustomSlider } from "../";
 
 import { getProducts } from "../../apis";
@@ -32,11 +30,13 @@ function BestSeller() {
   useEffect(() => {
     fetchProducts();
     dispatch(getNewProducts());
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (activatedTab === 1) setProducts(bestSellers);
     if (activatedTab === 2) setProducts(newProducts);
+    // eslint-disable-next-line
   }, [activatedTab]);
 
   return (
