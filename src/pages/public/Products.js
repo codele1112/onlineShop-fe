@@ -22,8 +22,10 @@ const Products = () => {
 
   const fetchProductByCategory = async (queries) => {
     if (category && category !== "products") queries.category = category;
+
     const response = await getProducts(queries);
-    console.log("response", response);
+    // console.log("response", response);
+
     if (response.success) setProducts(response.data);
   };
 
@@ -33,7 +35,25 @@ const Products = () => {
     const queries = {};
     for (let i of params) queries[i[0]] = i[1];
 
-    fetchProductByCategory(queries);
+    let priceQuery = {};
+
+    if (queries.from && queries.to) {
+      priceQuery = {
+        $and: [
+          { price: { gte: queries.from } },
+          { price: { lte: queries.to } },
+        ],
+      };
+      delete queries.price;
+    }
+    if (queries.from) queries.price = { gte: queries.from };
+    if (queries.to) queries.price = { lte: queries.to };
+
+    delete queries.to;
+    delete queries.from;
+    const q = { ...priceQuery, queries };
+    console.log(q);
+    fetchProductByCategory(q);
   }, [params]);
 
   const changeActiveFilter = useCallback(

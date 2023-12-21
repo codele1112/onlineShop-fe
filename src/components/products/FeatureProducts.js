@@ -18,7 +18,7 @@ const FeatureProducts = () => {
     fetchProducts();
   }, []);
 
-  console.log("products", products);
+  // console.log("products", products);
   return (
     <div className="w-main md:max-w-[390px] lg:max-w-[768px]">
       <h3 className=" font-semibold border-b-2 border-main text-[20px] md:text-[10px] py-[15px]">

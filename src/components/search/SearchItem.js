@@ -1,8 +1,11 @@
-import React, { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect } from "react";
 import icons from "../../ultils/icons";
 import { useNavigate, createSearchParams, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import path from "../../ultils/path";
+import { getProducts } from "../../apis";
+import { formatMoney } from "../../ultils/helpers";
+import useDebounce from "../hooks/useDebounce";
 
 const { AiOutlineDown } = icons;
 
@@ -13,11 +16,10 @@ const SearchItem = ({
   type = "checkbox",
 }) => {
   const navigate = useNavigate();
-  // const { category } = useParams();
   const { categories } = useSelector((state) => state.categories);
   // console.log("category", categories[0].name);
   const [selected, setSelected] = useState([]);
-  const [price, setPrice] = useState([0, 0]);
+  const [price, setPrice] = useState({ from: "", to: "" });
   const [bestPrice, setBestPrice] = useState(null);
 
   const handleSelected = (e) => {
@@ -25,8 +27,14 @@ const SearchItem = ({
     if (alreadyEl)
       setSelected((prev) => prev.filter((el) => el !== e.target.value));
     else setSelected((prev) => [...prev, e.target.value]);
+    changeActiveFilter(null);
   };
-  console.log(selected);
+  // console.log(selected);
+  const fetchBestPriceProduct = async () => {
+    const response = await getProducts({ sort: "-price", limit: 1 });
+    // console.log("response best price product", response.data);
+    if (response.success) setBestPrice(response?.data?.products[0]?.price);
+  };
 
   useEffect(() => {
     navigate({
@@ -36,6 +44,25 @@ const SearchItem = ({
       }).toString(),
     });
   }, [selected]);
+
+  useEffect(() => {
+    if (type === "input") fetchBestPriceProduct();
+  }, [type]);
+
+  const debouncePriceFrom = useDebounce(price.from, 500);
+  const debouncePriceTo = useDebounce(price.to, 500);
+
+  useEffect(() => {
+    const data = {};
+    if (Number(price.from) > 0) data.from = price.from;
+    if (Number(price.from) > 0) data.to = price.to;
+
+    navigate({
+      pathname: `/${path.PRODUCTS}`,
+      search: createSearchParams(data).toString(),
+    });
+  }, [debouncePriceFrom, debouncePriceTo]);
+
   return (
     <div
       onClick={() => changeActiveFilter(name)}
@@ -84,6 +111,51 @@ const SearchItem = ({
                     </label>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+          {type === "input" && (
+            <div onClick={(e) => e.stopPropagation()}>
+              <div className="p-4 flex items-center justify-between gap-8 border-b">
+                <span className="whitespace-nowrap">{`The highest price is ${formatMoney(
+                  bestPrice
+                )}`}</span>
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPrice({ from: "", to: "" });
+                  }}
+                  className="underline cursor-pointer hover:text-second"
+                >
+                  Reset
+                </span>
+              </div>
+
+              <div className="flex items-center p-2 gap-2">
+                <div className="flex items-center gap-2 ">
+                  <label htmlFor="from">From</label>
+                  <input
+                    className="form-input"
+                    type="number"
+                    id="from"
+                    value={price.from}
+                    onChange={(e) =>
+                      setPrice((prev) => ({ ...prev, from: e.target.value }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center gap-2 ">
+                  <label htmlFor="to">To</label>
+                  <input
+                    className="form-input"
+                    type="number"
+                    id="to"
+                    value={price.to}
+                    onChange={(e) =>
+                      setPrice((prev) => ({ ...prev, to: e.target.value }))
+                    }
+                  />
+                </div>
               </div>
             </div>
           )}

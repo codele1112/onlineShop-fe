@@ -64,7 +64,7 @@ function DetailProduct({ isQuickview, data }) {
     if (response.success) setProduct(response.data);
     setCurrentImage(response.data?.thumb || response.data?.images[0]);
   };
-  console.log("product", product);
+  // console.log("product", product);
 
   const fetchProducts = async () => {
     const response = await getProducts();
