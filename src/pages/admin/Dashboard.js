@@ -1,38 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart, LineChart } from "../../components";
-import { dataOrderStat, dataUserStat } from "../../ultils/helpers";
+import { orderStat } from "../../apis";
 
 const Dashboard = () => {
   // eslint-disable-next-line
-  const [orderData, setOrderData] = useState({
-    labels: dataOrderStat?.data?.map((el) => el._id),
-    datasets: [
-      {
-        label: "Revenue gained for the last two months($) ",
-        data: dataOrderStat?.data?.map((el) => el.income),
-        backgroundColor: ["green "],
-      },
-    ],
-  });
+
+  const [orderData, setOrderData] = useState({});
+
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      const response = await orderStat();
+      console.log(response);
+      // if(response.success)
+    };
+    fetchOrderData();
+  }, []);
   // eslint-disable-next-line
-  const [userData, setUserData] = useState({
-    labels: dataUserStat?.data?.map((el) => el._id),
-    datasets: [
-      {
-        label: "Users registed for the last two months (person(s)) ",
-        data: dataUserStat?.data?.map((el) => el.total),
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  });
+  const [userData, setUserData] = useState({});
 
   // console.log("userdata", dataUserStat.data);
 
   return (
     <div>
-      <div className="h-[70px] w-full"></div>
+      {/* <div className="h-[70px] w-full"></div>
       <div className="p-4 border-b bg-white w-full flex justify-between items-center fixed top-0">
         <h1 className=" text-3xl tracking-tighter ">Dashboard</h1>
       </div>
@@ -53,7 +43,7 @@ const Dashboard = () => {
         <div className="w-[700px]">
           <LineChart chartData={userData} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
