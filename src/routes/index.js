@@ -48,7 +48,8 @@ function Router() {
       </Route>
 
       <Route path={path.ADMIN} element={<AdminLayout />}>
-        <Route path={path.DASHBOARD} element={<Dashboard />} />
+        {/* <Route path={path.DASHBOARD} element={<Dashboard />} /> */}
+        {/* updated */}
         <Route path={path.MANAGE_PRODUCTS} element={<ManageProducts />} />
         <Route path={path.MANAGE_USER} element={<ManageUser />} />
         <Route path={path.MANAGE_ORDER} element={<ManageOrder />} />
