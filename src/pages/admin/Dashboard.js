@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { BarChart, LineChart } from "../../components";
-import { orderStat } from "../../apis";
+import React from "react";
+// import { BarChart, LineChart } from "../../components";
+// import { orderStat } from "../../apis";
 
 const Dashboard = () => {
   // eslint-disable-next-line
 
-  const [orderData, setOrderData] = useState({});
+  // const [orderData, setOrderData] = useState({});
 
-  useEffect(() => {
-    const fetchOrderData = async () => {
-      const response = await orderStat();
-      console.log(response);
-      // if(response.success)
-    };
-    fetchOrderData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchOrderData = async () => {
+  //     const response = await orderStat();
+  //     console.log(response);
+  //     // if(response.success)
+  //   };
+  //   fetchOrderData();
+  // }, []);
   // eslint-disable-next-line
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
 
   // console.log("userdata", dataUserStat.data);
 
