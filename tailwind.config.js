@@ -19,7 +19,8 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     fontFamily: {
-      main: ["Montserrat", "sans-serif"],
+      main: ["Open Sans", "sans-serif"],
+      second: ["Playfair Display", "serif"],
     },
     extend: {
       width: {

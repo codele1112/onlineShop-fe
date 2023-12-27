@@ -1,6 +1,10 @@
 import { memo, useState, useEffect } from "react";
 import icons from "../../ultils/icons";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  createSearchParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useSelector } from "react-redux";
 import path from "../../ultils/path";
 import { getProducts } from "../../apis";
@@ -20,6 +24,7 @@ const SearchItem = ({
   const [selected, setSelected] = useState([]);
   const [price, setPrice] = useState({ from: "", to: "" });
   const [bestPrice, setBestPrice] = useState(null);
+  const [params] = useSearchParams();
 
   const handleSelected = (e) => {
     const alreadyEl = selected.find((el) => el === e.target.value);
@@ -28,44 +33,41 @@ const SearchItem = ({
     else setSelected((prev) => [...prev, e.target.value]);
     changeActiveFilter(null);
   };
-  // console.log(selected);
   const fetchBestPriceProduct = async () => {
     const response = await getProducts({ sort: "-price", limit: 1 });
-    // console.log("response best price product", response.data);
     if (response.success) setBestPrice(response?.data?.products[0]?.price);
   };
+  const debouncePriceFrom = useDebounce(price.from, 500);
+  const debouncePriceTo = useDebounce(price.to, 500);
 
   useEffect(() => {
-    navigate({
-      pathname: `/${path.PRODUCTS}`,
-      search: createSearchParams({
-        category: selected,
-      }).toString(),
-    });
+    if (selected.length > 0) {
+      let param = [];
+      for (let i of params.entries()) param.push(i);
+      const queries = {};
+      for (let i of param) queries[i[0]] = i[1];
+      if (Number(price.from) > 0) queries.from = price.from;
+      if (Number(price.from) > 0) queries.to = price.to;
+      queries.page = 1;
+      navigate({
+        pathname: `/${path.PRODUCTS}`,
+        search: createSearchParams({
+          category: selected,
+        }).toString(),
+      });
+    } else {
+      navigate(`/${path.PRODUCTS}`);
+    }
     // eslint-disable-next-line
-  }, [selected]);
+  }, [selected, debouncePriceFrom, debouncePriceTo]);
 
   useEffect(() => {
     if (type === "input") fetchBestPriceProduct();
   }, [type]);
 
-  const debouncePriceFrom = useDebounce(price.from, 500);
-  const debouncePriceTo = useDebounce(price.to, 500);
-
   useEffect(() => {
-    const data = {};
-    if (Number(price.from) > 0) data.from = price.from;
-    if (Number(price.from) > 0) data.to = price.to;
-
-    navigate({
-      pathname: `/${path.PRODUCTS}`,
-      search: createSearchParams(data).toString(),
-    });
-    // eslint-disable-next-line
-  }, [debouncePriceFrom, debouncePriceTo]);
-
-  useEffect(() => {
-    if (price.from > price.to) alert("From price connot greater than To price");
+    if (price.from && price.to && price.from > price.to)
+      alert("From price connot greater than To price");
   }, [price]);
   return (
     <div

@@ -24,7 +24,7 @@ const Login = () => {
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("redirect"));
+  // console.log(searchParams.get("redirect"));
   const resetPayload = () => {
     setPayload({
       email: "",

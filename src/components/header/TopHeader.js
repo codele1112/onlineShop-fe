@@ -27,14 +27,14 @@ const TopHeader = () => {
     await persistor.flush();
   }
   return (
-    <div className=" w-full  h-[40px] bg-main flex items-center justify-center">
-      <div className="w-main flex items-center justify-between text-xs text-white">
+    <div className=" w-full py-4 h-[40px] bg-gray-300 flex items-center justify-center">
+      <div className="w-main flex items-center justify-between text-xs font-mono">
         <span className="md:invisible md:max-w-[200px]">
           ORDER ONLINE OR CALL US (+1800) 000 9098
         </span>
 
         {isLoggedIn ? (
-          <div className="flex gap-2 ">
+          <div className="flex gap-2 font-mono ">
             <span className="text-base sm:text-[10px]">
               {`Welcome, ${current?.name ? current.name : ""}  `}!
             </span>
@@ -44,7 +44,7 @@ const TopHeader = () => {
               }}
               className=" hover:bg-gray-300 hover:text-main cursor-pointer"
             >
-              <FiLogOut color="#fff" size={20} />
+              <FiLogOut size={20} />
             </span>
           </div>
         ) : (

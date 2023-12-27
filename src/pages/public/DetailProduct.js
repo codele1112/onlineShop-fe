@@ -176,7 +176,7 @@ function DetailProduct({ isQuickview, data }) {
             {product?.name}
           </h1>
 
-          <div className=" md:max-w-[390px] lg:max-w-[768px] lg:text-[15px] text-gray-500 md:mt-[20px] mt-[50px] mb-[50px] ">
+          <div className=" md:max-w-[390px] lg:max-w-[768px] lg:text-[15px] font-mono md:mt-[20px] mt-[25px] mb-[50px] ">
             <span>
               {product?.description && (
                 <div
@@ -188,15 +188,15 @@ function DetailProduct({ isQuickview, data }) {
             </span>
           </div>
 
-          <div className="mt-[50px] mb-[50px] flex items-center gap-1">
+          <div className="mt-[30px] mb-[50px] flex items-center gap-1">
             <h2 className="text-base">In Stock: </h2>
             <span className=" text-base text-gray-700 ">
               {product?.quantity}
             </span>
           </div>
 
-          <div className="  mt-[50px] mb-[50px] flex items-center gap-1">
-            <h2 className="text-base  ">Sold: </h2>
+          <div className="  mt-[30px] mb-[50px] flex items-center gap-1">
+            <h2 className="text-base">Sold: </h2>
             <span className=" text-base text-gray-700 ">{product?.sold}</span>
           </div>
 
@@ -224,31 +224,31 @@ function DetailProduct({ isQuickview, data }) {
       </div>
 
       {!isQuickview && (
-        <div className=" w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-8">
-          <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
-            YOU MAY ALSO LIKE
-          </h3>
-          <CustomSlider products={relatedProducts} />
-        </div>
-      )}
-
-      {!isQuickview && (
-        <div className="  flex w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-8 gap-2 p-4">
-          <div className="flex-4 flex items-center justify-center border">
-            <Rating totalRatings={3} totalCount={18} />
+        <div className="  flex w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-10 gap-2 p-4 border-b border-t">
+          <div className="flex-4 flex items-center justify-center ">
+            <Rating totalRatings={4} totalCount={18} />
           </div>
-          <div className="flex-6 flex flex-col gap-4 border">
+          <div className="flex-6 flex flex-col gap-4 ">
             {Array.from(Array(5).keys())
               .reverse()
               .map((el) => (
                 <Votebar
                   key={el}
                   number={el + 1}
-                  ratingCount={5}
+                  ratingCount={33}
                   ratingTotal={35}
                 />
               ))}
           </div>
+        </div>
+      )}
+
+      {!isQuickview && (
+        <div className=" w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-8 mb-8">
+          <h3 className="border-b-2  border-main text-[20px] py-[15px] text-center ">
+            YOU MAY ALSO LIKE
+          </h3>
+          <CustomSlider products={relatedProducts} />
         </div>
       )}
     </div>

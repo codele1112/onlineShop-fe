@@ -38,3 +38,15 @@ export const createProducts = (data) =>
     method: "post",
     data,
   });
+
+export const updateProduct = (data, pid) =>
+  axios({
+    url: "/products/" + pid,
+    method: "put",
+    data,
+  });
+export const deleteProduct = (pid) =>
+  axios({
+    url: "/products/" + pid,
+    method: "delete",
+  });

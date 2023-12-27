@@ -48,7 +48,9 @@ const MarkDownEditor = ({
         onChange={(e) =>
           changeValue((prev) => ({ ...prev, [name]: e.target.getContent() }))
         }
-        onFocus={() => setInValidFields && setInValidFields([])}
+        onFocus={() => {
+          setInValidFields && setInValidFields([]);
+        }}
       />
       {invalidFields?.some(
         (el) =>

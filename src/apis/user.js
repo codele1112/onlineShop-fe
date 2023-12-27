@@ -79,3 +79,15 @@ export const updateWishlist = (pid) =>
     url: "/users/wishlist/" + pid,
     method: "put",
   });
+
+export const orderStat = () =>
+  axios({
+    url: "/order/order-stat",
+    method: "get",
+  });
+
+export const UserStat = () =>
+  axios({
+    url: "/users/user-stat",
+    method: "get",
+  });

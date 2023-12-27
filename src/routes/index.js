@@ -4,12 +4,12 @@ import {
   Home,
   Login,
   Products,
-  Services,
   DetailProduct,
   FAQ,
   DetailCart,
   FinalRegister,
   ResetPassword,
+  About,
 } from "../pages/public";
 import {
   AdminLayout,
@@ -43,7 +43,7 @@ function Router() {
         <Route path={path.PRODUCTS_CATEGORY} element={<Products />} />
         <Route path={path.DETAIL_CART} element={<DetailCart />} />
         <Route path={path.FAQ} element={<FAQ />} />
-        <Route path={path.OUR_SERVICE} element={<Services />} />
+        <Route path={path.ABOUT} element={<About />} />
         <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
       </Route>
 

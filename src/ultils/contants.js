@@ -15,8 +15,8 @@ export const navigation = [
 
   {
     id: 3,
-    value: "OUR SERVICES",
-    path: `/${path.OUR_SERVICE}`,
+    value: "ABOUT",
+    path: `/${path.ABOUT}`,
   },
   {
     id: 4,
@@ -39,6 +39,13 @@ export const productInfoTabs = [
   { id: 2, name: "DELIVERY" },
   { id: 3, name: "PAYMENT" },
   { id: 4, name: "CUSTOMER'S REVIEWS" },
+];
+
+export const sorts = [
+  { id: 1, value: "-sold", text: "Best selling" },
+  { id: 2, value: "-name", text: "Alphabeltically,A-Z" },
+  { id: 3, value: "-price", text: "Price, low to high" },
+  { id: 4, value: "-createdAt", text: "Date, new to old" },
 ];
 
 const {

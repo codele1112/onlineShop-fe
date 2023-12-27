@@ -5,7 +5,7 @@ const path = {
   LOGIN: "login",
   PRODUCTS: "products",
   PRODUCTS_CATEGORY: ":category",
-  OUR_SERVICE: "services",
+  ABOUT: "about",
   FAQ: "faqs",
   DETAIL_PRODUCT_CATEGORY_PID_NAME: ":category/:pid/:name",
   FINAL_REGISTER: "final-registration/:status",

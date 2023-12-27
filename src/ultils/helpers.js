@@ -1,3 +1,4 @@
+import { UserStat, orderStat } from "../apis";
 import icons from "./icons";
 
 const { AiOutlineStar, AiFillStar } = icons;
@@ -82,3 +83,7 @@ export const validate = (payload, setInvalidFields) => {
 
   return invalids;
 };
+
+export const dataOrderStat = await orderStat();
+
+export const dataUserStat = await UserStat();
