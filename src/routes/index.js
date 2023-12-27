@@ -13,7 +13,6 @@ import {
 } from "../pages/public";
 import {
   AdminLayout,
-  Dashboard,
   ManageOrder,
   ManageProducts,
   ManageUser,
