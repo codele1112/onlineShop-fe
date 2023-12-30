@@ -41,7 +41,7 @@ const ButtonWrapper = ({
       setIsSuccess(true);
       Swal.fire("Congratulations!", " Order was created.", "success").then(
         () => {
-          window.close();
+          navigate("/");
         }
       );
     }

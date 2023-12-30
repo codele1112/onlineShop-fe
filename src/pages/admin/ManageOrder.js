@@ -43,14 +43,15 @@ const ManageOrder = () => {
               <tr className="border-b" key={index}>
                 <td className="px-4 py-2 text-xs">{index + 1}</td>
                 <td className="px-4 py-2">
-                  {el?.products?.map((i, index) => (
-                    <ul key={index}>
-                      <li className="text-xs">
-                        {`product: ${i.name},
+                  {el?.products &&
+                    el?.products?.map((i, index) => (
+                      <ul key={index}>
+                        <li className="text-xs">
+                          {`product: ${i.name},
                       quantity: ${i.quantity}`}
-                      </li>
-                    </ul>
-                  ))}
+                        </li>
+                      </ul>
+                    ))}
                 </td>
                 <td className="px-4 py-2 text-xs">{el.status}</td>
                 <td className="px-4 py-2 text-xs">{el.orderBy}</td>
