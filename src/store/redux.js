@@ -5,19 +5,25 @@ import categoriesSlice from "./categories/categoriesSlice";
 import productsSlice from "./products/productsSlice";
 import userSlice from "./user/userSlice";
 const commonConfig = {
-  key: "shop/user",
   storage: storage,
 };
 
 const userConfig = {
   ...commonConfig,
   whitelist: ["isLoggedIn", "token", "current", "currentCart"],
+  key: "shop/user",
+};
+
+const productConfig = {
+  ...commonConfig,
+  whitelist: ["dealDaily"],
+  key: "shop/deal",
 };
 
 export const store = configureStore({
   reducer: {
     categories: categoriesSlice,
-    products: productsSlice,
+    products: persistReducer(productConfig, productsSlice),
     user: persistReducer(userConfig, userSlice),
   },
   middleware: (getDefaultMiddleware) =>

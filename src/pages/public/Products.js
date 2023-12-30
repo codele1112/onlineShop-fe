@@ -31,7 +31,6 @@ const Products = () => {
     if (category && category !== "products") queries.category = category;
 
     const response = await getProducts(queries);
-    console.log("response", response);
 
     if (response.success) setProducts(response.data);
   };

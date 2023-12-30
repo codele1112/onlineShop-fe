@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  Button,
-  InputForm,
-  Select,
-  MarkDownEditor,
-  Loading,
-} from "../../components";
+import { Button, InputForm, Select, MarkDownEditor } from "../../components";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { getBase64, validate } from "../../ultils/helpers";
@@ -84,9 +78,9 @@ const CreateProducts = () => {
       if (finalPayload.images) {
         for (let image of finalPayload.images) formData.append("images", image);
       }
-      dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
+      dispatch(showModal({ isShowModal: true }));
       const response = await createProducts(formData);
-      dispatch(showModal({ isShowModal: false, modalChildren: null }));
+      dispatch(showModal({ isShowModal: false }));
 
       if (response.success) {
         toast.success(response.message);
@@ -137,7 +131,7 @@ const CreateProducts = () => {
               errors={errors}
               id="quantity"
               validate={{ required: "Required." }}
-              placeholder="Quantity of product..."
+              placeholder="Stock of product..."
               type="number"
               // eslint-disable-next-line
               style="flex-auto"

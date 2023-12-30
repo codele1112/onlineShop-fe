@@ -12,7 +12,7 @@ export const categoriesSlice = createSlice({
   },
   reducers: {
     showModal: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.isShowModal = action.payload.isShowModal;
       state.detailProduct = action.payload.detailProduct;
     },

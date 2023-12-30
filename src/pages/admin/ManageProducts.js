@@ -122,7 +122,7 @@ const ManageProducts = () => {
             <th className=" px-4 py-2">Name</th>
             <th className=" px-4 py-2">Category</th>
             <th className="text-center px-4 py-2">Price</th>
-            <th className="text-center px-4 py-2">Quantity</th>
+            <th className="text-center px-4 py-2">Stock</th>
             <th className="text-center px-4 py-2">Sold</th>
             <th className="text-center px-4 py-2">Ratings</th>
             <th className="text-center px-4 py-2">Updated At</th>
@@ -145,7 +145,7 @@ const ManageProducts = () => {
                 <td className=" px-4 py-2">{el.name}</td>
                 <td className=" px-4 py-2">{el.category.name}</td>
                 <td className="text-center px-4 py-2">{el.price}</td>
-                <td className="text-center px-4 py-2">{el.quantity}</td>
+                <td className="text-center px-4 py-2">{el.stock}</td>
                 <td className="text-center px-4 py-2">{el.sold}</td>
                 <td className="text-center px-4 py-2">{el.totalRatings}</td>
                 <td className="text-center px-4 py-2">

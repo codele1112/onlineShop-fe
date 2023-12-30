@@ -27,6 +27,7 @@ import {
 } from "../pages/member";
 import NotFoundPage from "../pages/NotFoundPage";
 import path from "../ultils/path";
+import Dashboard from "../pages/admin/Dashboard";
 
 function Router() {
   return (
@@ -47,7 +48,7 @@ function Router() {
       </Route>
 
       <Route path={path.ADMIN} element={<AdminLayout />}>
-        {/* <Route path={path.DASHBOARD} element={<Dashboard />} /> */}
+        <Route path={path.DASHBOARD} element={<Dashboard />} />
         {/* updated */}
         <Route path={path.MANAGE_PRODUCTS} element={<ManageProducts />} />
         <Route path={path.MANAGE_USER} element={<ManageUser />} />

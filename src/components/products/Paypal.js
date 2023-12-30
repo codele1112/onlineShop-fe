@@ -13,7 +13,13 @@ import { useNavigate } from "react-router-dom";
 const style = { layout: "vertical" };
 
 // Custom component to wrap the PayPalButtons and show loading spinner
-const ButtonWrapper = ({ currency, showSpinner, amount, payload }) => {
+const ButtonWrapper = ({
+  currency,
+  showSpinner,
+  amount,
+  payload,
+  setIsSuccess,
+}) => {
   // console.log("amount", amount);
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
   const navigate = useNavigate();
@@ -30,8 +36,9 @@ const ButtonWrapper = ({ currency, showSpinner, amount, payload }) => {
 
   const handleSaveOrder = async () => {
     const response = await createOrder({ ...payload, status: "Succeed" });
-    console.log(response);
+    // console.log(response);
     if (response.success) {
+      setIsSuccess(true);
       Swal.fire("Congratulations!", " Order was created.", "success").then(
         () => {
           window.close();
@@ -73,13 +80,14 @@ const ButtonWrapper = ({ currency, showSpinner, amount, payload }) => {
   );
 };
 
-export default function Paypal({ amount, payload }) {
+export default function Paypal({ amount, payload, setIsSuccess }) {
   return (
     <div style={{ maxWidth: "750px", minHeight: "200px", margin: "auto" }}>
       <PayPalScriptProvider
         options={{ clientId: "test", components: "buttons", currency: "USD" }}
       >
         <ButtonWrapper
+          setIsSuccess={setIsSuccess}
           payload={payload}
           currency={"USD"}
           amount={amount}

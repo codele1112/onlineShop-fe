@@ -26,7 +26,7 @@ const UpdateProduct = ({
     reset({
       name: editProduct?.name || "",
       price: editProduct?.price || "",
-      quantity: editProduct?.quantity || "",
+      stock: editProduct?.stock || "",
       category: editProduct?.category?.name || "",
     });
     setPayload({

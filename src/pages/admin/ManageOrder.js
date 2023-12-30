@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { getOrders } from "../../apis";
 import { formatMoney } from "../../ultils/helpers";
+import { Pagination } from "@mui/material";
 
 const ManageOrder = () => {
   const [orderList, setOrdersList] = useState([]);
+  const [count, setCount] = useState(null);
   const fetchOrdersList = async () => {
     const response = await getOrders();
 
     if (response.success) {
       setOrdersList(response.data);
+      setCount(response.count);
     }
   };
   useEffect(() => {
@@ -30,7 +33,6 @@ const ManageOrder = () => {
             <th className="px-4 py-2">Products</th>
             <th className="px-4 py-2">Status</th>
             <th className="px-4 py-2 ">Order By</th>
-            <th className="px-4 py-2 ">Address Buyer</th>
             <th className="px-4 py-2">Value</th>
             <th className="px-4 py-2">Created At</th>
           </tr>
@@ -53,8 +55,9 @@ const ManageOrder = () => {
                 </td>
                 <td className="px-4 py-2 text-xs">{el.status}</td>
                 <td className="px-4 py-2 text-xs">{el.orderBy}</td>
-                <td className="px-4 py-2 text-xs">Address Buyers</td>
-                <td className="px-4 py-2 text-xs">{formatMoney(el.total)}</td>
+                <td className="px-4 py-2 text-xs">
+                  {el.total ? formatMoney(el.total) : ""}
+                </td>
                 <td className="px-4 py-2 text-xs">
                   {moment(el.updatedAt).format("DD/MM/YYYY")}
                 </td>
@@ -63,9 +66,9 @@ const ManageOrder = () => {
         </tbody>
       </table>
 
-      {/* <div className="w-full flex justify-end my-8">
+      <div className="w-full flex justify-end my-8">
         <Pagination totalCount={count} />
-      </div> */}
+      </div>
     </div>
   );
 };

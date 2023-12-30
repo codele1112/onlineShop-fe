@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUsers } from "../../apis/user";
 import moment from "moment";
-import {
-  InputField,
-  Pagination,
-  // InputForm,
-  // Select,
-  // Button,
-} from "../../components";
+import { InputField, Pagination } from "../../components";
 import useDebounce from "../../components/hooks/useDebounce";
 import { useSearchParams } from "react-router-dom";
 
@@ -18,7 +12,6 @@ const ManageUser = () => {
   const [params] = useSearchParams();
   const fetchUsers = async (params) => {
     const response = await getUsers(params);
-    // console.log("users response", response);
 
     if (response.success) {
       setUsers(response);
@@ -34,9 +27,6 @@ const ManageUser = () => {
     fetchUsers(queries);
   }, [queriesDebounce, params]);
 
-  // console.log(queries.q);
-  // console.log("users", users);
-  // console.log("editEl", editEl);
   return (
     <div className="w-full">
       <h1 className="h-[75px] flex justify-between items-center px-4 border-b text-3xl">

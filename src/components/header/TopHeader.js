@@ -48,7 +48,7 @@ const TopHeader = () => {
             </span>
           </div>
         ) : (
-          <Link className="hover:text-gray-300" to={`/${path.LOGIN}`}>
+          <Link className="hover:text-yellow-800" to={`/${path.LOGIN}`}>
             Sign in or Create Account
           </Link>
         )}

@@ -15,13 +15,11 @@ import clsx from "clsx";
 const { AiFillEye, AiFillHeart, BsFillCartPlusFill, BsFillCartCheckFill } =
   icons;
 
-const Product = ({ productData, pid, className }) => {
+const Product = ({ productData, className }) => {
   const [isShowOption, setIsShowOption] = useState(false);
   const { current } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // console.log("current", current);
-  // console.log("productData", productData);
 
   const handleClickOptions = async (e, flag) => {
     e.stopPropagation();
@@ -39,7 +37,7 @@ const Product = ({ productData, pid, className }) => {
           if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
         });
 
-      const response = await updateCart({ pid: productData._id });
+      const response = await updateCart({ pid: productData._id, quantity: 1 });
       if (response.success) {
         toast.success("Added!");
         dispatch(getCurrentUser());
@@ -47,7 +45,6 @@ const Product = ({ productData, pid, className }) => {
     }
 
     if (flag === "WISHLIST") {
-      console.log("pid", productData._id);
       const response = await updateWishlist(productData._id);
       if (response.success) {
         dispatch(getCurrentUser());
@@ -70,6 +67,7 @@ const Product = ({ productData, pid, className }) => {
       );
     }
   };
+
   return (
     <div
       className={clsx(
@@ -104,7 +102,9 @@ const Product = ({ productData, pid, className }) => {
                   icon={
                     <AiFillHeart
                       color={
-                        current?.wishlist?.some((i) => i === pid)
+                        current?.wishlist?.some(
+                          (item) => item._id === productData._id.toString()
+                        )
                           ? "red"
                           : "black"
                       }
@@ -113,7 +113,7 @@ const Product = ({ productData, pid, className }) => {
                 />
               </span>
               {current?.cart?.some(
-                (el) => el.product === productData._id.toString()
+                (el) => el.product._id === productData._id.toString()
               ) ? (
                 <span title="Added to cart">
                   <SelectOption icon={<BsFillCartCheckFill color="green" />} />

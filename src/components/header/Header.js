@@ -37,10 +37,18 @@ const Header = () => {
   return (
     <div className="w-full flex items-center justify-center h-[110px] py-[35px]">
       <div className="w-main md:max-w-[390px] lg:max-w-[768px] flex justify-between items-center ">
-        <div className="  flex text-center gap-0 ">
-          <Link to={`/${path.HOME}`} />
-          <RiBubbleChartLine size={35} />
-          <span className="text-[35px] md:text-[15px]">SOAP & CANDLE</span>
+        <div>
+          <Link
+            to={`/${path.HOME}`}
+            className=" flex items-center justify-between text-center gap-8 "
+          >
+            <span className="text-[40px] md:text-[15px] font-main">
+              G A I A
+            </span>
+            <span className="text-xs md:text-[15px] block italic">
+              A Gift From Morther Earth.
+            </span>
+          </Link>
         </div>
 
         <div className="flex text-[10px] ">

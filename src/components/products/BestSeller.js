@@ -46,9 +46,9 @@ function BestSeller() {
           <span
             key={index}
             className={`font-semibold uppercase px-8 cursor-pointer border-r text-gray-400 ${
-              activatedTab === el._id ? "text-main" : ""
+              activatedTab === el.id ? "text-main" : ""
             }`}
-            onClick={() => setActivatedTab(el._id)}
+            onClick={() => setActivatedTab(el.id)}
           >
             {el.name}
           </span>

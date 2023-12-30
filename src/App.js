@@ -17,7 +17,6 @@ function App() {
     dispatch(getCategories());
   }, [dispatch]);
 
-  // console.log("detailProduct", detailProduct);
   return (
     <div className=" font-main h-screen relative">
       {isShowCart && (
@@ -46,7 +45,7 @@ function App() {
       {isShowModal && (
         <Modal>
           <DetailProduct
-            isQuickview={!detailProduct.isQuickview}
+            isQuickview={!detailProduct?.isQuickview}
             data={detailProduct?.data}
           />
         </Modal>

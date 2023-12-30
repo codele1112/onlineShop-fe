@@ -39,7 +39,7 @@ const DetailCart = () => {
         }
       });
     } else {
-      window.open(`/${path.CHECK_OUT}`, "_blank");
+      navigate(`/${path.CHECK_OUT}`);
     }
   };
 

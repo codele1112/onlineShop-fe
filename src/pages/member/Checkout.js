@@ -1,29 +1,26 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
 import { Paypal } from "../../components";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-// import path from "../../ultils/path";
+import { getCurrentUser } from "../../apis";
 
 const Checkout = () => {
   const { currentCart, current } = useSelector((state) => state.user);
   const { watch, setValue } = useForm();
   const address = watch("address");
-  // const navigate = useNavigate();
-
+  const [isSuccess, setIsSuccess] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     setValue("address", current?.address);
     // eslint-disable-next-line
-  }, [current]);
+  }, [current.address]);
 
-  // const handleOnClick = () => {
-  //   navigate(`/${path.HOME}`);
-  // };
+  useEffect(() => {
+    if (isSuccess) dispatch(getCurrentUser);
 
-  console.log("currentCart", currentCart);
-  console.log("current", current);
-  console.log("address", address);
+    // eslint-disable-next-line
+  }, [isSuccess]);
 
   return (
     <div className=" w-main md:max-w-[350px] lg:max-w-[700px] mx-auto my-auto ">
@@ -77,12 +74,14 @@ const Checkout = () => {
       <div className="w-full mx-auto  mt-8">
         {address && address?.length > 10 && (
           <Paypal
+            setIsSuccess={setIsSuccess}
             payload={{
               products: currentCart,
               total: currentCart?.reduce(
                 (sum, el) => sum + +el.product?.price * el.quantity,
                 0
               ),
+              orderBy: current?._id,
               address,
             }}
             amount={currentCart?.reduce(

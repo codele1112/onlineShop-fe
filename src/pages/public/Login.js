@@ -24,7 +24,6 @@ const Login = () => {
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [searchParams] = useSearchParams();
-  // console.log(searchParams.get("redirect"));
   const resetPayload = () => {
     setPayload({
       email: "",
@@ -71,8 +70,7 @@ const Login = () => {
         }
       } else {
         const rs = await login(data);
-        // console.log("rs", rs);
-        // console.log("rs.data", rs.data.accessToken);
+
         if (rs.success) {
           dispatch(
             userLogin({

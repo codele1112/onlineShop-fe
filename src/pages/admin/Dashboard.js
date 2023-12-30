@@ -1,49 +1,67 @@
-import React from "react";
-// import { BarChart, LineChart } from "../../components";
-// import { orderStat } from "../../apis";
+import React, { useEffect, useState } from "react";
+import { userStat, orderStat } from "../../apis";
+import { useSelector } from "react-redux";
+import { BarChart, LineChart } from "../../components";
 
 const Dashboard = () => {
-  // eslint-disable-next-line
+  const { isLoggedIn } = useSelector((state) => state.user);
 
-  // const [orderData, setOrderData] = useState({});
+  const [orderData, setOrderData] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchOrderData = async () => {
-  //     const response = await orderStat();
-  //     console.log(response);
-  //     // if(response.success)
-  //   };
-  //   fetchOrderData();
-  // }, []);
-  // eslint-disable-next-line
-  // const [userData, setUserData] = useState({});
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchOrderData = async () => {
+        const response = await orderStat();
+        if (response.success)
+          setOrderData({
+            labels: response?.data?.map((el) => el._id),
+            datasets: [
+              {
+                label: "Revenue gained for the last two months($) ",
+                data: response?.data?.map((el) => el.income),
+                backgroundColor: ["green "],
+              },
+            ],
+          });
+      };
+      const fetchUserData = async () => {
+        const rs = await userStat();
+        if (rs.success)
+          setUserData({
+            labels: rs.data?.map((el) => el._id),
+            datasets: [
+              {
+                label: "Users register gained. ",
+                data: rs.data?.map((el) => el.total),
+                backgroundColor: ["green "],
+              },
+            ],
+          });
+      };
 
-  // console.log("userdata", dataUserStat.data);
+      fetchOrderData();
+      fetchUserData();
+    }
+  }, [isLoggedIn]);
 
   return (
     <div>
-      {/* <div className="h-[70px] w-full"></div>
+      <div className="h-[70px] w-full"></div>
       <div className="p-4 border-b bg-white w-full flex justify-between items-center fixed top-0">
         <h1 className=" text-3xl tracking-tighter ">Dashboard</h1>
       </div>
+
       <div className="flex items-center justify-center gap-4 ">
         <div className="w-[700px]">
-          <BarChart chartData={orderData} />
-        </div>
-        <div>
-          {dataOrderStat?.data?.map((el, index) => (
-            <div key={index} className="text-main flex flex-col mt-6">
-              <span>{`Total Orders Gained in ${el._id}: ${el.totalOrders} order(s)`}</span>
-              <span>{`Revenue Gained in ${el._id}: $${el.income}.00`}</span>
-            </div>
-          ))}
+          {orderData && <BarChart chartData={orderData} />}
         </div>
       </div>
       <div className="flex items-center justify-center gap-4 mt-8">
         <div className="w-[700px]">
-          <LineChart chartData={userData} />
+          {userData && <LineChart chartData={userData} />}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

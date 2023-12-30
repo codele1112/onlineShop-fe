@@ -1,40 +1,46 @@
 import React, { useEffect, useState, memo } from "react";
-import { formatMoney } from "../../ultils/helpers";
-import icons from "../../ultils/icons";
+import { formatMoney, secondsToHms } from "../../ultils/helpers";
 import Countdown from "../common/Countdown";
 import { getProducts } from "../../apis";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { getDealDaily } from "../../store/products/productsSlice";
 
-const { AiOutlineMenu } = icons;
 let idInterval;
 
 const DealDaily = () => {
-  const [dealDaily, setDealDaily] = useState(null);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
   const [expireTime, setExpireTime] = useState(false);
+  const dispatch = useDispatch();
+  const { dealDaily } = useSelector((state) => state.products);
+  // console.log("dealDaily", dealDaily);
 
   const fetchDealDaily = async () => {
     const response = await getProducts({
-      limit: 1,
-      page: Math.round(Math.random() * 10),
+      limit: 20,
     });
-    // console.log("dealdaily", response);
 
     if (response.success) {
-      setDealDaily(response.data.products[0]);
-      const h = 24 - new Date().getHours();
-      const m = 60 - new Date().getMinutes();
-      const s = 60 - new Date().getSeconds();
-      setHour(h);
-      setMinute(m);
-      setSecond(s);
+      const pr = response.data.products[Math.round(Math.random() * 20)];
+      dispatch(getDealDaily({ data: pr, time: Date.now() + 24 * 3600 * 1000 }));
     }
   };
 
   useEffect(() => {
+    if (dealDaily?.time) {
+      const deltaTime = dealDaily.time - Date.now();
+      const number = secondsToHms(deltaTime);
+      setHour(number.h);
+      setMinute(number.m);
+      setSecond(number.s);
+    }
+  }, [dealDaily]);
+  useEffect(() => {
     idInterval && clearInterval(idInterval);
-    fetchDealDaily();
+    if (moment(moment(dealDaily?.time).format("MM/DD/YYYY")).isBefore(moment()))
+      fetchDealDaily();
   }, [expireTime]);
 
   useEffect(() => {
@@ -72,13 +78,13 @@ const DealDaily = () => {
       </div>
       <div className="w-full flex flex-col items-center gap-2">
         <img
-          src={dealDaily?.images[0] || ""}
+          src={dealDaily?.data.images[0] || ""}
           alt=""
           className="w-full object-cover md:max-w-[300px]"
         />
 
         <span className="line-clamp-1 text-center">{dealDaily?.name}</span>
-        <span>{formatMoney(dealDaily?.price)}</span>
+        <span>{formatMoney(dealDaily?.data.price)}</span>
       </div>
       <div className=" px-4 mt-8">
         <div className=" flex justify-center gap-2 items-center mb-4">
@@ -90,8 +96,7 @@ const DealDaily = () => {
           type="button"
           className=" flex gap-2 items-center justify-center w-full bg-main hover:bg-gray-500 hover:text-black text-white font-medium py-2"
         >
-          <AiOutlineMenu />
-          <span>Options</span>
+          <span>View more...</span>
         </button>
       </div>
     </div>

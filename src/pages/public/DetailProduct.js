@@ -60,15 +60,12 @@ function DetailProduct({ isQuickview, data }) {
 
   const fetchProductData = async () => {
     const response = await getProductById(pid);
-    // console.log("response", response.data.thumb);
     if (response.success) setProduct(response.data);
     setCurrentImage(response.data?.thumb || response.data?.images[0]);
   };
-  // console.log("product", product);
 
   const fetchProducts = async () => {
     const response = await getProducts();
-    // console.log("products data", response);
     if (response.success) setRelatedProducts(response.data.products);
   };
   useEffect(() => {
@@ -122,9 +119,8 @@ function DetailProduct({ isQuickview, data }) {
         });
       });
     const response = await updateCart({ pid, quantity, price: product.price });
-    // console.log("response", response);
     if (response.success) {
-      toast.success("The product has been added to cart!");
+      toast.success("Added to cart!");
       dispatch(getCurrentUser());
     } else toast.error(response.mes);
   };

@@ -20,11 +20,8 @@ const AdminSidebar = () => {
   return (
     <div className=" bg-second h-full py-4">
       <Link to={`/${path.HOME}`} className="flex flex-col p-4 gap-2 ">
-        <div className="flex text-center">
-          <div>
-            <RiBubbleChartLine size={30} />
-          </div>
-          <span className="text-[20px] md:text-[15px] ">SOAP & CANDLE</span>
+        <div className="text-center">
+          <span className="text-[40px] md:text-[15px] ">G A I A</span>
         </div>
         <span className="text-center py-4 px-4 border-t border-b">
           ADMIN WORKSPACE

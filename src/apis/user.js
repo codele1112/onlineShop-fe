@@ -86,7 +86,7 @@ export const orderStat = () =>
     method: "get",
   });
 
-export const UserStat = () =>
+export const userStat = () =>
   axios({
     url: "/users/user-stat",
     method: "get",
