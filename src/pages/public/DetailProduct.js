@@ -186,9 +186,7 @@ function DetailProduct({ isQuickview, data }) {
 
           <div className="mt-[30px] mb-[50px] flex items-center gap-1">
             <h2 className="text-base">In Stock: </h2>
-            <span className=" text-base text-gray-700 ">
-              {product?.quantity}
-            </span>
+            <span className=" text-base text-gray-700 ">{product?.stock}</span>
           </div>
 
           <div className="  mt-[30px] mb-[50px] flex items-center gap-1">

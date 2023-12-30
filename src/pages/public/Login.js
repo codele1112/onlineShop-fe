@@ -61,10 +61,12 @@ const Login = () => {
         // console.log("register", response);
 
         if (response.success) {
-          Swal.fire("Congratulation!", response.message, "success").then(() => {
-            setIsRegister(false);
-            resetPayload();
-          });
+          Swal.fire("Congratulations!", response.message, "success").then(
+            () => {
+              setIsRegister(false);
+              resetPayload();
+            }
+          );
         } else {
           Swal.fire("Oops!", response.message, "error");
         }

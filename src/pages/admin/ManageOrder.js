@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { Pagination } from "../../components";
 import moment from "moment";
 import { getOrders } from "../../apis";
 import { formatMoney } from "../../ultils/helpers";
-import { Pagination } from "@mui/material";
+import { Pagination } from "../../components";
 
 const ManageOrder = () => {
   const [orderList, setOrdersList] = useState([]);
