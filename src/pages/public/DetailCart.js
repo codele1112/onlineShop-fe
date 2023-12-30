@@ -85,12 +85,6 @@ const DetailCart = () => {
         </span>
 
         <Button handleOnClick={handleSubmit}>Checkout</Button>
-        {/* <Link
-          to={`/${path.CHECK_OUT}`}
-          className="px-4 py-4 flex justify-center items-center rounded-md bg-main text-white text-semibold my-2"
-        >
-          Check out
-        </Link> */}
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import { formatMoney, renderStarFromNumber } from "../../ultils/helpers";
 
 const ProductCard = ({ price, name, image, totalRatings, pid, category }) => {
   const navigate = useNavigate();
-  //
   return (
     <div className="w-1/3 lg:w-[300px] md:w-full flex-auto px-[10px] mb-[20px]">
       <div

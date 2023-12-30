@@ -6,13 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showCart } from "../../store/categories/categoriesSlice";
 import { userLogout } from "../../store/user/userSlice";
 
-const {
-  RiPhoneFill,
-  MdEmail,
-  LiaUserCogSolid,
-  AiOutlineShoppingCart,
-  RiBubbleChartLine,
-} = icons;
+const { RiPhoneFill, MdEmail, LiaUserCogSolid, AiOutlineShoppingCart } = icons;
 
 const Header = () => {
   const { current } = useSelector((state) => state.user);

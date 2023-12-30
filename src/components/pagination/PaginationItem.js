@@ -6,7 +6,6 @@ import {
   createSearchParams,
   useLocation,
 } from "react-router-dom";
-import path from "../../ultils/path";
 
 const PaginationItem = ({ children }) => {
   const [params] = useSearchParams();

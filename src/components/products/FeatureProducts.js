@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../apis";
-// import Product from "./Product";
 const FeatureProducts = () => {
   const [products, setProducts] = useState(null);
 
@@ -10,7 +9,6 @@ const FeatureProducts = () => {
       limit: 6,
       sort: "-totalRatings",
     });
-    // console.log("feature products", response);
     if (response.success) setProducts(response.data.products);
   };
 
@@ -18,7 +16,6 @@ const FeatureProducts = () => {
     fetchProducts();
   }, []);
 
-  // console.log("products", products);
   return (
     <div className="w-main md:max-w-[390px] lg:max-w-[768px]">
       <h3 className=" font-semibold border-b-2 border-main text-[20px] md:text-[10px] py-[15px]">

@@ -5,7 +5,7 @@ import icons from "../../ultils/icons";
 import { adminSidebar } from "../../ultils/contants";
 import clsx from "clsx";
 
-const { RiBubbleChartLine, MdKeyboardArrowDown, MdOutlineChevronRight } = icons;
+const { MdKeyboardArrowDown, MdOutlineChevronRight } = icons;
 const activedStyle = "px-4 px-2 flex items-center gap-2 bg-third ";
 const notActivedStyle = "px-4 py-2 flex items-center gap-2 hover:bg-fourth";
 const AdminSidebar = () => {

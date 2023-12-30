@@ -4,7 +4,6 @@ import usePagination from "../hooks/usePagination";
 import PaginationItem from "./PaginationItem";
 
 const Pagination = ({ totalCount }) => {
-  // console.log("totalCount", totalCount);
   const [params] = useSearchParams();
   const pagination = usePagination(totalCount, +params.get("page") || 1);
 
