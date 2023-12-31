@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { InputField, Button } from "../../components";
-import { login, register, forgotPassword } from "../../apis";
+import { login, register, forgotPassword, finalRegister } from "../../apis";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
-import { showModal } from "../../store/categories/categoriesSlice";
+// import { showModal } from "../../store/categories/categoriesSlice";
 import { validate } from "../../ultils/helpers";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -56,9 +56,9 @@ const Login = () => {
 
     if (invalids === 0) {
       if (isRegister) {
-        dispatch(showModal({ isShowModal: true }));
+        // dispatch(showModal({ isShowModal: true }));
         const response = await register(payload);
-        dispatch(showModal({ isShowModal: false }));
+        // dispatch(showModal({ isShowModal: false }));
         if (response.success) {
           setIsVerifiedEmail(true);
           Swal.fire("Congratulations!", response.message, "success").then(
@@ -92,7 +92,7 @@ const Login = () => {
     // eslint-disable-next-line
   }, [payload, isRegister, dispatch, navigate]);
 
-  const finalRegister = async () => {
+  const handleFinalRegister = async () => {
     const response = await finalRegister(token);
     if (response.success) {
       Swal.fire("Congratulations!", response.message, "success").then(() => {
@@ -122,7 +122,7 @@ const Login = () => {
               children={"Submit"}
               // eslint-disable-next-line
               style={"py-2 px-4 rounded-md bg-main text-white my-2  ml-4"}
-              handleOnClick={finalRegister}
+              handleOnClick={handleFinalRegister}
             />
           </div>
         </div>
