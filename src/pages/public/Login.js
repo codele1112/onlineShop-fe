@@ -19,7 +19,8 @@ const Login = () => {
     name: "",
     phone: "",
   });
-  // const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
+  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
+  const [token, setToken] = useState("");
   const [isRegister, setIsRegister] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -55,12 +56,11 @@ const Login = () => {
 
     if (invalids === 0) {
       if (isRegister) {
-        dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
+        dispatch(showModal({ isShowModal: true }));
         const response = await register(payload);
-        dispatch(showModal({ isShowModal: false, modalChildren: null }));
-        // console.log("register", response);
-
+        dispatch(showModal({ isShowModal: false }));
         if (response.success) {
+          setIsVerifiedEmail(true);
           Swal.fire("Congratulations!", response.message, "success").then(
             () => {
               setIsRegister(false);
@@ -92,8 +92,41 @@ const Login = () => {
     // eslint-disable-next-line
   }, [payload, isRegister, dispatch, navigate]);
 
+  const finalRegister = async () => {
+    const response = await finalRegister(token);
+    if (response.success) {
+      Swal.fire("Congratulations!", response.message, "success").then(() => {
+        setIsRegister(false);
+        resetPayload();
+      });
+    } else Swal.fire("Oops!", response.message, "error");
+    setIsVerifiedEmail(false);
+    setToken("");
+  };
   return (
     <div className="w-screen h-screen relative">
+      {isVerifiedEmail && (
+        <div className=" absolute top-0 left-0 right-0 bottom-0 bg-overlay z-50 flex flex-col items-center justify-center gap-2">
+          <div className="bg-white w-[500px] md:max-w-[350px] lg:max-w[750px] rounded-md p-10">
+            <h4 className="italic font-main text-xs">
+              A verification code has been sent to your email. Please check your
+              email and fill in the verification code below.
+            </h4>
+            <input
+              type="text"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              className="p-2 outline-none rounded-md border"
+            />
+            <Button
+              children={"Submit"}
+              // eslint-disable-next-line
+              style={"py-2 px-4 rounded-md bg-main text-white my-2  ml-4"}
+              handleOnClick={finalRegister}
+            />
+          </div>
+        </div>
+      )}
       {isForgotPassword && (
         <div className="absolute top-0 left-0 bottom-0 bg-white right-0 py-8 flex flex-col items-center  z-50">
           <div className="flex flex-col gap-4">

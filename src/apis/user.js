@@ -5,9 +5,13 @@ export const register = (data) =>
     url: "/users/register",
     method: "post",
     data,
-    withCredentials: true,
   });
 
+export const finalRegister = (token) =>
+  axios({
+    url: "/users/final-registration/" + token,
+    method: "put",
+  });
 export const login = (data) =>
   axios({
     url: "/auth/login",
