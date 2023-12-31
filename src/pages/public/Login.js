@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { InputField, Button, Loading } from "../../components";
+import { InputField, Button } from "../../components";
 import { login, register, forgotPassword } from "../../apis";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import path from "../../ultils/path";
