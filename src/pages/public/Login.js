@@ -106,8 +106,8 @@ const Login = () => {
   return (
     <div className="w-screen h-screen relative">
       {isVerifiedEmail && (
-        <div className=" absolute top-0 left-0 right-0 bottom-0 bg-overlay z-50 flex flex-col items-center justify-center gap-2">
-          <div className="bg-white w-[500px] md:max-w-[350px] lg:max-w[750px] rounded-md p-10">
+        <div className=" absolute top-0 left-0 right-0 bottom-0 h-screen bg-overlay z-50 flex flex-col items-center justify-center gap-2">
+          <div className="bg-white w-[500px]  md:max-w-[350px] lg:max-w[750px] rounded-md p-10">
             <h4 className="italic font-main text-xs">
               A verification code has been sent to your email. Please check your
               email and fill in the verification code below.
