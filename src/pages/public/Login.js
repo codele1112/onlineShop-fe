@@ -68,11 +68,6 @@ const Login = () => {
           Swal.fire("Oops!", response.message, "error");
         }
       } else {
-        Swal.fire(
-          "Oops!",
-          "Wrong email or password! Please try again.",
-          "error"
-        );
         const rs = await login(data);
 
         console.log("rs", rs);
@@ -98,7 +93,7 @@ const Login = () => {
         } else {
           Swal.fire(
             "Oops!",
-            "Wrong email or password! Please try again.",
+            "Invalid email or password! Please try again.",
             "error"
           );
         }
