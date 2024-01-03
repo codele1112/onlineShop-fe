@@ -12,6 +12,11 @@ const UpdateProduct = ({
   setEditProduct,
 }) => {
   const { categories } = useSelector((state) => state.categories);
+  const [invalidFields, setInValidFields] = useState([]);
+  const [preview, setPreview] = useState({
+    thumb: null,
+    images: [],
+  });
   const {
     handleSubmit,
     register,
@@ -36,16 +41,11 @@ const UpdateProduct = ({
           : editProduct?.description,
     });
     setPreview({
-      thumb: editProduct?.thumb || "",
+      thumb: editProduct?.thumb || null,
       images: editProduct?.images || [],
     });
     // eslint-disable-next-line
   }, [editProduct]);
-  const [invalidFields, setInValidFields] = useState([]);
-  const [preview, setPreview] = useState({
-    thumb: null,
-    images: [],
-  });
 
   const changeValue = useCallback(
     (e) => {
@@ -76,6 +76,7 @@ const UpdateProduct = ({
       handlePreviewThumb(watch("thumb")[0]);
     // eslint-disable-next-line
   }, [watch("thumb")]);
+
   useEffect(() => {
     if (watch("images") instanceof FileList && watch("images").length > 0)
       handlePreviewImages(watch("images"));
@@ -83,6 +84,7 @@ const UpdateProduct = ({
   }, [watch("images")]);
 
   const handleUpdateProduct = async (data) => {
+    console.log("data", data);
     const invalids = validate(payload, setInValidFields);
     if (invalids === 0) {
       if (data.category)
@@ -161,7 +163,7 @@ const UpdateProduct = ({
               label="Stock"
               register={register}
               errors={errors}
-              id="quantity"
+              id="stock"
               validate={{ required: "Required." }}
               placeholder="Quantity of product..."
               type="number"

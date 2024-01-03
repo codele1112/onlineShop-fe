@@ -68,7 +68,14 @@ const Login = () => {
           Swal.fire("Oops!", response.message, "error");
         }
       } else {
+        Swal.fire(
+          "Oops!",
+          "Wrong email or password! Please try again.",
+          "error"
+        );
         const rs = await login(data);
+
+        console.log("rs", rs);
         if (rs.errors) {
           Swal.fire(
             "Oops!",
@@ -96,6 +103,8 @@ const Login = () => {
           );
         }
       }
+    } else {
+      Swal.fire("Oops!", "Wrong email or password! Please try again.", "error");
     }
     // eslint-disable-next-line
   }, [payload, isRegister]);
