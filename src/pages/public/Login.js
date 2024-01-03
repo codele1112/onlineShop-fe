@@ -68,35 +68,54 @@ const Login = () => {
           Swal.fire("Oops!", response.message, "error");
         }
       } else {
-        const rs = await login(data);
+        const rs = login(data)
+          .then((rs) => {
+            dispatch(
+              userLogin({
+                isLoggedIn: true,
+                token: rs.data.accessToken,
+                user: rs.data.userData,
+              })
+            );
+            searchParams.get("redirect")
+              ? navigate(searchParams.get("redirect"))
+              : navigate(`/${path.HOME}`);
+          })
+          .catch((error) =>
+            Swal.fire(
+              "Oops!",
+              "Wrong email or password! Please try again.",
+              "error"
+            )
+          );
 
         console.log("rs", rs);
-        if (rs.errors) {
-          Swal.fire(
-            "Oops!",
-            "Wrong email or password! Please try again.",
-            "error"
-          );
-        }
+        // if (rs.errors) {
+        //   Swal.fire(
+        //     "Oops!",
+        //     "Wrong email or password! Please try again.",
+        //     "error"
+        //   );
+        // }
 
-        if (rs.success) {
-          dispatch(
-            userLogin({
-              isLoggedIn: true,
-              token: rs.data.accessToken,
-              user: rs.data.userData,
-            })
-          );
-          searchParams.get("redirect")
-            ? navigate(searchParams.get("redirect"))
-            : navigate(`/${path.HOME}`);
-        } else {
-          Swal.fire(
-            "Oops!",
-            "Invalid email or password! Please try again.",
-            "error"
-          );
-        }
+        // if (rs.success) {
+        //   dispatch(
+        //     userLogin({
+        //       isLoggedIn: true,
+        //       token: rs.data.accessToken,
+        //       user: rs.data.userData,
+        //     })
+        //   );
+        //   searchParams.get("redirect")
+        //     ? navigate(searchParams.get("redirect"))
+        //     : navigate(`/${path.HOME}`);
+        // } else {
+        //   Swal.fire(
+        //     "Oops!",
+        //     "Invalid email or password! Please try again.",
+        //     "error"
+        //   );
+        // }
       }
     } else {
       Swal.fire("Oops!", "Wrong email or password! Please try again.", "error");
