@@ -15,6 +15,7 @@ const DealDaily = () => {
   const [expireTime, setExpireTime] = useState(false);
   const dispatch = useDispatch();
   const { dealDaily } = useSelector((state) => state.products);
+  // console.log("dealDaily", dealDaily);
 
   const fetchDealDaily = async () => {
     const response = await getProducts({

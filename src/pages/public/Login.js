@@ -5,7 +5,6 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import path from "../../ultils/path";
 import { userLogin } from "../../store/user/userSlice";
 import { useDispatch } from "react-redux";
-// import { showModal } from "../../store/categories/categoriesSlice";
 import { validate } from "../../ultils/helpers";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -56,9 +55,7 @@ const Login = () => {
 
     if (invalids === 0) {
       if (isRegister) {
-        // dispatch(showModal({ isShowModal: true }));
         const response = await register(payload);
-        // dispatch(showModal({ isShowModal: false }));
         if (response.success) {
           setIsVerifiedEmail(true);
           Swal.fire("Congratulations!", response.message, "success").then(
@@ -72,6 +69,13 @@ const Login = () => {
         }
       } else {
         const rs = await login(data);
+        if (rs.errors) {
+          Swal.fire(
+            "Oops!",
+            "Wrong email or password! Please try again.",
+            "error"
+          );
+        }
 
         if (rs.success) {
           dispatch(
@@ -85,12 +89,16 @@ const Login = () => {
             ? navigate(searchParams.get("redirect"))
             : navigate(`/${path.HOME}`);
         } else {
-          Swal.fire("Oops!", rs.message, "error");
+          Swal.fire(
+            "Oops!",
+            "Wrong email or password! Please try again.",
+            "error"
+          );
         }
       }
     }
     // eslint-disable-next-line
-  }, [payload, isRegister, dispatch, navigate]);
+  }, [payload, isRegister]);
 
   const handleFinalRegister = async () => {
     const response = await finalRegister(token);
