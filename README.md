@@ -1,46 +1,187 @@
-# Getting Started with Create React App and Redux
+#Online Shop
+Our online shop wants to build web app that serves as a platform to allow our customers to browse and purchase products of various categories from us. The app should provide an intuitive and seamless user experience, ensuring that customers can easily find and purchase the products they want. It should also allow our admin to create and manage our products, orders, transactions, and promotions.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+##User Stories
+###Guest Customer User
+As a guest user, I can browse through the product catalog,
+As a guest user, I can view product details
+As a guest user, I can add products to my cart.
+###Registered Customer User
+As a registered user, I can log in to the app,
+As a registered user, I can browse through the product catalog,
+As a registered user, I can view product details
+As a registered user, I can add products to my cart.
+As a registered user, I can check out securely.
+As a registered user, I want to be able to track my orders and receive updates on their status.
+As a registered user, I want to be able to check out my cart with Cash On Delivery payment options.
+###Admin User
+As an admin, I can register/sign in to my admin account.
+As an admin, I can list my products on the marketplace.
+As an admin, I can manage my product listings and update them as needed.
+As an admin, I can receive and manage orders from buyers.
+As an admin, I can communicate with buyers regarding their orders.
 
-## Available Scripts
+##Features and Specifications
+###User Registration
+Allow users to sign up, log in, and log out of the marketplace application with appropriate role.
+Ensure that only authorized users have access to the appropriate features.
+Use encryption to securely store user passwords and other sensitive information.
+###Product Catalog & Search
+Admin can create and manage (update, remove) product listings, including details such as title, description, price, and images.
+Customers can filter and browse for products based on price, categories.
+Customers can view the product details (ex: description, stock quantity,…)
+###Cart Management & Checkout
+Allow customers to add products to a cart, modify cart items, and proceed to checkout.
+Provide a secure, user-friendly checkout process accepting COD payment methods.
+###Order Management
+Allow admin to receive order
+Allow admin to update the delivery status of an order, which triggers automated notifications to be sent to the customers.
+Customers can view their order history, track order status, and cancel orders (at the appropriate stage, for example before the order has been sent).
 
-In the project directory, you can run:
+###Admin Dashboard
 
-### `npm start`
+Admin can view key information such as product inventory, registered customers gained, revenue gained,…
+Admin can view and filter total orders by status or other appropriate attributes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##Endpoint APIs
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+###Auth APIs
+/\*\*
 
-### `npm test`
+- @route POST /auth/login
+- @description Log in with email and password
+- @body { email, password }
+- @access Public
+  \*/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+/\*\*
 
-### `npm run build`
+- @rout POST /auth/forgotpassword
+- @query email
+- @access Public
+  \*/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+/\*\*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- @rout PUT /auth/resetpassword
+- @description Reset password.
+- @body (email, password)
+- @access Public
+  \*/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+/\*\*
 
-### `npm run eject`
+- @rout POST /auth/logout
+- @description Logout account.
+- @access Public
+  \*/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+User APIs
+/\*\*
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- @route POST /user/register
+- @description Register a new user
+- @body {name, email, password}
+- @access Public
+  /\*\*
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+\*\*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+/\*\*
 
-## Learn More
+- @route POST /user/register
+- @description Register a new user
+- @body {name, email, password}
+- @access Public
+  /\*\*
+- @rout GET /users/user-stat
+- @description Get users stats
+- @access Admin login required
+  _/
+  /\*\*
+  _@rout GET /users/final-registration
+  _@description final registration a new account
+  _@access Public
+  \*/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- @route GET /user/:userId
+- @description Get a user profile
+- @body { email, password }
+- @access Login required
+  Cart APIs
+  /\*\*
+- @route GET /cart
+- @description Get all products in cart
+- @access Public
+  \*/
+  /\*\*
+- @route GET /cart/checkout
+- @description Checkout cart
+- @access Public
+  \*/
+  /\*\*
+- @route GET /cart/checkout/payment
+- @description Make payment
+- @access Public
+  \*/
+  Order APIs
+  /\*\*
+- @route POST /orders
+- @description Create an order
+- @body { userId, products, subtotal, total, shipping, delivery_status, payment_status }
+- @access Public
+  \*/
+  /\*\*
+- @route PUT /orders
+- @description Update an order - Admin only
+- @body { userId, products, subtotal, total, shipping, delivery_status, payment_status }
+- @access Login required
+  \*/
+  /\*\*
+- @route DELETE /orders
+- @description Delete an order - Admin only
+- @access Login required
+  \*/
+  /\*\*
+- @route GET /orders
+- @description Get all orders
+- @access Login required
+  \*/
+  /\*\*
+- @route GET /admin/orders/:userId
+- @description Get orders of a user
+- @access Login required
+  \*/
+  /\*\*
+- @route GET /user/:userId/orders
+- @description Track a user orders
+- @access Login required
+  \*/
+  Product APIs
+  /\*\*
+- @route POST /admin/products/product
+- @description Create a product
+- @body { name, price, description , image }
+- @access Login required
+  \*/
+  /\*\*
+- @route DELETE /admin/products/product
+- @description Delete a product
+- @access Login required
+  \*/
+  /\*\*
+- @route PUT /admin/products/:productId
+- @description Update a product
+- @body { name, price, description , image }
+- @access Login required
+  \*/
+  /\*\*
+- @route GET /products?page=1&limit=10
+- @description Get all products a user can see with pagination
+- @access Public
+  \*/
+  /\*\*
+- @route GET /products/:productId
+- @description Get product detail
+- @access Public
+  \*/
