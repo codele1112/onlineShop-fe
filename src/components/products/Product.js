@@ -25,7 +25,7 @@ const Product = ({ productData, className }) => {
     e.stopPropagation();
 
     if (flag === "CART") {
-      if (!current)
+      if (!current) {
         Swal.fire({
           title: "ALmost...",
           text: "Please login first!",
@@ -36,12 +36,16 @@ const Product = ({ productData, className }) => {
         }).then((rs) => {
           if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
         });
-
-      const response = await updateCart({ pid: productData._id, quantity: 1 });
-      if (response.success) {
-        toast.success("Added!");
-        dispatch(getCurrentUser());
-      } else toast.error(response.message);
+      } else {
+        const response = await updateCart({
+          pid: productData._id,
+          quantity: 1,
+        });
+        if (response.success) {
+          toast.success("Added!");
+          dispatch(getCurrentUser());
+        } else toast.error(response.message);
+      }
     }
 
     if (flag === "WISHLIST") {
@@ -68,6 +72,12 @@ const Product = ({ productData, className }) => {
     }
   };
 
+  const handleNavigate = () => {
+    navigate(
+      `/${productData?.category?.name}/${productData?._id}/${productData?.name}`
+    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div
       className={clsx(
@@ -77,11 +87,7 @@ const Product = ({ productData, className }) => {
     >
       <div
         className="w-full border p-[15px] md:text-[8px] flex flex-col items-center "
-        onClick={(e) =>
-          navigate(
-            `/${productData?.category?.name}/${productData?._id}/${productData?.name}`
-          )
-        }
+        onClick={(e) => handleNavigate()}
         onMouseEnter={(e) => {
           e.stopPropagation();
           setIsShowOption(true);

@@ -40,6 +40,8 @@ const Personal = () => {
 
     for (let i of Object.entries(data)) formData.append(i[0], i[1]);
 
+    console.log("formdata", formData);
+
     const response = await updateCurrentUser(formData);
 
     if (response.success) {

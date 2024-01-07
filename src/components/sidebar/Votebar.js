@@ -9,7 +9,7 @@ const Votebar = ({ number, ratingCount, ratingTotal }) => {
     }%`;
   }, [ratingCount, ratingTotal]);
   return (
-    <div className="flex items-center gap-2 text-gray-600">
+    <div className="flex items-center gap-2 text-gray-600 ">
       <div className="flex w-[10%] items-center justify-center gap-1 text-sm">
         <span>{number}</span>
 

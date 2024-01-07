@@ -6,10 +6,9 @@ import { useSelector } from "react-redux";
 const Sidebar = () => {
   const { categories } = useSelector((state) => state.categories);
 
-  // console.log("categories", categories);
   return (
-    <div className="flex flex-col border">
-      <span className=" md:text-[8px] flex gap-2 items-center justify-center w-full bg-main text-white font-medium py-2">
+    <div className="flex flex-col border lg:max-w-[750px] md:max-w-[350px]">
+      <span className="md:text-[8px] flex items-center justify-center w-full bg-main text-white font-medium py-2 ">
         ALL CATEGORIES
       </span>
       {categories?.map((el) => (

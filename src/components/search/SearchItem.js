@@ -23,7 +23,7 @@ const SearchItem = ({
   const { categories } = useSelector((state) => state.categories);
   const [selected, setSelected] = useState([]);
   const [price, setPrice] = useState({ from: "", to: "" });
-  const [bestPrice, setBestPrice] = useState(null);
+  const [highestPrice, setHighestPrice] = useState(null);
   const [params] = useSearchParams();
 
   const handleSelected = (e) => {
@@ -33,10 +33,13 @@ const SearchItem = ({
     else setSelected((prev) => [...prev, e.target.value]);
     changeActiveFilter(null);
   };
-  const fetchBestPriceProduct = async () => {
+
+  const fetchHighestPriceProduct = async () => {
     const response = await getProducts({ sort: "-price", limit: 1 });
-    if (response.success) setBestPrice(response?.data?.products[0]?.price);
+    // console.log("response highest price", response);
+    if (response.success) setHighestPrice(response?.data?.products[0].price);
   };
+
   const debouncePriceFrom = useDebounce(price.from, 500);
   const debouncePriceTo = useDebounce(price.to, 500);
 
@@ -52,23 +55,36 @@ const SearchItem = ({
       navigate({
         pathname: `/${path.PRODUCTS}`,
         search: createSearchParams({
-          category: selected,
+          category: selected.join(","),
         }).toString(),
       });
     } else {
       navigate(`/${path.PRODUCTS}`);
     }
     // eslint-disable-next-line
-  }, [selected, debouncePriceFrom, debouncePriceTo]);
+  }, [selected]);
 
   useEffect(() => {
-    if (type === "input") fetchBestPriceProduct();
+    if (type === "input") fetchHighestPriceProduct();
   }, [type]);
 
   useEffect(() => {
     if (price.from && price.to && price.from > price.to)
-      alert("From price connot greater than To price");
+      alert("From price cannot greater than To price");
   }, [price]);
+
+  useEffect(() => {
+    const data = {};
+    if (Number(price.from) > 0) data.from = price.from;
+    if (Number(price.from) > 0) data.to = price.to;
+
+    navigate({
+      pathname: `/${path.PRODUCTS}`,
+      search: createSearchParams(data).toString(),
+    });
+    // eslint-disable-next-line
+  }, [debouncePriceFrom, debouncePriceTo]);
+
   return (
     <div
       onClick={() => changeActiveFilter(name)}
@@ -120,16 +136,18 @@ const SearchItem = ({
               </div>
             </div>
           )}
+
           {type === "input" && (
             <div onClick={(e) => e.stopPropagation()}>
               <div className="p-4 flex items-center justify-between gap-8 border-b">
                 <span className="whitespace-nowrap">{`The highest price is ${formatMoney(
-                  bestPrice
+                  highestPrice
                 )}`}</span>
                 <span
                   onClick={(e) => {
                     e.stopPropagation();
                     setPrice({ from: "", to: "" });
+                    changeActiveFilter(null);
                   }}
                   className="underline cursor-pointer hover:text-second"
                 >

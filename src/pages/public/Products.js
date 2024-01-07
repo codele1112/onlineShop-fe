@@ -58,6 +58,7 @@ const Products = () => {
     delete queries.to;
     delete queries.from;
     const q = { ...priceQuery, ...queries };
+
     fetchProductByCategory(q);
     window.scrollTo(0, 0);
     // eslint-disable-next-line
@@ -89,14 +90,14 @@ const Products = () => {
     // eslint-disable-next-line
   }, [sort]);
   return (
-    <div className=" w-full md:max-w-[390px]  lg:max-w-[768px]">
+    <div className=" w-full md:max-w-[350px]  lg:max-w-[750px]">
       <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-        <div className="text-bold pl-2 md:pl-2 lg:pl-2 w-main md:max-w-[390px]">
+        <div className="text-bold pl-2 md:pl-2 lg:pl-2 w-main md:max-w-[350px]">
           PRODUCTS
         </div>
       </div>
 
-      <div className="  w-main md:max-w-[390px] lg:max-w-[768px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
+      <div className="w-main md:max-w-[350px] lg:max-w-[750px] md:flex md:flex-col border p-4 md:p-0 flex justify-between mt-8 m-auto">
         <div className="w-4/5 flex-auto flex flex-col">
           <span className="font-semibold text-sm">Filter By</span>
           <div className="flex gap-4">

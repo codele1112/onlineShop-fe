@@ -79,13 +79,13 @@ const DealDaily = () => {
       </div>
       <div className="w-full flex flex-col items-center gap-2">
         <img
-          src={dealDaily?.data.images[0] || ""}
+          src={dealDaily?.data?.images[0] || ""}
           alt=""
           className="w-full object-cover md:max-w-[300px]"
         />
 
         <span className="line-clamp-1 text-center">{dealDaily?.name}</span>
-        <span>{formatMoney(dealDaily?.data.price)}</span>
+        <span>{formatMoney(dealDaily?.data?.price)}</span>
       </div>
       <div className=" px-4 mt-8">
         <div className=" flex justify-center gap-2 items-center mb-4">

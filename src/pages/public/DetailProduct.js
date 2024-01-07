@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProductById, getProducts } from "../../apis/products";
 
 import {
@@ -17,12 +12,10 @@ import {
 } from "../../components";
 import Slider from "react-slick";
 import { formatMoney } from "../../ultils/helpers";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { updateCart } from "../../apis";
-import { toast } from "react-toastify";
+
 import path from "../../ultils/path";
-import { getCurrentUser } from "../../store/user/asyncActions";
 import DOMPurify from "dompurify";
 import clsx from "clsx";
 
@@ -43,9 +36,7 @@ function DetailProduct({ isQuickview, data }) {
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { current } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   // console.log("data", data);
   useEffect(() => {
@@ -73,7 +64,7 @@ function DetailProduct({ isQuickview, data }) {
       fetchProductData();
       fetchProducts();
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     // eslint-disable-next-line
   }, [pid]);
 
@@ -109,28 +100,21 @@ function DetailProduct({ isQuickview, data }) {
         cancelButtonText: "Not now!",
         showCancelButton: true,
         confirmButtonText: "Go to login page",
-      }).then((rs) => {
-        if (rs.isConfirmed) navigate(`/${path.LOGIN}`);
-        navigate({
-          pathname: `/${path.LOGIN}`,
-          search: createSearchParams({
-            redirect: location.pathname,
-          }).toString(),
-        });
+      }).then(async (rs) => {
+        if (rs.isConfirmed) {
+          navigate(`/${path.LOGIN}`);
+        }
       });
-    const response = await updateCart({ pid, quantity, price: product.price });
-    if (response.success) {
-      toast.success("Added to cart!");
-      dispatch(getCurrentUser());
-    } else toast.error(response.mes);
   };
 
   return (
-    <div className="w-full md:max-w-[390px]  lg:max-w-[768px] px-2">
+    <div className="w-full px-2 ">
       {!isQuickview && (
-        <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-          <div className="w-main md:max-w-[390px] lg:max-w-[768px] pl-2 lg:pl-2">
-            <h3 className="font-semibold md:text-[10px]">{product?.name}</h3>
+        <div className="h-[81px] md:h-[50px] bg-gray-100 flex items-center justify-center">
+          <div className="w-main md:max-w-[350px] lg:max-w-[768px] pl-2 lg:pl-2">
+            <h3 className="font-semibold md:text-[10px] md:ml-2">
+              {product?.name}
+            </h3>
             <Breadcrumb name={product?.name} category={category} />
           </div>
         </div>
@@ -138,10 +122,10 @@ function DetailProduct({ isQuickview, data }) {
 
       <div
         className={clsx(
-          "  bg-white md:max-w-[390px] md:flex md:flex-col lg:flex-col lg:max-w-[700px] m-auto mt-4 flex",
+          "  bg-white md:max-w-[350px] md:flex md:flex-col lg:flex-col lg:max-w-[700px] m-auto mt-4 flex",
           isQuickview
-            ? "w-main md:max-w-[390px] px-2 py-2 "
-            : "w-main md:max-w-[390px]"
+            ? "w-main md:max-w-[350px] px-2 py-2 "
+            : "w-main md:max-w-[350px]"
         )}
       >
         <div className="md:w-full lg:w-full w-1/2  lg:flex lg:flex-col flex-col flex ">
@@ -159,7 +143,7 @@ function DetailProduct({ isQuickview, data }) {
                     onClick={(e) => handleClickImage(e, el)}
                     src={el}
                     alt="sub-product"
-                    className="h-[143px] w-[143px] lg:w-[150px] lg:h-[150px]  border object-cover cursor-pointer"
+                    className="h-[143px] w-[143px] lg:w-[100px] lg:h-[100px] border object-cover cursor-pointer"
                   />
                 </div>
               ))}
@@ -167,7 +151,7 @@ function DetailProduct({ isQuickview, data }) {
           </div>
         </div>
 
-        <div className=" w-1/2 md:w-full lg:w-full  md:max-w-[390px] lg:max-w-[768px] ">
+        <div className=" w-1/2 md:w-full lg:w-full md:max-w-[390px] lg:max-w-[768px] ">
           <h1 className="text-[30px] md:text-[15px] font-semibold">
             {product?.name}
           </h1>
@@ -218,7 +202,7 @@ function DetailProduct({ isQuickview, data }) {
       </div>
 
       {!isQuickview && (
-        <div className="  flex w-main md:max-w-[390px] lg:max-w-[768px] m-auto mt-10 gap-2 p-4 border-b border-t">
+        <div className="  flex w-main md:hidden lg:max-w-[750px] m-auto mt-10 gap-2 p-4 border-b border-t">
           <div className="flex-4 flex items-center justify-center ">
             <Rating totalRatings={4} totalCount={18} />
           </div>

@@ -30,16 +30,14 @@ const Header = () => {
 
   return (
     <div className="w-full flex items-center justify-center h-[110px] py-[35px]">
-      <div className="w-main md:max-w-[390px] lg:max-w-[768px] flex justify-between items-center ">
+      <div className="w-main md:max-w-[350px] lg:max-w-[750px] flex justify-between items-center ">
         <div>
           <Link
             to={`/${path.HOME}`}
             className=" flex items-center justify-between text-center gap-8 "
           >
-            <span className="text-[40px] md:text-[15px] font-main">
-              G A I A
-            </span>
-            <span className="text-xs md:text-[15px] block italic">
+            <span className="text-[30px]  font-main">G A I A</span>
+            <span className="text-xs md:hidden block italic">
               A Gift From Morther Earth.
             </span>
           </Link>
@@ -47,7 +45,7 @@ const Header = () => {
 
         <div className="flex text-[10px] ">
           <div className=" md:hidden lg:hidden flex flex-col items-center px-4 border-r">
-            <span className="flex  gap-4 items-center">
+            <span className="flex gap-4 items-center">
               <RiPhoneFill />
               <span className="font-semibold">(+1800) 0000 8098</span>
             </span>
@@ -74,14 +72,13 @@ const Header = () => {
 
               <div
                 id="profile"
-                className="flex items-center justify-center cursor-pointer px-6 gap-2 relative"
+                className="flex items-center justify-center md:tex-[15px] cursor-pointer px-6 gap-2 relative"
                 onClick={(e) => {
                   setIsShowOption((prev) => !prev);
                 }}
               >
                 <LiaUserCogSolid size={24} />
                 <span>Profile</span>
-                {/* {console.log("isShowOption", isShowOption)} */}
                 {isShowOption && (
                   <div className=" flex flex-col absolute top-full left-0 bg-gray-100 border min-w-[100px] py-2">
                     {current?.role === "user" && (

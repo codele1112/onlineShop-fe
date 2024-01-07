@@ -24,6 +24,7 @@ const Login = () => {
   const [invalidFields, setInvalidFields] = useState([]);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [searchParams] = useSearchParams();
+
   const resetPayload = () => {
     setPayload({
       email: "",
@@ -90,32 +91,6 @@ const Login = () => {
           );
 
         console.log("rs", rs);
-        // if (rs.errors) {
-        //   Swal.fire(
-        //     "Oops!",
-        //     "Wrong email or password! Please try again.",
-        //     "error"
-        //   );
-        // }
-
-        // if (rs.success) {
-        //   dispatch(
-        //     userLogin({
-        //       isLoggedIn: true,
-        //       token: rs.data.accessToken,
-        //       user: rs.data.userData,
-        //     })
-        //   );
-        //   searchParams.get("redirect")
-        //     ? navigate(searchParams.get("redirect"))
-        //     : navigate(`/${path.HOME}`);
-        // } else {
-        //   Swal.fire(
-        //     "Oops!",
-        //     "Invalid email or password! Please try again.",
-        //     "error"
-        //   );
-        // }
       }
     } else {
       Swal.fire("Oops!", "Wrong email or password! Please try again.", "error");

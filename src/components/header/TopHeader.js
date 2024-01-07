@@ -27,15 +27,15 @@ const TopHeader = () => {
     await persistor.flush();
   }
   return (
-    <div className=" w-full py-4 h-[40px] bg-gray-300 flex items-center justify-center">
-      <div className="w-main flex items-center justify-between text-xs font-mono">
+    <div className=" w-full py-8 md:py-4 h-[40px] bg-gray-300 flex items-center justify-center">
+      <div className="w-main   lg:px-2 flex items-center text-center justify-between text-xs font-mono">
         <span className="md:invisible md:max-w-[200px]">
           ORDER ONLINE OR CALL US (+1800) 000 9098
         </span>
 
         {isLoggedIn ? (
-          <div className="flex gap-2 font-mono ">
-            <span className="text-base sm:text-[10px]">
+          <div className="flex justify-center items-center gap-2 font-mono ">
+            <span className="text-base sm:text-[10px] text-center">
               {`Welcome, ${current?.name ? current.name : ""}  `}!
             </span>
             <span
