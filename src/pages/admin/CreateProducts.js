@@ -1,14 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, InputForm, Select, MarkDownEditor } from "../../components";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getBase64, validate } from "../../ultils/helpers";
 import { toast } from "react-toastify";
 import { createProducts } from "../../apis";
-import { showModal } from "../../store/categories/categoriesSlice";
 
 const CreateProducts = () => {
-  const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
   const [payload, setPayload] = useState({
     description: "",
