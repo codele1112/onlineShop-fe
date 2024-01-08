@@ -12,12 +12,15 @@ import {
 } from "../../components";
 import Slider from "react-slick";
 import { formatMoney } from "../../ultils/helpers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import path from "../../ultils/path";
 import DOMPurify from "dompurify";
 import clsx from "clsx";
+import { updateCart } from "../../apis";
+import { getCurrentUser } from "../../store/user/asyncActions";
+import { toast } from "react-toastify";
 
 const settings = {
   dots: false,
@@ -29,6 +32,7 @@ const settings = {
 
 function DetailProduct({ isQuickview, data }) {
   const params = useParams();
+  const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [category, setCategory] = useState(null);
   const [pid, setPid] = useState(null);
@@ -92,7 +96,7 @@ function DetailProduct({ isQuickview, data }) {
   };
 
   const handleAddtoCart = async () => {
-    if (!current)
+    if (!current) {
       Swal.fire({
         title: "Almost...",
         text: "Please login first!",
@@ -105,8 +109,18 @@ function DetailProduct({ isQuickview, data }) {
           navigate(`/${path.LOGIN}`);
         }
       });
+    } else {
+      const response = await updateCart({
+        pid,
+      });
+      if (response.success) {
+        toast.success("Added!");
+        dispatch(getCurrentUser());
+      } else toast.error(response.message);
+    }
   };
 
+  console.log("params", pid);
   return (
     <div className="w-full px-2 ">
       {!isQuickview && (
