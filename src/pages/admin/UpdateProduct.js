@@ -91,24 +91,26 @@ const UpdateProduct = ({
         data.category = categories?.find(
           (el) => el.name === data.category
         )?.name;
-      const finalPayload = { ...data, ...payload };
-      const formData = new FormData();
-      for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
-      if (finalPayload.thumb)
-        formData.append(
-          "thumb",
-          finalPayload?.thumb?.length === 0
-            ? preview?.thumb
-            : finalPayload?.thumb[0]
-        );
-      if (finalPayload.images) {
-        const images =
-          finalPayload?.images?.length === 0
-            ? preview.images
-            : finalPayload.images;
-        for (let image of images) formData.append("images", image);
-      }
-      const response = await updateProduct(formData, editProduct._id);
+      let finalPayload = { ...data, ...payload };
+      finalPayload.thumb = preview?.thumb;
+      finalPayload.images = preview?.images;
+      // const formData = new FormData();
+      // for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
+      // if (finalPayload.thumb)
+      //   formData.append(
+      //     "thumb",
+      //     finalPayload?.thumb?.length === 0
+      //       ? preview?.thumb
+      //       : finalPayload?.thumb[0]
+      //   );
+      // if (finalPayload.images) {
+      //   const images =
+      //     finalPayload?.images?.length === 0
+      //       ? preview.images
+      //       : finalPayload.images;
+      //   for (let image of images) formData.append("images", image);
+      // }
+      const response = await updateProduct(finalPayload, editProduct._id);
 
       console.log(response);
       if (response.success) {

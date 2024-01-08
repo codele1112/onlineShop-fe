@@ -79,14 +79,13 @@ const ManageProducts = () => {
       if (rs.isConfirmed) {
         if (response.success) {
           toast.success(response.message);
+          renderUpdateProduct();
         } else {
           toast.error(response.message);
         }
-        renderUpdateProduct();
       }
     });
   };
-  console.log("editProduct", editProduct);
   return (
     <div className="w-full flex flex-col gap-4 relative">
       {editProduct && (

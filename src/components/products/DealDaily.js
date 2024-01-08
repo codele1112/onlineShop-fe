@@ -5,6 +5,7 @@ import { getProducts } from "../../apis";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { getDealDaily } from "../../store/products/productsSlice";
+import { NavLink } from "react-router-dom";
 
 let idInterval;
 
@@ -39,8 +40,11 @@ const DealDaily = () => {
   }, [dealDaily]);
   useEffect(() => {
     idInterval && clearInterval(idInterval);
-    if (moment(moment(dealDaily?.time).format("MM/DD/YYYY")).isBefore(moment()))
+    if (
+      moment(moment(dealDaily?.time).format("MM/DD/YYYY")).isBefore(moment())
+    ) {
       fetchDealDaily();
+    }
     // eslint-disable-next-line
   }, [expireTime]);
 
@@ -97,7 +101,7 @@ const DealDaily = () => {
           type="button"
           className=" flex gap-2 items-center justify-center w-full bg-main hover:bg-gray-500 hover:text-black text-white font-medium py-2"
         >
-          <span>View more...</span>
+          <NavLink to="/">View more...</NavLink>
         </button>
       </div>
     </div>

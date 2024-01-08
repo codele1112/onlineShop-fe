@@ -32,12 +32,13 @@ export const getOrders = () =>
     method: "get",
   });
 
-export const createProducts = (data) =>
+export const createProducts = (data) => {
   axios({
     url: "/products/",
     method: "post",
     data,
   });
+};
 
 export const updateProduct = (data, pid) =>
   axios({

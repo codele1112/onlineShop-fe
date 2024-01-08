@@ -31,7 +31,7 @@ const ManageOrder = () => {
             <th className="px-4 py-2">#</th>
             <th className="px-4 py-2">Products</th>
             <th className="px-4 py-2">Status</th>
-            <th className="px-4 py-2 ">Order By</th>
+            <th className="px-4 py-2 ">Address</th>
             <th className="px-4 py-2">Value</th>
             <th className="px-4 py-2">Created At</th>
           </tr>
@@ -54,7 +54,7 @@ const ManageOrder = () => {
                     ))}
                 </td>
                 <td className="px-4 py-2 text-xs">{el.status}</td>
-                <td className="px-4 py-2 text-xs">{el.orderBy}</td>
+                <td className="px-4 py-2 text-xs">{el.orderBy?.address}</td>
                 <td className="px-4 py-2 text-xs">
                   {el.total ? formatMoney(el.total) : ""}
                 </td>

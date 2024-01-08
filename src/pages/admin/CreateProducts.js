@@ -69,28 +69,34 @@ const CreateProducts = () => {
         data.category = categories?.find(
           (el) => el._id === data.category
         )?.name;
-      const finalPayload = { ...data, ...payload };
-      const formData = new FormData();
-      for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
-      if (finalPayload.thumb) formData.append("thumb", finalPayload.thumb[0]);
-      if (finalPayload.images) {
-        for (let image of finalPayload.images) formData.append("images", image);
-      }
-      const response = await createProducts(formData);
+      let finalPayload = { ...data, ...payload };
+      finalPayload.thumb = preview.thumb;
+      finalPayload.images = preview.images;
+      console.log("finalPayload", finalPayload);
 
-      if (response.success) {
-        toast.success(response.message);
+      // const formData = new FormData();
+      // for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
+      // if (finalPayload.thumb) formData.append("thumb", finalPayload.thumb[0]);
+      // if (finalPayload.images) {
+      //   for (let image of finalPayload.images) formData.append("images", image);
+      // }
+      // console.log("formData", formData);
+      try {
+        await createProducts(finalPayload);
+
+        toast.success("Create product successfully!");
         reset();
         setPayload({
           thumb: "",
           images: [],
         });
-      } else {
-        toast.error(response.message);
+      } catch (error) {
+        toast.error(error.message);
       }
     }
   };
 
+  // console.log("preview", preview);
   return (
     <div className="w-full">
       <h1 className="h-[75px] flex justify-between items-center px-4 border-b text-3xl">
@@ -125,7 +131,7 @@ const CreateProducts = () => {
               label="Stock"
               register={register}
               errors={errors}
-              id="quantity"
+              id="stock"
               validate={{ required: "Required." }}
               placeholder="Stock of product..."
               type="number"
