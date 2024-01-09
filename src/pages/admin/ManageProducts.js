@@ -87,7 +87,7 @@ const ManageProducts = () => {
     });
   };
   return (
-    <div className="w-full flex flex-col gap-4 relative">
+    <div className=" flex flex-col gap-4 ">
       {editProduct && (
         <div className="absolute inset-0 min-h-screen bg-white z-50">
           <UpdateProduct
@@ -102,76 +102,78 @@ const ManageProducts = () => {
         <h1 className=" text-3xl tracking-tighter ">Products</h1>
       </div>
 
-      <div className="flex justify-end items-center px-4">
-        <form className="w-[45%]">
-          <InputForm
-            id="q"
-            register={register}
-            errors={errors}
-            fullWidth
-            placeholder="Search product by name..."
-          />
-        </form>
-      </div>
+      <div className="p-4">
+        <div className="flex justify-end items-center px-4">
+          <form className="w-[45%]">
+            <InputForm
+              id="q"
+              register={register}
+              errors={errors}
+              fullWidth
+              placeholder="Search product by name..."
+            />
+          </form>
+        </div>
 
-      <table className="table-auto text-left mb-6 w-full ">
-        <thead className="text-red-900 text-[13px] border-b bg-second">
-          <tr className="border ">
-            <th className="text-center px-4 py-2">#</th>
-            <th className="text-center px-4 py-2">Thumbnail</th>
-            <th className=" px-4 py-2">Name</th>
-            <th className=" px-4 py-2">Category</th>
-            <th className="text-center px-4 py-2">Price</th>
-            <th className="text-center px-4 py-2">Stock</th>
-            <th className="text-center px-4 py-2">Sold</th>
-            <th className="text-center px-4 py-2">Ratings</th>
-            <th className="text-center px-4 py-2">Updated At</th>
-            <th className="text-center px-4 py-2">Actions</th>
-          </tr>
-        </thead>
+        <table className="table-auto text-left mb-6 w-full ">
+          <thead className="text-red-900 text-[13px] border-b bg-second">
+            <tr className="border ">
+              <th className="text-center px-4 py-2">#</th>
+              <th className="text-center px-4 py-2">Thumbnail</th>
+              <th className=" px-4 py-2">Name</th>
+              <th className=" px-4 py-2">Category</th>
+              <th className="text-center px-4 py-2">Price</th>
+              <th className="text-center px-4 py-2">Stock</th>
+              <th className="text-center px-4 py-2">Sold</th>
+              <th className="text-center px-4 py-2">Ratings</th>
+              <th className="text-center px-4 py-2">Updated At</th>
+              <th className="text-center px-4 py-2">Actions</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {products?.length &&
-            products?.map((el, index) => (
-              <tr className="border-b" key={index}>
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2">
-                  <img
-                    src={el.thumb}
-                    alt="thumb"
-                    className="w-12 h-12 object-cover"
-                  />
-                </td>
-                <td className=" px-4 py-2">{el.name}</td>
-                <td className=" px-4 py-2">{el.category.name}</td>
-                <td className="text-center px-4 py-2">{el.price}</td>
-                <td className="text-center px-4 py-2">{el.stock}</td>
-                <td className="text-center px-4 py-2">{el.sold}</td>
-                <td className="text-center px-4 py-2">{el.totalRatings}</td>
-                <td className="text-center px-4 py-2">
-                  {moment(el.updatedAt).format("DD/MM/YYYY")}
-                </td>
-                <td>
-                  <span
-                    onClick={() => setEditProduct(el)}
-                    className="text-blue-600 hover:text-red-600 text-sm cursor-pointer px-1"
-                  >
-                    Edit
-                  </span>
-                  <span
-                    onClick={() => handleDeleteProduct(el._id)}
-                    className="text-blue-600 hover:text-red-600 text-sm cursor-pointer px-1"
-                  >
-                    Remove
-                  </span>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+          <tbody>
+            {products?.length &&
+              products?.map((el, index) => (
+                <tr className="border-b" key={index}>
+                  <td className="px-4 py-2">{index + 1}</td>
+                  <td className="px-4 py-2">
+                    <img
+                      src={el.thumb}
+                      alt="thumb"
+                      className="w-12 h-12 object-cover"
+                    />
+                  </td>
+                  <td className=" px-4 py-2">{el.name}</td>
+                  <td className=" px-4 py-2">{el.category.name}</td>
+                  <td className="text-center px-4 py-2">{el.price}</td>
+                  <td className="text-center px-4 py-2">{el.stock}</td>
+                  <td className="text-center px-4 py-2">{el.sold}</td>
+                  <td className="text-center px-4 py-2">{el.totalRatings}</td>
+                  <td className="text-center px-4 py-2">
+                    {moment(el.updatedAt).format("DD/MM/YYYY")}
+                  </td>
+                  <td>
+                    <span
+                      onClick={() => setEditProduct(el)}
+                      className="text-blue-600 hover:text-red-600 text-sm cursor-pointer px-1"
+                    >
+                      Edit
+                    </span>
+                    <span
+                      onClick={() => handleDeleteProduct(el._id)}
+                      className="text-blue-600 hover:text-red-600 text-sm cursor-pointer px-1"
+                    >
+                      Remove
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
-      <div className="w-full flex justify-end my-8">
-        <Pagination totalCount={count} />
+        <div className="w-full flex justify-end my-8">
+          <Pagination totalCount={count} />
+        </div>
       </div>
     </div>
   );

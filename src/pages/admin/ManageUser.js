@@ -28,11 +28,12 @@ const ManageUser = () => {
   }, [queriesDebounce, params]);
 
   return (
-    <div className="w-full">
-      <h1 className="h-[75px] flex justify-between items-center px-4 border-b text-3xl">
-        <span>Users</span>
-      </h1>
-      <div className="w-full p-4">
+    <div>
+      <div className="h-[70px] w-full"></div>
+      <div className="p-4 border-b w-full bg-white flex justify-between items-center fixed top-0">
+        <h1 className="text-3xl tracking-tighter ">Users</h1>
+      </div>
+      <div className="p-4">
         <div className="flex justify-end py-4">
           <InputField
             nameKey={"q"}
