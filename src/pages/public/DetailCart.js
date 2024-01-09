@@ -44,47 +44,47 @@ const DetailCart = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className=" h-[81px] bg-gray-100 flex items-center justify-center">
-        <div className="w-main md:max-w-[390px] lg:max-w-[768px]  lg:px-3">
-          <h3 className="font-semibold uppercase">My Cart</h3>
-          <Breadcrumb name="your cart" />
-        </div>
+    <div>
+      <div className="h-[70px] w-full"></div>
+      <div className="p-4 border-b bg-white w-full flex justify-between items-center fixed top-0">
+        <h1 className=" text-3xl tracking-tighter ">My Cart</h1>
       </div>
 
-      <div className="flex flex-col border mt-8 w-main md:max-w-[390px] lg:max-w-[768px] mx-auto my-8">
-        <div className="w-main md:max-w-[390px] lg:max-w-[768px] mx-auto bg-second py-3 lg:px-2  grid font-semibold grid-cols-10">
-          <span className="col-span-6 w-full text-center">Products</span>
-          <span className="col-span-1 w-full text-center">Quantity</span>
-          <span className="col-span-3 w-full text-center">Price</span>
-        </div>
+      <div className="p-4">
+        <div className="flex flex-col border mt-8 w-full mx-auto my-8">
+          <div className=" mx-auto bg-second w-full py-3 lg:px-2  grid font-semibold grid-cols-10">
+            <span className="col-span-6  text-center">Products</span>
+            <span className="col-span-1 text-center">Quantity</span>
+            <span className="col-span-3 text-center">Price</span>
+          </div>
 
-        {currentCart?.map((el, index) => (
-          <OrderItem
-            key={index}
-            el={el}
-            defaultQuantity={el.quantity}
-            handleChangeQuantities={handleChangeQuantities}
-          />
-        ))}
-      </div>
-      <div className="w-main md:max-w-[390px] lg:max-w-[768px] mx-auto flex flex-col justify-center items-end gap-3 lg:px-3  md:px-3 ">
-        <span className="flex items-center gap-8">
-          <span>Subtotal: </span>
-          <span>
-            {formatMoney(
-              currentCart?.reduce(
-                (sum, el) => sum + +el.product?.price * el.quantity,
-                0
-              )
-            )}
+          {currentCart?.map((el, index) => (
+            <OrderItem
+              key={index}
+              el={el}
+              defaultQuantity={el.quantity}
+              handleChangeQuantities={handleChangeQuantities}
+            />
+          ))}
+        </div>
+        <div className="mx-auto flex flex-col justify-center items-end gap-3 lg:px-3  md:px-3 ">
+          <span className="flex items-center gap-4">
+            <span>Subtotal: </span>
+            <span>
+              {formatMoney(
+                currentCart?.reduce(
+                  (sum, el) => sum + +el.product?.price * el.quantity,
+                  0
+                )
+              )}
+            </span>
           </span>
-        </span>
-        <span className="text-xs italic text-center text-main">
-          Shipping, taxes, and discounts calculated at checkout.
-        </span>
+          <span className="text-xs italic text-center text-main">
+            Shipping, taxes, and discounts calculated at checkout.
+          </span>
 
-        <Button handleOnClick={handleSubmit}>Checkout</Button>
+          <Button handleOnClick={handleSubmit}>Checkout</Button>
+        </div>
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const OrderItem = ({ el, handleChangeQuantities, defaultQuantity = 1 }) => {
     <div>
       <div
         key={el._id}
-        className="w-main md:max-w-[390px] lg:max-w-[768px] border-b mx-auto py-3 px-2 grid grid-cols-10"
+        className="w-full border-b mx-auto py-3 px-2 grid grid-cols-10"
       >
         <span className="col-span-6 w-full text-center">
           <div className="flex gap-2">

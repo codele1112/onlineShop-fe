@@ -6,18 +6,20 @@ const Wishlist = () => {
   const { current } = useSelector((state) => state.user);
   console.log("current", current);
   return (
-    <div className="w-full pl-[70px] relative">
+    <div>
       <div className="h-[70px] w-full"></div>
       <div className="p-4 border-b bg-white w-full flex justify-between items-center fixed top-0">
         <h1 className=" text-3xl tracking-tighter ">My Wishlist</h1>
       </div>
 
-      <div className="p-4 w-full grid grid-cols-4 gap-2">
-        {current?.wishlist?.map((el, index) => (
-          <div key={index}>
-            <Product pid={el.id} productData={el} />
-          </div>
-        ))}
+      <div className="p-4">
+        <div className="p-4 w-full grid grid-cols-4 gap-2">
+          {current?.wishlist?.map((el, index) => (
+            <div key={index}>
+              <Product pid={el.id} productData={el} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
