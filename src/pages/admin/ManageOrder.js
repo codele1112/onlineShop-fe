@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { getOrders } from "../../apis";
 import { formatMoney } from "../../ultils/helpers";
-import { Pagination } from "../../components";
+// import { Pagination } from "../../components";
 
 const ManageOrder = () => {
   const [orderList, setOrdersList] = useState([]);
 
-  const [count, setCount] = useState(null);
+  // const [count, setCount] = useState(null);
   const fetchOrdersList = async () => {
     const response = await getOrders();
 
     if (response.success) {
       setOrdersList(response?.data);
-      setCount(response?.data?.length);
+      // setCount(response?.data?.length);
     }
   };
   useEffect(() => {
@@ -69,9 +69,9 @@ const ManageOrder = () => {
           </tbody>
         </table>
 
-        <div className="w-full flex justify-end my-8">
+        {/* <div className="w-full flex justify-end my-8">
           <Pagination totalCount={count} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
