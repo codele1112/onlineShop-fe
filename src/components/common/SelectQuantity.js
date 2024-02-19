@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 
 const SelectQuantity = ({
   originalQuantity,
@@ -36,4 +36,4 @@ const SelectQuantity = ({
   );
 };
 
-export default memo(SelectQuantity);
+export default SelectQuantity;

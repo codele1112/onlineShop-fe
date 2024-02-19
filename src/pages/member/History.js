@@ -19,10 +19,8 @@ const History = () => {
   console.log("params", params.get("page"));
   const {
     register,
-    // handleSubmit,
-    // reset,
+
     watch,
-    // setValue,
     formState: { errors },
   } = useForm();
   watch("q");
@@ -35,7 +33,6 @@ const History = () => {
       ...params,
       limit: process.env.REACT_APP_LIMIT,
     });
-    // console.log("orders response", response);
 
     if (response.success) {
       setOrdersList(response.data.orders);
@@ -54,7 +51,6 @@ const History = () => {
     });
   };
 
-  // console.log("orderList", orderList);
   return (
     <div>
       <div className="h-[70px] w-full"></div>
@@ -64,10 +60,7 @@ const History = () => {
 
       <div className="p-4">
         <div className="flex justify-end items-center px-4">
-          <form
-            className="w-[45%] grid grid-cols-2 gap-4"
-            // onSubmit={handleSubmit(handleSearchProducts())}
-          >
+          <form className="w-[45%] grid grid-cols-2 gap-4">
             <div className="col-span-1 ">
               <InputForm
                 id="q"

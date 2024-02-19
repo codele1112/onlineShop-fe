@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { renderStarFromNumber } from "../../ultils/helpers";
 
 const Rating = ({ totalRatings, totalCount }) => {
@@ -15,4 +15,4 @@ const Rating = ({ totalRatings, totalCount }) => {
   );
 };
 
-export default memo(Rating);
+export default Rating;

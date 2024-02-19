@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import path from "../../ultils/path";
 import icons from "../../ultils/icons";
@@ -89,4 +89,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default memo(AdminSidebar);
+export default AdminSidebar;

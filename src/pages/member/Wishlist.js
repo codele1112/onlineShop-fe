@@ -4,7 +4,6 @@ import { Product } from "../../components";
 
 const Wishlist = () => {
   const { current } = useSelector((state) => state.user);
-  console.log("current", current);
   return (
     <div>
       <div className="h-[70px] w-full"></div>

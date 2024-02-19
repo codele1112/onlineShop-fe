@@ -6,7 +6,6 @@ import { AdminSidebar } from "../../components";
 
 const AdminLayout = () => {
   const { isLoggedIn, current } = useSelector((state) => state.user);
-  // console.log(isLoggedIn, current);
   if (!isLoggedIn || !current || current?.role !== "admin")
     return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (
@@ -14,7 +13,6 @@ const AdminLayout = () => {
       <div className="w-1/6 top-0 bottom-0 flex-none ">
         <AdminSidebar />
       </div>
-      {/* <div className=" w-1/6 "></div> */}
       <div className=" w-5/6 ">
         <Outlet />
       </div>

@@ -18,7 +18,6 @@ function BestSeller() {
   const dispatch = useDispatch();
   const { newProducts } = useSelector((state) => state.products);
   const { isShowModal } = useSelector((state) => state.categories);
-  // console.log("newProducts", newProducts);
   const fetchProducts = async () => {
     const response = await getProducts({ sort: "-sold" });
     if (response?.success) {

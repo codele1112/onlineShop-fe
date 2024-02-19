@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { formatMoney, renderStarFromNumber } from "../../ultils/helpers";
 
@@ -37,4 +37,4 @@ const ProductCard = ({ price, name, image, totalRatings, pid, category }) => {
   );
 };
 
-export default memo(ProductCard);
+export default ProductCard;

@@ -14,7 +14,6 @@ const MemberLayout = () => {
         <MemberSidebar />
       </div>
 
-      {/* <div className="w-[250px] "></div> */}
       <div className=" w-5/6 ">
         <Outlet />
       </div>

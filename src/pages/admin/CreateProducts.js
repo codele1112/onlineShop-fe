@@ -63,24 +63,18 @@ const CreateProducts = () => {
   }, [watch("images")]);
 
   const handleCreateProduct = async (data) => {
+    console.log(data);
     const invalids = validate(payload, setInValidFields);
     if (invalids === 0) {
       if (data.category)
+        // lay _id category
         data.category = categories?.find(
           (el) => el._id === data.category
         )?.name;
       let finalPayload = { ...data, ...payload };
       finalPayload.thumb = preview.thumb;
       finalPayload.images = preview.images;
-      console.log("finalPayload", finalPayload);
 
-      // const formData = new FormData();
-      // for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
-      // if (finalPayload.thumb) formData.append("thumb", finalPayload.thumb[0]);
-      // if (finalPayload.images) {
-      //   for (let image of finalPayload.images) formData.append("images", image);
-      // }
-      // console.log("formData", formData);
       try {
         await createProducts(finalPayload);
 

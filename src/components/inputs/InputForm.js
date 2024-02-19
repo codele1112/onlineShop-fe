@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import clsx from "clsx";
 
 const InputForm = ({
@@ -37,4 +37,4 @@ const InputForm = ({
   );
 };
 
-export default memo(InputForm);
+export default InputForm;

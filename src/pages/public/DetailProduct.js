@@ -42,7 +42,6 @@ function DetailProduct({ isQuickview, data }) {
   const { current } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  // console.log("data", data);
   useEffect(() => {
     if (data && data.pid) {
       setPid(data.pid);
@@ -87,6 +86,7 @@ function DetailProduct({ isQuickview, data }) {
       if (flag === "minus") setQuantity((prev) => +prev - 1);
       if (flag === "plus") setQuantity((prev) => +prev + 1);
     },
+
     [quantity]
   );
 
@@ -95,7 +95,7 @@ function DetailProduct({ isQuickview, data }) {
     setCurrentImage(el);
   };
 
-  const handleAddtoCart = async () => {
+  const handleAddtoCart = async (quantity) => {
     if (!current) {
       Swal.fire({
         title: "Almost...",
@@ -112,6 +112,7 @@ function DetailProduct({ isQuickview, data }) {
     } else {
       const response = await updateCart({
         pid,
+        quantity,
       });
       if (response.success) {
         toast.success("Added!");
@@ -120,7 +121,6 @@ function DetailProduct({ isQuickview, data }) {
     }
   };
 
-  console.log("params", pid);
   return (
     <div className="w-full px-2 ">
       {!isQuickview && (
@@ -209,7 +209,7 @@ function DetailProduct({ isQuickview, data }) {
             <Button
               fw
               children={"Add to cart"}
-              handleOnClick={handleAddtoCart}
+              handleOnClick={() => handleAddtoCart(quantity)}
             />
           </div>
         </div>

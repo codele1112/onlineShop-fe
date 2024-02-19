@@ -9,12 +9,10 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const { token } = useParams();
   const navigate = useNavigate();
-  // console.log("token ", token);
 
   const handleResetPassword = async () => {
     const response = await resetPassword({ password, token });
     console.log(response);
-    // console.log({ password, token });
 
     if (response.success) {
       toast.success(response.message, { theme: "colored" });

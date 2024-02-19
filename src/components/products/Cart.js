@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import icons from "../../ultils/icons";
 import { showCart } from "../../store/categories/categoriesSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current } = useSelector((state) => state.user);
-  // console.log("current.cart", current.cart);
   const removeCart = async (pid) => {
     const response = await removeProductInCart(pid);
     if (response.success) {
@@ -99,4 +98,4 @@ const Cart = () => {
   );
 };
 
-export default memo(Cart);
+export default Cart;

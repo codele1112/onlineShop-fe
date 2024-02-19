@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import path from "../../ultils/path";
 import icons from "../../ultils/icons";
@@ -47,4 +47,4 @@ const MemberSidebar = () => {
   );
 };
 
-export default memo(MemberSidebar);
+export default MemberSidebar;

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { productInfoTabs } from "../../ultils/contants";
 const ProductInfor = () => {
   return (
@@ -14,4 +14,4 @@ const ProductInfor = () => {
   );
 };
 
-export default memo(ProductInfor);
+export default ProductInfor;

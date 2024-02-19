@@ -17,7 +17,7 @@ const OrderItem = ({ el, handleChangeQuantities, defaultQuantity = 1 }) => {
     },
     [quantity]
   );
-
+  // Onclick ko trong useEffect()
   useEffect(() => {
     handleChangeQuantities && handleChangeQuantities(el.product?._id, quantity);
   });

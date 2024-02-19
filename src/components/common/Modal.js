@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../store/categories/categoriesSlice";
 
@@ -16,4 +16,4 @@ const Modal = ({ children }) => {
   );
 };
 
-export default memo(Modal);
+export default Modal;

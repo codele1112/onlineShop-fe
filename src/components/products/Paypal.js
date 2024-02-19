@@ -9,10 +9,8 @@ import { createOrder } from "../../apis";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-// This value is from the props in the UI
 const style = { layout: "vertical" };
 
-// Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({
   currency,
   showSpinner,
@@ -20,8 +18,8 @@ const ButtonWrapper = ({
   payload,
   setIsSuccess,
 }) => {
-  // console.log("amount", amount);
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
+
   const navigate = useNavigate();
   useEffect(() => {
     dispatch({
@@ -36,7 +34,6 @@ const ButtonWrapper = ({
 
   const handleSaveOrder = async () => {
     const response = await createOrder({ ...payload, status: "Succeed" });
-    // console.log(response);
     if (response.success) {
       setIsSuccess(true);
       Swal.fire("Congratulations!", " Order was created.", "success").then(

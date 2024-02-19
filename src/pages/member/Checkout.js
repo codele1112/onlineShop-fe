@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatMoney } from "../../ultils/helpers";
-import { Paypal } from "../../components";
-import { useForm } from "react-hook-form";
+import { InputField, Paypal } from "../../components";
 import { getCurrentUser } from "../../apis";
 
 const Checkout = () => {
-  const { currentCart, current } = useSelector((state) => state.user);
-  const { watch, setValue } = useForm();
-  const address = watch("address");
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { currentCart } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  useEffect(() => {
-    setValue("address", current?.address);
-    // eslint-disable-next-line
-  }, [current.address]);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [invalidFields, setInvalidFields] = useState([]);
+  const [payload, setPayload] = useState({
+    address: "",
+    name: "",
+    phone: "",
+  });
 
   useEffect(() => {
     if (isSuccess) dispatch(getCurrentUser);
-
     // eslint-disable-next-line
   }, [isSuccess]);
 
@@ -31,7 +29,7 @@ const Checkout = () => {
       </h2>
 
       <div className="mx-auto">
-        <table className="table-auto w-full md:text-[15px] lg:text-[20px]">
+        <table className="table-auto w-full md:text-[15px] lg:text-[20px] ">
           <thead>
             <tr className="border bg-gray-200">
               <th className="text-left p-2">Product</th>
@@ -66,13 +64,45 @@ const Checkout = () => {
           </span>
         </div>
       </div>
-      <div className=" w-full">
-        <span>Address:</span>
-        <span className="font-bold text-red-800 ">{current?.address}</span>
+
+      <div className="border rounded-md">
+        <span className="uppercase px-4 text-2xl text-blue-900  font-semibold md:text-[18px]">
+          Basic Information
+        </span>
+        <div className="px-8 py-2 ">
+          <span>Name</span>
+          <InputField
+            value={payload.name}
+            setValue={setPayload}
+            nameKey="name"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
+          />
+        </div>
+        <div className="px-8 py-2 ">
+          <span>Address</span>
+          <InputField
+            value={payload.address}
+            setValue={setPayload}
+            nameKey="address"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
+          />
+        </div>
+        <div className="px-8 py-2">
+          <span>Phone</span>
+          <InputField
+            value={payload.phone}
+            setValue={setPayload}
+            nameKey="phone"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
+          />
+        </div>
       </div>
 
       <div className="w-full mx-auto  mt-8">
-        {address && address?.length > 10 && (
+        {payload && (
           <Paypal
             setIsSuccess={setIsSuccess}
             payload={{
@@ -81,8 +111,8 @@ const Checkout = () => {
                 (sum, el) => sum + +el.product?.price * el.quantity,
                 0
               ),
-              orderBy: current?._id,
-              address,
+              orderBy: payload.name,
+              address: payload.address,
             }}
             amount={currentCart?.reduce(
               (sum, el) => sum + +el.product?.price * el.quantity,
